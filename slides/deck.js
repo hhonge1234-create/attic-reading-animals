@@ -16,17 +16,14 @@
     ['KDEC', '사색하는 곰'], ['KDEN', '마음을 돌보는 판다'], ['KDLC', '느긋한 거북이'], ['KDLN', '집 짓는 비버'],
     ['KWEC', '기억하는 코끼리'], ['KWEN', '산책하는 강아지'], ['KWLC', '영리한 돌고래'], ['KWLN', '모아 두는 다람쥐']
   ];
+  var DESC = {"SDEC": "한 번 잠수하면 오래 머무는 독자", "SDEN": "지금 이 시대의 이야기에 마음이 움직이는 독자", "SDLC": "이야기 속 구조와 수수께끼를 즐기는 독자", "SDLN": "치밀하게 짜인 장르 소설에 빠지는 독자", "SWEC": "여러 나라, 여러 시대의 명작을 산책하듯 읽는 독자", "SWEN": "요즘 이야기라면 장르를 가리지 않는 독자", "SWLC": "고전 장르 문학을 두루 섭렵하는 독자", "SWLN": "요즘 장르 소설의 흐름을 빠르게 따라가는 독자", "KDEC": "오래된 생각의 책을 천천히 곱씹는 독자", "KDEN": "인문·심리 에세이로 나를 들여다보는 독자", "KDLC": "한 분야의 원전을 끝까지 읽어 내는 독자", "KDLN": "최신 연구와 데이터로 생각의 집을 짓는 독자", "KWEC": "예술, 역사, 자연을 넘나드는 교양 고전 독자", "KWEN": "다정한 교양서를 여기저기 즐겁게 읽는 독자", "KWLC": "분야를 가로지르는 큰 그림을 좋아하는 독자", "KWLN": "화제의 실용서와 트렌드서를 빠르게 모으는 독자"};
   var EXAMPLE = [['이야기', 64], ['몰입', 87], ['감성', 81], ['고전', 81]]; // from data/model.json
   var SITE_URL = 'https://hhonge1234-create.github.io/attic-reading-animals/';
 
   // ---------- static content built from data ----------
-  Array.prototype.forEach.call(document.querySelectorAll('.guide[data-group]'), function (grid) {
-    var g = grid.getAttribute('data-group');
-    grid.innerHTML = TYPES.filter(function (t) { return t[0][0] === g; }).map(function (t, i) {
-      var rot = [-2.5, 2, -1.5, 2.5, 1.5, -2, 2, -1][i % 8];
-      return '<figure class="g-item" style="transform:rotate(' + rot + 'deg)" data-rot="' + rot + '"><img src="assets/img/' + t[0] + '.jpg" alt="' + t[1] + '"><figcaption>' + t[1] + '<small>' + t[0] + '</small></figcaption></figure>';
-    }).join('');
-  });
+  document.getElementById('guide16').insertAdjacentHTML('beforeend', TYPES.map(function (t) {
+    return '<figure class="g16"><img src="assets/img/' + t[0] + '.jpg" alt="' + t[1] + '"><figcaption>' + t[1] + '<small>' + t[0] + '</small></figcaption></figure>';
+  }).join(''));
   document.getElementById('exStats').innerHTML = EXAMPLE.map(function (e) {
     return '<li><span>' + e[0] + '</span><div class="tr"><i style="width:' + e[1] + '%" data-w="' + e[1] + '"></i></div><b data-count="' + e[1] + '">' + e[1] + '%</b></li>';
   }).join('');
@@ -104,9 +101,32 @@
     },
     guide: function (s) {
       run(head(s));
-      run(A({ targets: s.querySelectorAll('.g-item'), opacity: [0, 1], scale: [.3, 1], rotate: function (el) { var r = Number(el.getAttribute('data-rot')); return [r * 6, r]; },
-        duration: 900, delay: A.stagger(90, { grid: [4, 2], from: 'center', start: 300 }), easing: 'easeOutBack' }));
-      if (!STATIC) run(A({ targets: s.querySelectorAll('.g-item'), translateY: [0, -8], duration: 1800, delay: A.stagger(120, { start: 2000 }), direction: 'alternate', loop: true, easing: 'easeInOutSine' }));
+      run(A({ targets: s.querySelectorAll('.g-title > *'), opacity: [0, 1], translateY: [24, 0], duration: 700, delay: A.stagger(140), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelectorAll('.g16'), opacity: [0, 1], scale: [.4, 1], rotate: function (_, i) { return [(i % 2 ? 10 : -10), 0]; },
+        duration: 800, delay: A.stagger(70, { start: 400 }), easing: 'easeOutBack' }));
+      if (!STATIC) run(A({ targets: s.querySelectorAll('.g16 img'), translateY: [0, -6], duration: 1600, delay: A.stagger(110, { start: 2200 }), direction: 'alternate', loop: true, easing: 'easeInOutSine' }));
+    },
+    prompt: function (s) {
+      run(head(s));
+      run(A({ targets: s.querySelector('.pr-card'), opacity: [0, 1], translateY: [40, 0], duration: 700, delay: 200, easing: 'easeOutCubic' }));
+      var parts = s.querySelectorAll('[data-type]'), caret = s.querySelector('.caret');
+      if (!STATIC) {
+        var texts = Array.prototype.map.call(parts, function (p) { return p.getAttribute('data-type'); });
+        var total = texts.reduce(function (n, t) { return n + t.length; }, 0), o = { n: 0 };
+        Array.prototype.forEach.call(parts, function (p) { p.textContent = ''; });
+        run(A({ targets: caret, opacity: [0, 1], duration: 450, direction: 'alternate', loop: true, easing: 'steps(1)' }));
+        run(A({ targets: o, n: total, duration: total * 16, delay: 800, easing: 'linear', update: function () {
+          var left = Math.round(o.n);
+          Array.prototype.forEach.call(parts, function (p, i) { var t = texts[i]; p.textContent = t.slice(0, Math.max(0, left)); left -= t.length; });
+        } }));
+      }
+      run(A({ targets: s.querySelectorAll('.pr-legend p'), opacity: [0, 1], translateX: [-30, 0], duration: 600, delay: A.stagger(250, { start: STATIC ? 0 : 1200 }), easing: 'easeOutCubic' }));
+      var t0 = 1600;
+      run(A({ targets: s.querySelectorAll('.pr-step, .cand'), opacity: function (el) { return [0, el.classList.contains('cand') && !el.classList.contains('pick') ? .55 : 1]; }, translateY: [30, 0], duration: 700, delay: A.stagger(300, { start: t0 }), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelector('.cand.pick'), scale: [1, 1.05, 1], duration: 700, delay: t0 + 1300, easing: 'easeInOutSine' }));
+      run(A({ targets: s.querySelectorAll('.pr-arrow path'), strokeDashoffset: [A.setDashOffset, 0], duration: 700, delay: t0 + 1900, easing: 'easeInOutSine' }));
+      run(A({ targets: s.querySelector('.pr-final'), opacity: [0, 1], translateY: [-160, 0], rotate: [-14, 2], duration: 1400, delay: t0 + 2400, easing: 'easeOutElastic(1, .6)' }));
+      run(A({ targets: s.querySelector('.pr-foot'), opacity: [0, 1], duration: 700, delay: t0 + 3000, easing: 'linear' }));
     },
     lis: function (s) {
       run(head(s));
@@ -268,7 +288,7 @@
         if (!r.width || !r.height) return;
         var o = { l: (r.left - box.left) / scale, t: (r.top - box.top) / scale, r: (r.right - box.left) / scale, b: (r.bottom - box.top) / scale };
         if (o.l < -2 || o.t < -2 || o.r > 1922 || o.b > 1082) issues.push({ kind: 'outside-slide', el: desc(el), box: round(o) });
-        else if (!el.closest('.cover, .ending') && (o.l < 60 || o.r > 1860 || o.b > 1040)) issues.push({ kind: 'outside-margin', el: desc(el), box: round(o) });
+        else if (!el.closest('.cover, .ending, .guide-one') && (o.l < 60 || o.r > 1860 || o.b > 1040)) issues.push({ kind: 'outside-margin', el: desc(el), box: round(o) });
         if (/^(H1|H2|H3|P|LI|TD|TH|FIGCAPTION)$/.test(el.tagName) || el.matches('.fb, .ab')) {
           if (el.scrollWidth > el.clientWidth + 2) issues.push({ kind: 'text-overflow-x', el: desc(el), sw: el.scrollWidth, cw: el.clientWidth });
           if (el.scrollHeight > el.clientHeight + 2 && st.overflow !== 'visible') issues.push({ kind: 'text-overflow-y', el: desc(el) });
@@ -277,7 +297,7 @@
         if (el.tagName === 'VIDEO' && (el.error || el.readyState === 0)) issues.push({ kind: 'video-not-loaded', el: el.getAttribute('src'), state: el.readyState, err: el.error && el.error.code });
       });
       // card-level clipping: children taller than a fixed-height parent
-      Array.prototype.forEach.call(s.querySelectorAll('.flip .face, .shot-main, .video-frame, .card-p, .card-l, .card-v, .stage-c, .note, .sol'), function (el) {
+      Array.prototype.forEach.call(s.querySelectorAll('.flip .face, .shot-main, .video-frame, .card-p, .card-l, .card-v, .stage-c, .note, .sol, .g-title'), function (el) {
         if (el.scrollHeight > el.clientHeight + 2) issues.push({ kind: 'box-overflow', el: desc(el), sh: el.scrollHeight, ch: el.clientHeight });
       });
       report.slides.push({ n: i + 1, anim: s.getAttribute('data-anim'), issues: issues });
