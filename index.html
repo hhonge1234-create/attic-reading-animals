@@ -134,6 +134,33 @@ form.paper { display: grid; gap: 30px; padding: 40px 28px 28px; }
 .q legend { padding: 0; font-size: 16px; }
 .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .opts.three { grid-template-columns: repeat(3, 1fr); }
+.quiz-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.q-group { margin: 0; font-family: var(--hand); font-size: 25px; line-height: 1.1; color: var(--rose); }
+.q-count { font-family: var(--type); font-size: 13px; color: var(--ink-muted); white-space: nowrap; }
+.qbar { height: 8px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--paper-line); overflow: hidden; margin-top: -16px; }
+.qbar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--gold), var(--wood)); border-radius: 999px; transition: width .35s ease; }
+.panel { display: grid; gap: 16px; min-height: 230px; align-content: start; }
+.q-title { font-size: clamp(22px, 3.6vw, 30px); line-height: 1.35; outline: none; }
+.qopts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.qopts.three { grid-template-columns: repeat(3, 1fr); }
+.qopt { font: inherit; text-align: left; display: flex; gap: 14px; align-items: center; padding: 20px; min-height: 100px; border-radius: 14px;
+  border: 2px solid var(--paper-line); background: var(--paper-2); color: var(--ink); cursor: pointer; font-size: 18px; line-height: 1.45; transition: transform .12s, border-color .15s, background .15s; }
+.qopt:hover { border-color: var(--wood-lt); transform: translateY(-2px); }
+.qopt:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+.qopt .key { flex: none; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font: 700 14px var(--type); background: var(--paper); border: 1px solid var(--paper-line); color: var(--ink-muted); }
+.qopt.on { border-color: var(--wood); background: #FFF3E0; box-shadow: 0 0 0 3px rgba(139, 94, 60, .15); }
+.qopt.on .key { background: var(--wood); border-color: var(--wood); color: var(--cream); }
+.q-tip { margin: 0; font-size: 13px; color: var(--ink-muted); }
+.qnav { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; border-top: 1px dashed var(--paper-line); padding-top: 18px; }
+.qnav .qnext, .qnav #go { margin-left: auto; }
+.qnext { font: inherit; font-family: var(--display); font-weight: 700; font-size: 17px; padding: 11px 26px; border-radius: 999px; border: 0; background: var(--wood); color: var(--cream); cursor: pointer; }
+.qnext:disabled { background: var(--paper-line); color: var(--ink-muted); cursor: not-allowed; }
+#qPrev:disabled { opacity: .35; cursor: default; }
+@media (prefers-reduced-motion: no-preference) {
+  .slide-in-1 { animation: qin1 .28s ease-out; } .slide-in--1 { animation: qin2 .28s ease-out; }
+  @keyframes qin1 { from { transform: translateX(24px); } } @keyframes qin2 { from { transform: translateX(-24px); } }
+}
+@media (max-width: 560px) { .qopts, .qopts.three { grid-template-columns: 1fr; } .qopt { min-height: 68px; padding: 14px 16px; font-size: 17px; } .panel { min-height: 0; } }
 .qn { display: inline-block; min-width: 2.2em; font-family: var(--type); font-size: 12px; color: var(--rose); }
 .answered { font-family: var(--type); font-size: 13px; color: var(--ink-muted); }
 .answered.done { color: var(--leaf); font-weight: 700; }
@@ -331,39 +358,33 @@ footer strong { color: var(--text); }
 
 <div class="wrap">
   <form id="f" class="paper pinned" novalidate>
-    <p class="hand">예시 답이 채워져 있어요. 내 취향으로 바꿔 보세요.</p>
-    <fieldset class="step">
-      <legend><span class="n">No.1</span><h2>좋아하는 분야</h2></legend>
-      <p class="hint">자주 손이 가는 분야를 모두 골라 주세요.</p>
+    <div class="quiz-head"><p class="q-group" id="qGroup">시작하기</p><span class="q-count" id="qCount"></span></div>
+    <div class="qbar" aria-hidden="true"><i id="qBar"></i></div>
+    <div class="panel" id="pFields">
+      <h2 class="q-title">자주 손이 가는 분야를 골라 주세요</h2>
+      <p class="hint">여러 개 골라도 되고, 고르지 않고 넘어가도 괜찮아요. 다음부터는 질문 하나에 답 하나를 누르면 바로 넘어가요.</p>
       <div class="chips" id="chips"></div>
-    </fieldset>
-    <fieldset class="step">
-      <legend><span class="n">No.2</span><h2>나의 독서 습관</h2></legend>
-      <p class="hint">더 가까운 쪽을 골라 주세요. 정답은 없어요.</p>
-      <div class="qs" id="qsA"></div>
-    </fieldset>
-    <fieldset class="step">
-      <legend><span class="n">No.3</span><h2>끌리는 이야기와 주제</h2></legend>
-      <div class="qs" id="qsB"></div>
-    </fieldset>
-    <fieldset class="step">
-      <legend><span class="n">No.4</span><h2>나의 책 취향</h2><small class="opt-tag">결과의 취향 카드에 담겨요</small></legend>
-      <div class="qs" id="qsT"></div>
-    </fieldset>
-    <fieldset class="step">
-      <legend><span class="n">No.5</span><h2>내 책장 보여 주기</h2><small class="opt-tag">선택</small></legend>
-      <p class="hint">최근에 읽었거나 좋아하는 책을 적어 주세요. 분석에는 쓰지 않고, 동의하면 <b>다락방 이웃들의 책장</b>에 꽂혀 나와 같은 동물에게 추천돼요.</p>
+    </div>
+    <div class="panel" id="pQ" hidden>
+      <h2 class="q-title" id="qText" tabindex="-1"></h2>
+      <div class="qopts" id="qOpts" role="group" aria-labelledby="qText"></div>
+      <p class="q-tip">숫자 키 1·2·3으로 고르고, ← → 키로 앞뒤 질문을 오갈 수 있어요.</p>
+    </div>
+    <div class="panel" id="pBooks" hidden>
+      <h2 class="q-title">마지막으로, 내 책장을 보여 주세요 <small class="opt-tag">선택</small></h2>
+      <p class="hint">최근에 읽었거나 좋아하는 책을 적어 주세요. 분석에는 쓰지 않고, 동의하면 <b>다락방 이웃들의 책장</b>에 꽂혀 나와 같은 동물에게 추천돼요. 비워 두고 결과를 봐도 괜찮아요.</p>
       <div class="book-head" aria-hidden="true"><span>도서명</span><span>저자</span></div>
       <div class="book-rows" id="bookRows"></div>
       <button type="button" class="ghost add-book" id="addBook">+ 책 한 권 더</button>
-    </fieldset>
-    <label class="consent" id="consentRow" hidden><input type="checkbox" id="share" checked><span>내가 적은 책을 <b>다락방 이웃들의 책장</b>에 익명으로 꽂기<small>이름 없이 도서명, 저자, 동물 유형만 저장되고, 나와 같은 동물에게 추천돼요.</small></span></label>
-    <div class="submit-row">
-      <button type="submit" class="primary" id="go">내 독서 동물 찾기</button>
-      <span class="answered" id="answered"></span>
-      <div id="status" hidden><span class="dot"></span><span id="statusText"></span><button type="button" class="link" id="stop">그만두기</button></div>
-      <p class="err" id="err" hidden></p>
+      <label class="consent" id="consentRow" hidden><input type="checkbox" id="share" checked><span>내가 적은 책을 <b>다락방 이웃들의 책장</b>에 익명으로 꽂기<small>이름 없이 도서명, 저자, 동물 유형만 저장되고, 나와 같은 동물에게 추천돼요.</small></span></label>
     </div>
+    <div class="qnav">
+      <button type="button" class="ghost" id="qPrev">← 이전</button>
+      <button type="button" class="qnext" id="qNext">시작하기 →</button>
+      <button type="submit" class="primary" id="go" hidden>내 독서 동물 찾기</button>
+    </div>
+    <div id="status" hidden><span class="dot"></span><span id="statusText"></span><button type="button" class="link" id="stop">그만두기</button></div>
+    <p class="err" id="err" hidden></p>
     <p class="claude-hint" id="claudeHint" hidden>더 깊이 알고 싶다면 내 Claude 계정으로 <a href="https://claude.ai/artifact/DmqLE6gvBbLZoa9okZhq62" target="_blank" rel="noopener">다락방 독서 상담실 열기 ↗</a></p>
   </form>
 
@@ -552,22 +573,65 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     if (c.group) return '<div class="group-label">' + c.group + '</div>';
     return '<label class="chip"><input type="checkbox" id="' + c.id + '" value="' + c.id + '"><span>' + c.l + '</span></label>';
   }).join('');
-  function qHtml(id, text, opts, n) {
-    return '<fieldset class="q"><legend><span class="qn">' + n + '</span>' + text + '</legend><div class="opts' + (opts.length === 3 ? ' three' : '') + '">' + opts.map(function (o, i) {
-      return '<label class="opt"><input type="radio" name="' + id + '" id="' + id + '_' + i + '" value="' + i + '"><span>' + o + '</span></label>';
-    }).join('') + '</div></fieldset>';
+  // ---------- 한 화면에 질문 하나 ----------
+  var GROUP = { A: '나의 독서 습관', B: '끌리는 이야기와 주제' };
+  var STEPS = [{ type: 'fields' }]
+    .concat(QS.map(function (q) { return { type: 'q', q: q }; }))
+    .concat(TASTE.map(function (t) { return { type: 't', t: t }; }))
+    .concat([{ type: 'books' }]);
+  var NQ = QS.length + TASTE.length, ans = {}, step = 0, advT = null;
+  function sId(st) { return st.type === 'q' ? st.q.id : st.t.id; }
+  function sOpts(st) { return st.type === 'q' ? st.q.o.map(function (o) { return o[0]; }) : st.t.o; }
+  function isQ(st) { return st.type === 'q' || st.type === 't'; }
+  function showStep(i, dir) {
+    clearTimeout(advT);
+    step = Math.max(0, Math.min(STEPS.length - 1, i));
+    var st = STEPS[step];
+    $('pFields').hidden = st.type !== 'fields';
+    $('pQ').hidden = !isQ(st);
+    $('pBooks').hidden = st.type !== 'books';
+    $('qGroup').textContent = st.type === 'fields' ? '시작하기' : st.type === 'q' ? GROUP[st.q.g] : st.type === 't' ? '나의 책 취향 · 건너뛰어도 돼요' : '마지막 단계';
+    $('qCount').textContent = isQ(st) ? '질문 ' + step + ' / ' + NQ : st.type === 'books' ? '질문 ' + NQ + ' / ' + NQ + ' 끝' : '';
+    $('qBar').style.width = Math.round(step / (STEPS.length - 1) * 100) + '%';
+    if (isQ(st)) {
+      var id = sId(st), opts = sOpts(st);
+      $('qText').textContent = st.type === 'q' ? st.q.q : st.t.q;
+      $('qOpts').className = 'qopts' + (opts.length === 3 ? ' three' : '');
+      $('qOpts').innerHTML = opts.map(function (o, k) {
+        return '<button type="button" class="qopt' + (ans[id] === k ? ' on' : '') + '" data-k="' + k + '" aria-pressed="' + (ans[id] === k) + '"><span class="key">' + (k + 1) + '</span><span class="txt">' + esc(o) + '</span></button>';
+      }).join('');
+      var pq = $('pQ'); pq.classList.remove('slide-in-1', 'slide-in--1'); void pq.offsetWidth; if (dir) pq.classList.add('slide-in-' + dir);
+      try { $('qText').focus({ preventScroll: true }); } catch (e) {}
+    }
+    $('qPrev').disabled = step === 0;
+    var nx = $('qNext');
+    if (st.type === 'books') { nx.hidden = true; $('go').hidden = false; }
+    else {
+      nx.hidden = false; $('go').hidden = true;
+      nx.textContent = st.type === 'fields' ? '시작하기 →' : (st.type === 't' && ans[sId(st)] == null) ? '건너뛰기 →' : '다음 →';
+      nx.disabled = st.type === 'q' && ans[st.q.id] == null;
+    }
   }
-  var qn = 0;
-  ['A', 'B'].forEach(function (g) {
-    $('qs' + g).innerHTML = QS.filter(function (q) { return q.g === g; }).map(function (q) { return qHtml(q.id, q.q, q.o.map(function (o) { return o[0]; }), ++qn); }).join('');
+  function choose(k) {
+    var st = STEPS[step];
+    if (!isQ(st) || k < 0 || k >= sOpts(st).length) return;
+    ans[sId(st)] = k;
+    Array.prototype.forEach.call($('qOpts').children, function (b, j) { b.classList.toggle('on', j === k); b.setAttribute('aria-pressed', j === k ? 'true' : 'false'); });
+    $('qNext').disabled = false; $('qNext').textContent = '다음 →';
+    var at = step;
+    advT = setTimeout(function () { if (step === at) showStep(step + 1, 1); }, 280);
+  }
+  $('qOpts').addEventListener('click', function (e) { var b = e.target.closest('.qopt'); if (b) choose(Number(b.getAttribute('data-k'))); });
+  $('qPrev').addEventListener('click', function () { showStep(step - 1, -1); });
+  $('qNext').addEventListener('click', function () { if (!$('qNext').disabled) showStep(step + 1, 1); });
+  document.addEventListener('keydown', function (e) {
+    var t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA') || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (!$('f').contains(document.activeElement) && document.activeElement !== document.body) return;
+    if (/^[1-3]$/.test(e.key)) { choose(Number(e.key) - 1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft' && step > 0) { showStep(step - 1, -1); e.preventDefault(); }
+    else if (e.key === 'ArrowRight' && !$('qNext').hidden && !$('qNext').disabled) { showStep(step + 1, 1); e.preventDefault(); }
   });
-  $('qsT').innerHTML = TASTE.map(function (t, i) { return qHtml(t.id, t.q, t.o, 'T' + (i + 1)); }).join('');
-  function updateAnswered() {
-    var n = QS.filter(function (q) { return document.querySelector('input[name="' + q.id + '"]:checked'); }).length;
-    $('answered').textContent = n + ' / ' + QS.length + ' 답함';
-    $('answered').classList.toggle('done', n === QS.length);
-  }
-  $('f').addEventListener('change', updateAnswered);
   // Book rows: 도서명 + 저자
   var MAX_BOOKS = 15, rowSeq = 0;
   function renumber() {
@@ -609,12 +673,16 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
   });
 
   function fillExample() {
-    EXAMPLE.chips.forEach(function (id) { $(id).checked = true; });
-    EXAMPLE.books.forEach(function (b) { addBookRow(b[0], b[1]); });
     addBookRow();
-    Object.keys(EXAMPLE.ans).forEach(function (q) { $(q + '_' + EXAMPLE.ans[q]).checked = true; });
-    Object.keys(EXAMPLE.taste).forEach(function (q) { $(q + '_' + EXAMPLE.taste[q]).checked = true; });
-    updateAnswered();
+    showStep(0, 0);
+  }
+  function exampleForm() {
+    return {
+      picked: CHIPS.filter(function (c) { return c.id && EXAMPLE.chips.indexOf(c.id) >= 0; }),
+      books: EXAMPLE.books.map(function (b) { return { t: b[0], a: b[1] }; }),
+      answers: QS.map(function (q) { return q.o[EXAMPLE.ans[q.id]][1]; }),
+      taste: TASTE.map(function (t) { return { label: t.label, v: t.o[EXAMPLE.taste[t.id]] }; })
+    };
   }
 
   // Scoring
@@ -641,9 +709,9 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     books = books.slice(0, MAX_BOOKS);
     var lines = books.map(function (b) { return b.t + (b.a ? ' / ' + b.a : ''); });
     var answers = [];
-    QS.forEach(function (q) { var r = document.querySelector('input[name="' + q.id + '"]:checked'); if (r) answers.push(q.o[+r.value][1]); });
+    QS.forEach(function (q) { if (ans[q.id] != null) answers.push(q.o[ans[q.id]][1]); });
     var taste = [];
-    TASTE.forEach(function (t) { var r = document.querySelector('input[name="' + t.id + '"]:checked'); if (r) taste.push({ label: t.label, v: t.o[+r.value] }); });
+    TASTE.forEach(function (t) { if (ans[t.id] != null) taste.push({ label: t.label, v: t.o[ans[t.id]] }); });
     return { picked: picked, books: books, lines: lines, answers: answers, taste: taste };
   }
   // rows: [{input, known, title, author, year, kdc, genre, story, emotion, code?}]
@@ -880,7 +948,10 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     ev.preventDefault();
     $('err').hidden = true;
     var form = readForm();
-    if (form.answers.length < QS.length) { showErr('No.2와 No.3의 질문 ' + QS.length + '개에 모두 답해 주세요. (지금 ' + form.answers.length + '개)'); return; }
+    if (form.answers.length < QS.length) {
+      var miss = 0; while (miss < STEPS.length && !(STEPS[miss].type === 'q' && ans[STEPS[miss].q.id] == null)) miss++;
+      showStep(miss, -1); showErr('답하지 않은 질문이 있어요. 이 질문부터 이어서 답해 주세요.'); return;
+    }
     if (ctl) ctl.abort();
     $('go').disabled = true;
     try { await run(form); } finally { $('go').disabled = false; }
@@ -999,7 +1070,7 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
   var start = (location.hash || '').replace('#', '').toUpperCase();
   if (TYPES[start]) render(start, { mode: 'browse' });
   else {
-    var f0 = readForm(), r0 = score(f0);
+    var f0 = exampleForm(), r0 = score(f0);
     lastExclude = f0.books.map(function (b) { return norm(b.t); });
     render(r0.code, { mode: 'example', pct: r0.pct, field: r0.field, taste: r0.taste });
   }
