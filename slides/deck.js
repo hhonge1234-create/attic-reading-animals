@@ -42,7 +42,7 @@
   // ---------- scaling ----------
   function fit() {
     var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
-    deck.style.transform = 'scale(' + s + ')';
+    deck.style.transform = 'translate(-50%, -50%) scale(' + s + ')';
   }
   window.addEventListener('resize', fit);
   fit();
@@ -251,7 +251,9 @@
 
   // ---------- verify mode ----------
   function check() {
-    var report = { slides: [], errors: window.__errors || [] };
+    var dr = deck.getBoundingClientRect(), vw = window.innerWidth, vh = window.innerHeight;
+    var fitOk = Math.abs(dr.left - (vw - dr.width) / 2) < 2 && Math.abs(dr.top - (vh - dr.height) / 2) < 2 && dr.width <= vw + 1 && dr.height <= vh + 1;
+    var report = { slides: [], errors: window.__errors || [], viewport: [vw, vh], deck: [Math.round(dr.left), Math.round(dr.top), Math.round(dr.width), Math.round(dr.height)], fit: fitOk };
     slides.forEach(function (s, i) {
       go(i);
       var box = s.getBoundingClientRect(), scale = box.width / 1920, issues = [];

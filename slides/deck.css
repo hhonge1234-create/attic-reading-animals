@@ -12,8 +12,8 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: #2B2019; overflow: hidden; }
 body { font-family: var(--body); color: var(--ink); word-break: keep-all; overflow-wrap: break-word; }
-.stage { position: fixed; inset: 0; display: grid; place-items: center; }
-.deck { position: relative; width: 1920px; height: 1080px; transform-origin: center center; flex: none; }
+.stage { position: fixed; inset: 0; overflow: hidden; }
+.deck { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: center center; transform: translate(-50%, -50%); }
 .slide {
   position: absolute; inset: 0; overflow: hidden; padding: 110px 128px 120px; display: none;
   background-color: var(--bg);
@@ -81,14 +81,14 @@ p { margin: 0; }
 .slide[data-anim="example"].on { grid-template-columns: 1fr 600px; }
 
 /* 4 axes */
-.axes { display: grid; gap: 34px; margin-top: 10px; }
+.axes { display: grid; gap: 78px; margin-top: 60px; }
 .axis-row { display: grid; grid-template-columns: 360px 560px 1fr; gap: 48px; align-items: center; }
-.ax-name { display: flex; align-items: baseline; justify-content: space-between; font-size: 40px; font-family: var(--display); }
+.ax-name { display: flex; align-items: baseline; justify-content: space-between; font-size: 48px; font-family: var(--display); }
 .ax-name .a { color: var(--rose); } .ax-name .b { color: var(--blue); }
 .ax-name span { font: 22px var(--type); color: var(--muted); }
 .track { position: relative; height: 26px; border-radius: 999px; background: linear-gradient(90deg, rgba(169, 71, 63, .35), var(--paper2) 50%, rgba(94, 127, 160, .35)); border: 2px solid var(--line); }
 .knob { position: absolute; top: 50%; left: 50%; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: var(--wood); box-shadow: 0 6px 12px -4px var(--shadow); border: 4px solid var(--paper); }
-.axis-row p { font-size: 29px; line-height: 1.5; color: var(--muted); }
+.axis-row p { font-size: 31px; line-height: 1.5; color: var(--muted); }
 
 /* 5 guide */
 .guide { display: grid; grid-template-columns: repeat(8, 1fr); gap: 36px 26px; padding-top: 10px; }
