@@ -20,10 +20,13 @@
   var SITE_URL = 'https://hhonge1234-create.github.io/attic-reading-animals/';
 
   // ---------- static content built from data ----------
-  document.getElementById('guideGrid').innerHTML = TYPES.map(function (t, i) {
-    var rot = [-3, 2, -1.5, 2.5, 1.5, -2.5, 2, -1][i % 8];
-    return '<figure class="g-item" style="transform:rotate(' + rot + 'deg)" data-rot="' + rot + '"><img src="assets/img/' + t[0] + '.jpg" alt="' + t[1] + '"><figcaption>' + t[1] + '<small>' + t[0] + '</small></figcaption></figure>';
-  }).join('');
+  Array.prototype.forEach.call(document.querySelectorAll('.guide[data-group]'), function (grid) {
+    var g = grid.getAttribute('data-group');
+    grid.innerHTML = TYPES.filter(function (t) { return t[0][0] === g; }).map(function (t, i) {
+      var rot = [-2.5, 2, -1.5, 2.5, 1.5, -2, 2, -1][i % 8];
+      return '<figure class="g-item" style="transform:rotate(' + rot + 'deg)" data-rot="' + rot + '"><img src="assets/img/' + t[0] + '.jpg" alt="' + t[1] + '"><figcaption>' + t[1] + '<small>' + t[0] + '</small></figcaption></figure>';
+    }).join('');
+  });
   document.getElementById('exStats').innerHTML = EXAMPLE.map(function (e) {
     return '<li><span>' + e[0] + '</span><div class="tr"><i style="width:' + e[1] + '%" data-w="' + e[1] + '"></i></div><b data-count="' + e[1] + '">' + e[1] + '%</b></li>';
   }).join('');
@@ -102,7 +105,7 @@
     guide: function (s) {
       run(head(s));
       run(A({ targets: s.querySelectorAll('.g-item'), opacity: [0, 1], scale: [.3, 1], rotate: function (el) { var r = Number(el.getAttribute('data-rot')); return [r * 6, r]; },
-        duration: 900, delay: A.stagger(70, { grid: [8, 2], from: 'center', start: 300 }), easing: 'easeOutBack' }));
+        duration: 900, delay: A.stagger(90, { grid: [4, 2], from: 'center', start: 300 }), easing: 'easeOutBack' }));
       if (!STATIC) run(A({ targets: s.querySelectorAll('.g-item'), translateY: [0, -8], duration: 1800, delay: A.stagger(120, { start: 2000 }), direction: 'alternate', loop: true, easing: 'easeInOutSine' }));
     },
     lis: function (s) {
