@@ -337,7 +337,7 @@ footer strong { color: var(--text); }
       <div id="status" hidden><span class="dot"></span><span id="statusText"></span><button type="button" class="link" id="stop">그만두기</button></div>
       <p class="err" id="err" hidden></p>
     </div>
-    <p class="claude-hint" id="claudeHint" hidden>목록에 없는 책까지 정확하게 분석하려면 <a href="https://claude.ai/artifact/DmqLE6gvBbLZoa9okZhq62" target="_blank" rel="noopener">내 Claude 계정으로 열기 ↗</a></p>
+    <p class="claude-hint" id="claudeHint" hidden>더 깊이 알고 싶다면 내 Claude 계정으로 <a href="https://claude.ai/artifact/DmqLE6gvBbLZoa9okZhq62" target="_blank" rel="noopener">다락방 독서 상담실 열기 ↗</a></p>
   </form>
 
   <section id="result" aria-live="polite"></section>
@@ -931,10 +931,10 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
   var CLAUDE_URL = 'https://claude.ai/artifact/DmqLE6gvBbLZoa9okZhq62';
   var IN_CLAUDE = !!(window.claude && typeof window.claude.use === 'function');
   function claudeCta() {
-    return '<div class="paper pinned claude-cta"><div><p class="cta-kind">더 정확하게 분석하고 싶다면</p>' +
-      '<p class="cta-body">이 결과는 내장 도서 71권과 고른 분야, 습관 질문으로만 분석했어요. <b>내 Claude 계정</b>으로 열면 Claude 사서가 어떤 책이든 찾아 분야와 출간연도를 확인하고, 나에게 맞춘 책을 새로 골라 드려요.</p>' +
-      '<p class="cta-note">claude.ai 로그인이 필요해요 · 책 목록은 열린 화면에서 다시 적어 주세요</p></div>' +
-      '<a class="cta-btn" href="' + CLAUDE_URL + '" target="_blank" rel="noopener">내 Claude 계정으로 정밀 분석하기 ↗</a></div>';
+    return '<div class="paper pinned claude-cta"><div><p class="cta-kind">더 깊이 알고 싶다면</p>' +
+      '<p class="cta-body">이 결과는 내장 도서 71권과 고른 분야, 습관 질문으로만 분석했어요. <b>내 Claude 계정</b>으로 여는 <b>다락방 독서 상담실</b>에서 별점과 감상, 인생 책, 독서 습관까지 이야기하면 사서가 나만을 위한 상담 기록과 맞춤 추천을 써 드려요.</p>' +
+      '<p class="cta-note">claude.ai 로그인이 필요해요 · 적은 내용은 저장되지 않아요</p></div>' +
+      '<a class="cta-btn" href="' + CLAUDE_URL + '" target="_blank" rel="noopener">다락방 독서 상담실 열기 ↗</a></div>';
   }
   if (!IN_CLAUDE) $('claudeHint').hidden = false;
   render = function (code, ctx) {

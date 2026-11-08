@@ -1,0 +1,528 @@
+<title>다락방 독서 상담실</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Song+Myung&family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Nanum+Pen+Script&family=Courier+Prime:wght@400;700&display=swap">
+<style>
+/* Layout: a one-on-one reading consultation in the watercolor attic. A painted banner, then a long questionnaire on paper,
+   then the librarian's written report: portrait, four axes with reasons, keywords, book-by-book notes, habits, picks, plan, letter. */
+:root {
+  color-scheme: light;
+  --wall: #FAF6EE; --wall-2: #F3EADB;
+  --text: #4A3324; --muted: #8C6F57;
+  --wood: #8B5E3C; --wood-lt: #C49A6C; --cream: #FFF8EC;
+  --gold: #D9A55B; --amber: #D58E4E;
+  --paper: #FFFDF8; --paper-2: #F7EFE1; --line: #E7D7BD;
+  --leaf: #66784A; --rose: #B4544B; --blue: #5E7FA0;
+  --shadow: rgba(120, 80, 40, .16);
+  --title: "Song Myung", "Gowun Batang", serif;
+  --display: "Gowun Batang", "AppleMyungjo", serif;
+  --body: "Gowun Dodum", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --hand: "Nanum Pen Script", "Gowun Dodum", cursive;
+  --type: "Courier Prime", "Courier New", ui-monospace, monospace;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--wall); color: var(--text); font-family: var(--body); font-size: 16.5px; line-height: 1.7; word-break: keep-all; overflow-wrap: break-word; padding-block: 0 80px;
+  background-image: radial-gradient(900px 600px at 10% 30%, rgba(232, 205, 160, .18), transparent 70%), radial-gradient(700px 500px at 90% 80%, rgba(214, 160, 140, .12), transparent 70%); }
+.wrap { max-width: 860px; margin: 0 auto; display: grid; gap: 40px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3, h4 { font-family: var(--display); font-weight: 700; margin: 0; line-height: 1.3; text-wrap: balance; }
+p { margin: 0; }
+.hand { font-family: var(--hand); color: var(--rose); line-height: 1.2; }
+
+/* banner */
+.banner { position: relative; height: clamp(300px, 38vw, 420px); background: var(--wall) url("{{ATTIC}}") right center / cover no-repeat; overflow: hidden;
+  padding-left: max(16px, env(safe-area-inset-left, 0px), 5vw); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.banner::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(250, 246, 238, .97) 0, rgba(250, 246, 238, .9) 34%, rgba(250, 246, 238, 0) 62%), linear-gradient(to bottom, transparent 70%, var(--wall)); }
+.banner-text { position: relative; z-index: 1; max-width: 460px; height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 10px; }
+.eyebrow { font-family: var(--type); font-size: 13px; letter-spacing: .12em; color: var(--rose); }
+.banner h1 { font-family: var(--title); font-weight: 400; font-size: clamp(34px, 5vw, 52px); line-height: 1.15; color: #5A3A26; }
+.banner .lead { font-size: 16px; }
+.banner .lead b { color: var(--wood); }
+
+/* paper */
+.paper { position: relative; background: var(--paper); border-radius: 4px; box-shadow: 0 16px 28px -16px var(--shadow), 0 1px 3px rgba(120, 80, 40, .12); }
+.pin::before { content: ""; position: absolute; top: 12px; left: 50%; width: 16px; height: 16px; margin-left: -8px; border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #F28B7C, #C0625A 60%, #6E2A22); box-shadow: 0 3px 4px rgba(120, 80, 40, .3); }
+
+/* intro + notice */
+.intro { padding: 30px 28px 24px; display: grid; gap: 10px; }
+.intro ol { margin: 0; padding-left: 22px; display: grid; gap: 4px; }
+.privacy { font-size: 14px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 10px; }
+.notice { padding: 20px 24px; border-left: 5px solid var(--rose); }
+.notice a { color: var(--wood); font-weight: 700; }
+
+/* form */
+form { display: grid; gap: 26px; }
+.sec { padding: 36px 26px 26px; display: grid; gap: 16px; }
+.sec-h { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.sec-h .n { font-family: var(--type); font-size: 14px; color: var(--rose); }
+.sec-h h2 { font-size: 22px; }
+.sec-h small { font-size: 14px; color: var(--muted); }
+.hint { font-size: 14px; color: var(--muted); }
+label.lbl { display: block; font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+input[type="text"], textarea { width: 100%; min-width: 0; font: inherit; color: var(--text); background: var(--paper-2); border: 0; border-bottom: 1.5px solid var(--line); border-radius: 3px 3px 0 0; padding: 9px 11px; }
+textarea { min-height: 76px; resize: vertical; line-height: 1.6; }
+input::placeholder, textarea::placeholder { color: var(--muted); opacity: .8; }
+input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--rose); outline-offset: 2px; }
+
+.book { display: grid; grid-template-columns: 2em minmax(0, 1.5fr) minmax(0, 1fr) auto 2.2em; gap: 8px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+.book .no { font-family: var(--type); font-size: 13px; color: var(--rose); text-align: center; }
+.book .note { grid-column: 2 / 5; }
+.stars { display: flex; gap: 2px; }
+.stars button { font-size: 22px; line-height: 1; border: 0; background: none; padding: 2px; color: var(--line); cursor: pointer; }
+.stars button.on { color: var(--gold); }
+.del { font: inherit; font-size: 18px; width: 2em; height: 2em; border-radius: 50%; border: 1px solid var(--line); background: transparent; color: var(--muted); cursor: pointer; }
+.ghost { justify-self: start; font: inherit; font-size: 14px; padding: 7px 16px; border-radius: 999px; border: 1px solid var(--wood); background: transparent; color: var(--wood); cursor: pointer; }
+.pair { display: grid; grid-template-columns: 1.5fr 1fr; gap: 8px; }
+
+.q { display: grid; gap: 8px; }
+.q > p { font-weight: 700; font-size: 15px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+.chip span { display: inline-block; padding: 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--paper-2); font-size: 15px; cursor: pointer; }
+.chip input:checked + span { background: var(--wood); border-color: var(--wood); color: var(--cream); }
+.chip input:focus-visible + span { outline: 2px solid var(--rose); outline-offset: 2px; }
+.scale { display: grid; grid-template-columns: 8.5em 1fr 8.5em; gap: 10px; align-items: center; font-size: 15px; }
+.scale .l { text-align: right; }
+.dots { display: flex; justify-content: space-between; padding: 0 4px; position: relative; }
+.dots::before { content: ""; position: absolute; left: 12px; right: 12px; top: 50%; height: 2px; background: var(--line); }
+.dots label { position: relative; }
+.dots input { position: absolute; opacity: 0; }
+.dots span { display: block; width: 22px; height: 22px; border-radius: 50%; background: var(--paper); border: 2px solid var(--wood-lt); cursor: pointer; }
+.dots input:checked + span { background: var(--wood); border-color: var(--wood); box-shadow: 0 0 0 4px rgba(139, 94, 60, .18); }
+.dots input:focus-visible + span { outline: 2px solid var(--rose); outline-offset: 2px; }
+
+.submit { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.primary { font: inherit; font-family: var(--display); font-weight: 700; font-size: 19px; padding: 13px 30px; border-radius: 999px; border: 0; background: var(--wood); color: var(--cream); cursor: pointer; box-shadow: 0 8px 20px -8px rgba(139, 94, 60, .6); }
+.primary:disabled { opacity: .6; cursor: progress; }
+.err { color: var(--rose); font-size: 14px; }
+
+/* progress */
+.progress { padding: 34px 26px 26px; display: grid; gap: 14px; }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.steps li { display: flex; gap: 10px; align-items: center; color: var(--muted); }
+.steps li::before { content: ""; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--wood-lt); flex: none; }
+.steps li.on { color: var(--text); font-weight: 700; }
+.steps li.on::before { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 10px var(--gold); }
+.steps li.done::before { background: var(--wood); border-color: var(--wood); }
+.stream { font-size: 13px; color: var(--muted); font-family: var(--type); }
+@media (prefers-reduced-motion: no-preference) { .steps li.on::before { animation: flick 1.1s ease-in-out infinite; } @keyframes flick { 50% { opacity: .35; } } }
+
+/* report */
+#report { display: grid; gap: 30px; }
+.r-title { font-size: 24px; margin-bottom: 12px; display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+.r-title small { font-family: var(--body); font-weight: 400; font-size: 14px; color: var(--muted); }
+.portrait { padding: 30px 28px 30px; display: grid; grid-template-columns: auto 1fr; gap: 26px; align-items: center; }
+.portrait > div { min-width: 0; }
+.frame { padding: 8px; background: linear-gradient(135deg, var(--wood-lt), var(--wood)); border-radius: 8px; }
+.frame img { width: 168px; height: 168px; object-fit: cover; display: block; border-radius: 4px; background: #FBFAF5; }
+.code { font-family: var(--type); font-weight: 700; letter-spacing: .24em; color: var(--rose); }
+.portrait h2 { font-size: clamp(28px, 5vw, 38px); }
+.summary { font-family: var(--hand); font-size: 28px; line-height: 1.3; color: var(--wood); margin-top: 10px; }
+.axes { padding: 26px 24px; display: grid; gap: 20px; }
+.ax-top { display: grid; grid-template-columns: 6.4em 1fr 6.4em; gap: 10px; align-items: center; font-size: 15px; }
+.ax-top .l { text-align: right; }
+.ax-top .win { font-weight: 700; color: var(--wood); }
+.bar { height: 12px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--line); overflow: hidden; }
+.bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--gold), #C77F3D); border-radius: 999px; }
+.ax-why { font-size: 14.5px; color: var(--muted); margin: 6px 0 0 6.4em; padding-left: 10px; }
+.kw { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+.kw .paper { padding: 18px 18px 16px; }
+.kw h4 { font-family: var(--hand); font-weight: 400; font-size: 30px; color: var(--rose); line-height: 1.1; }
+.kw p { font-size: 14.5px; margin-top: 4px; }
+.books-r { padding: 8px 22px; }
+.br { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 14px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.br:last-child { border-bottom: 0; }
+.br h4 { font-size: 17px; }
+.br .meta { font-size: 13px; color: var(--muted); }
+.br .rate { color: var(--gold); white-space: nowrap; }
+.br .bn { grid-column: 1 / -1; font-size: 15px; }
+.two { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.note { padding: 26px 22px 20px; }
+.note h4 { font-family: var(--hand); font-weight: 400; font-size: 26px; color: var(--leaf); }
+.note.minus h4 { color: var(--rose); }
+.note p { font-size: 15px; margin-top: 6px; }
+.habits { padding: 26px 24px; display: grid; gap: 12px; }
+.habits ul { margin: 0; padding-left: 22px; display: grid; gap: 6px; }
+.habits li::marker { color: var(--gold); }
+.picks { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+.picks li { padding: 30px 18px 16px 24px; display: grid; gap: 4px; align-content: start; }
+.picks li::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 8px; border-radius: 4px 0 0 4px; background: var(--leaf); }
+.picks li.stretch::after { background: var(--rose); }
+.tag { justify-self: start; font: 700 11px var(--type); letter-spacing: .06em; padding: 2px 9px; border-radius: 999px; border: 1px solid currentColor; color: var(--leaf); }
+.stretch .tag { color: var(--rose); }
+.picks h4 { font-size: 17px; }
+.picks .au { font-size: 13px; color: var(--muted); }
+.picks p { font-size: 14.5px; margin: 4px 0 6px; }
+.picks a { font-size: 13px; color: var(--leaf); text-underline-offset: 3px; }
+.plan { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: p; }
+.plan li { counter-increment: p; padding: 16px 20px 16px 64px; position: relative; }
+.plan li::before { content: counter(p); position: absolute; left: 18px; top: 14px; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--wood); color: var(--cream); font: 700 16px var(--display); }
+.letter { padding: 40px 34px 34px; background-color: #FFFDF6; background-image: repeating-linear-gradient(to bottom, transparent 0 33px, rgba(203, 179, 137, .35) 33px 34px); background-position: 0 40px; }
+.letter p { font-family: var(--hand); font-size: 25px; line-height: 34px; color: #4F3A2C; white-space: pre-line; }
+.letter .sign { text-align: right; margin-top: 10px; color: var(--rose); }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+#copyMsg { font-size: 14px; color: var(--leaf); }
+#copyFallback { flex: 1 1 100%; min-height: 120px; font-size: 13px; }
+
+@media (max-width: 620px) {
+  .book { grid-template-columns: 1.6em minmax(0, 1fr) 2.2em; }
+  .book .ti { grid-column: 2; } .book .au { grid-column: 2; } .book .stars { grid-column: 2; } .book .note { grid-column: 2; } .book .del { grid-column: 3; grid-row: 1; }
+  .pair { grid-template-columns: 1fr; }
+  .scale { grid-template-columns: 1fr; gap: 4px; } .scale .l { text-align: left; }
+  .portrait { grid-template-columns: 1fr; }
+  .two { grid-template-columns: 1fr; }
+  .ax-why { margin-left: 0; }
+}
+</style>
+
+<header class="banner">
+  <div class="banner-text">
+    <p class="eyebrow">다락방 서재에 놀러 온 동물들 · 정밀 분석</p>
+    <h1>다락방 독서 상담실</h1>
+    <p class="lead">조금 더 자세히 이야기해 주세요. <b>내 Claude 계정의 사서</b>가 내 책들을 하나하나 읽고, 나만을 위한 독서 상담 기록을 써 드려요.</p>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="paper pin intro">
+    <p class="hand" style="font-size:26px">상담은 이렇게 진행돼요</p>
+    <ol>
+      <li>읽은 책과 별점, 인생 책과 아쉬웠던 책을 적어요.</li>
+      <li>나의 독서 생활과 좋아하는 문체, 분위기를 골라요.</li>
+      <li>사서가 1분 정도 읽고, 독서 초상과 맞춤 처방을 써 드려요.</li>
+    </ol>
+    <p class="privacy">적은 내용은 어디에도 저장되지 않아요. 분석을 위해 지금 로그인한 내 Claude 계정의 Claude에게만 전달돼요. 예시 답이 채워져 있으니 내 이야기로 바꿔 주세요.</p>
+  </section>
+
+  <section class="paper notice" id="notice" hidden>
+    <p><b>이 상담실은 claude.ai에서 열어야 쓸 수 있어요.</b> 로그인 없이 가볍게 해 보려면 <a href="https://hhonge1234-create.github.io/attic-reading-animals/" target="_blank" rel="noopener">무료 체험 페이지 ↗</a>를 이용해 주세요.</p>
+  </section>
+
+  <form id="f" novalidate>
+    <section class="paper pin sec">
+      <div class="sec-h"><span class="n">01</span><h2>최근에 읽은 책</h2><small>최대 10권</small></div>
+      <p class="hint">별점과 한 줄 감상을 남기면 무엇이 좋았는지까지 읽어 낼 수 있어요.</p>
+      <div id="books"></div>
+      <button type="button" class="ghost" id="addBook">+ 책 한 권 더</button>
+    </section>
+
+    <section class="paper pin sec">
+      <div class="sec-h"><span class="n">02</span><h2>인생 책과 아쉬웠던 책</h2></div>
+      <div class="q">
+        <p>인생 책 한 권</p>
+        <div class="pair"><input type="text" id="lifeT" placeholder="도서명" aria-label="인생 책 도서명"><input type="text" id="lifeA" placeholder="저자" aria-label="인생 책 저자"></div>
+        <textarea id="lifeWhy" placeholder="이 책이 왜 특별한가요?" aria-label="인생 책인 이유"></textarea>
+      </div>
+      <div class="q">
+        <p>끝까지 못 읽었거나 아쉬웠던 책 <small class="hint">(선택)</small></p>
+        <div class="pair"><input type="text" id="mehT" placeholder="도서명" aria-label="아쉬웠던 책 도서명"><input type="text" id="mehA" placeholder="저자" aria-label="아쉬웠던 책 저자"></div>
+        <textarea id="mehWhy" placeholder="어떤 점이 맞지 않았나요?" aria-label="아쉬웠던 이유"></textarea>
+      </div>
+    </section>
+
+    <section class="paper pin sec">
+      <div class="sec-h"><span class="n">03</span><h2>나의 독서 생활</h2></div>
+      <div class="q"><p>한 달에 읽는 책</p><div class="chips" data-name="perMonth" data-type="radio"></div></div>
+      <div class="q"><p>주로 읽는 때와 곳 <small class="hint">(여러 개)</small></p><div class="chips" data-name="when" data-type="checkbox"></div></div>
+      <div class="q"><p>즐겨 읽는 형태</p><div class="chips" data-name="format" data-type="checkbox"></div></div>
+      <div class="q"><p>책을 고르는 기준</p><div class="chips" data-name="pick" data-type="checkbox"></div></div>
+      <div class="q"><p>좋아하는 분야</p><div class="chips" data-name="fields" data-type="checkbox"></div></div>
+    </section>
+
+    <section class="paper pin sec">
+      <div class="sec-h"><span class="n">04</span><h2>책에서 바라는 것과 취향</h2></div>
+      <div class="q"><p>책을 읽고 나서 남았으면 하는 것 <small class="hint">(3개까지)</small></p><div class="chips" data-name="want" data-type="checkbox" data-max="3"></div></div>
+      <div class="q" id="scales"></div>
+    </section>
+
+    <section class="paper pin sec">
+      <div class="sec-h"><span class="n">05</span><h2>지금의 나</h2><small>선택 · 적을수록 처방이 정확해져요</small></div>
+      <div class="q"><label class="lbl" for="now">요즘 마음에 있는 것이나 관심사</label><textarea id="now" placeholder="예: 진로 고민이 많아요, 요즘 우주에 빠졌어요"></textarea></div>
+      <div class="q"><label class="lbl" for="goal">올해 독서 목표</label><input type="text" id="goal" placeholder="예: 한 달에 두 권, 고전 한 권 완독"></div>
+    </section>
+
+    <div class="submit">
+      <button type="submit" class="primary" id="go">사서에게 상담 받기</button>
+      <p class="err" id="err" hidden></p>
+    </div>
+  </form>
+
+  <section class="paper pin progress" id="progress" hidden aria-live="polite">
+    <p class="hand" style="font-size:28px">사서가 내 책장을 읽는 중이에요</p>
+    <ul class="steps" id="steps"><li>책을 서가에서 찾는 중</li><li>좋아한 책과 아쉬웠던 책을 비교하는 중</li><li>네 가지 축으로 취향을 읽는 중</li><li>나에게 맞는 책을 고르는 중</li><li>편지를 쓰는 중</li></ul>
+    <p class="stream" id="stream"></p>
+    <button type="button" class="ghost" id="stop">그만두기</button>
+  </section>
+
+  <section id="report" aria-live="polite" hidden></section>
+</div>
+
+<script>
+var IMGDATA = {{IMGDATA}};
+(function () {
+  'use strict';
+  function $(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]; }); }
+
+  var TYPES = {
+    SDEC: '깊은 바다의 고래', SDEN: '밤의 고양이', SDLC: '서재의 올빼미', SDLN: '설계하는 여우',
+    SWEC: '숲길의 사슴', SWEN: '물결 타는 수달', SWLC: '호기심 많은 너구리', SWLN: '소식 빠른 앵무새',
+    KDEC: '사색하는 곰', KDEN: '마음을 돌보는 판다', KDLC: '느긋한 거북이', KDLN: '집 짓는 비버',
+    KWEC: '기억하는 코끼리', KWEN: '산책하는 강아지', KWLC: '영리한 돌고래', KWLN: '모아 두는 다람쥐'
+  };
+  var AXES = [
+    { k: 's', a: 'S', b: 'K', an: '이야기', bn: '지식' },
+    { k: 'd', a: 'D', b: 'W', an: '몰입', bn: '탐험' },
+    { k: 'e', a: 'E', b: 'L', an: '감성', bn: '논리' },
+    { k: 'c', a: 'C', b: 'N', an: '고전', bn: '신간' }
+  ];
+  var FIELDS = ['문학', '철학·심리', '과학', '사회·경제', '역사·지리', '예술', '언어', '종교', '기술·건강·생활', '교양·정보'];
+  var OPTS = {
+    perMonth: ['1권 이하', '2~3권', '4~6권', '7권 이상'],
+    when: ['출퇴근·통학길', '잠들기 전', '주말 오후', '카페', '도서관', '여행 중', '틈날 때마다'],
+    format: ['종이책', '전자책', '오디오북', '웹소설·연재'],
+    pick: ['좋아하는 작가', '지인 추천', '베스트셀러', 'SNS·유튜브', '서평·리뷰', '표지와 제목', '서점·도서관에서 우연히'],
+    fields: FIELDS,
+    want: ['위로', '새로운 지식', '순수한 재미', '깊은 몰입', '생각할 거리', '나의 성장', '현실에서 잠시 떠나기', '누군가와 나눌 이야기']
+  };
+  var SCALES = [
+    ['style', '간결한 문장', '풍성한 묘사'], ['length', '얇은 책', '두꺼운 책'], ['ending', '분명한 결말', '열린 결말'],
+    ['mood', '밝고 따뜻한', '어둡고 묵직한'], ['pace', '빠른 전개', '느린 호흡']
+  ];
+  var EXAMPLE = {
+    books: [['데미안', '헤르만 헤세', 5, '나를 찾아가는 과정이 내 얘기 같았다'], ['아몬드', '손원평', 4, '감정을 배워 가는 소년이 뭉클했다'], ['코스모스', '칼 세이건', 3, '아름답지만 조금 어려웠다']],
+    life: ['어린 왕자', '앙투안 드 생텍쥐페리', '읽을 때마다 다른 문장이 마음에 남아요.'],
+    meh: ['', '', ''],
+    choice: { perMonth: ['2~3권'], when: ['잠들기 전', '카페'], format: ['종이책'], pick: ['지인 추천', '서점·도서관에서 우연히'], fields: ['문학', '철학·심리', '과학'], want: ['위로', '생각할 거리'] },
+    scales: { style: 3, length: 2, ending: 4, mood: 3, pace: 4 }
+  };
+
+  // ---------- form building ----------
+  var bookSeq = 0;
+  function addBook(t, a, r, n) {
+    var box = $('books');
+    if (box.children.length >= 10) return;
+    var id = bookSeq++, row = document.createElement('div');
+    row.className = 'book';
+    row.innerHTML = '<span class="no"></span>' +
+      '<input type="text" class="ti" id="bt' + id + '" placeholder="도서명" autocomplete="off">' +
+      '<input type="text" class="au" id="ba' + id + '" placeholder="저자" autocomplete="off">' +
+      '<div class="stars" role="radiogroup" data-v="0">' + [1, 2, 3, 4, 5].map(function (k) { return '<button type="button" data-k="' + k + '" aria-label="별점 ' + k + '">★</button>'; }).join('') + '</div>' +
+      '<button type="button" class="del">×</button>' +
+      '<input type="text" class="note" id="bn' + id + '" placeholder="한 줄 감상 (선택)" autocomplete="off">';
+    row.querySelector('.ti').value = t || '';
+    row.querySelector('.au').value = a || '';
+    row.querySelector('.note').value = n || '';
+    setStars(row.querySelector('.stars'), r || 0);
+    box.appendChild(row);
+    renumber();
+  }
+  function setStars(el, v) { el.setAttribute('data-v', v); Array.prototype.forEach.call(el.children, function (b) { b.classList.toggle('on', Number(b.getAttribute('data-k')) <= v); b.setAttribute('aria-pressed', Number(b.getAttribute('data-k')) === v ? 'true' : 'false'); }); }
+  function renumber() {
+    Array.prototype.forEach.call($('books').children, function (r, i) {
+      r.querySelector('.no').textContent = String(i + 1).padStart(2, '0');
+      r.querySelector('.ti').setAttribute('aria-label', (i + 1) + '번 책 도서명');
+      r.querySelector('.au').setAttribute('aria-label', (i + 1) + '번 책 저자');
+      r.querySelector('.note').setAttribute('aria-label', (i + 1) + '번 책 한 줄 감상');
+      r.querySelector('.del').setAttribute('aria-label', (i + 1) + '번 책 지우기');
+    });
+    $('addBook').hidden = $('books').children.length >= 10;
+  }
+  $('addBook').addEventListener('click', function () { addBook(); var l = $('books').lastElementChild; if (l) l.querySelector('.ti').focus(); });
+  $('books').addEventListener('click', function (e) {
+    var s = e.target.closest('.stars button');
+    if (s) { var g = s.parentNode, k = Number(s.getAttribute('data-k')); setStars(g, Number(g.getAttribute('data-v')) === k ? 0 : k); return; }
+    if (e.target.classList.contains('del')) { e.target.closest('.book').remove(); if (!$('books').children.length) addBook(); renumber(); }
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('.chips[data-name]'), function (box) {
+    var name = box.getAttribute('data-name'), type = box.getAttribute('data-type');
+    box.innerHTML = OPTS[name].map(function (o, i) { return '<label class="chip"><input type="' + type + '" name="' + name + '" id="' + name + i + '" value="' + esc(o) + '"><span>' + esc(o) + '</span></label>'; }).join('');
+    var max = Number(box.getAttribute('data-max') || 0);
+    if (max) box.addEventListener('change', function (e) {
+      var on = box.querySelectorAll('input:checked');
+      if (on.length > max) e.target.checked = false;
+    });
+  });
+  $('scales').innerHTML = '<p>문장과 이야기 취향</p>' + SCALES.map(function (s) {
+    return '<div class="scale"><span class="l">' + s[1] + '</span><div class="dots" role="radiogroup" aria-label="' + s[1] + '부터 ' + s[2] + '까지">' +
+      [1, 2, 3, 4, 5].map(function (v) { return '<label><input type="radio" name="sc_' + s[0] + '" id="sc_' + s[0] + v + '" value="' + v + '"><span title="' + v + '"></span></label>'; }).join('') +
+      '</div><span>' + s[2] + '</span></div>';
+  }).join('');
+
+  function fillExample() {
+    EXAMPLE.books.forEach(function (b) { addBook(b[0], b[1], b[2], b[3]); });
+    $('lifeT').value = EXAMPLE.life[0]; $('lifeA').value = EXAMPLE.life[1]; $('lifeWhy').value = EXAMPLE.life[2];
+    Object.keys(EXAMPLE.choice).forEach(function (n) { EXAMPLE.choice[n].forEach(function (v) { var i = OPTS[n].indexOf(v); if (i >= 0) $(n + i).checked = true; }); });
+    Object.keys(EXAMPLE.scales).forEach(function (k) { $('sc_' + k + EXAMPLE.scales[k]).checked = true; });
+  }
+
+  function picked(name) { return Array.prototype.map.call(document.querySelectorAll('input[name="' + name + '"]:checked'), function (i) { return i.value; }); }
+  function readForm() {
+    var books = Array.prototype.map.call($('books').children, function (r) {
+      return { t: r.querySelector('.ti').value.trim(), a: r.querySelector('.au').value.trim(), r: Number(r.querySelector('.stars').getAttribute('data-v')), n: r.querySelector('.note').value.trim() };
+    }).filter(function (b) { return b.t; });
+    var sc = {};
+    SCALES.forEach(function (s) { var c = document.querySelector('input[name="sc_' + s[0] + '"]:checked'); sc[s[0]] = c ? Number(c.value) : 0; });
+    return {
+      books: books,
+      life: { t: $('lifeT').value.trim(), a: $('lifeA').value.trim(), why: $('lifeWhy').value.trim() },
+      meh: { t: $('mehT').value.trim(), a: $('mehA').value.trim(), why: $('mehWhy').value.trim() },
+      perMonth: picked('perMonth'), when: picked('when'), format: picked('format'), pick: picked('pick'), fields: picked('fields'), want: picked('want'),
+      scales: sc, now: $('now').value.trim(), goal: $('goal').value.trim()
+    };
+  }
+
+  // ---------- prompt ----------
+  function cut(s, n) { return String(s || '').slice(0, n); }
+  function buildPrompt(f) {
+    var L = [];
+    L.push('너는 따뜻하고 통찰력 있는 공공도서관의 독서 상담 사서야. 아래는 한 이용자가 상담 신청서에 적은 내용이야. 이 사람만을 위한 독서 상담 기록을 써 줘.');
+    L.push('');
+    L.push('[최근에 읽은 책] (별점 0은 미입력, 5가 최고)');
+    f.books.slice(0, 10).forEach(function (b, i) { L.push((i + 1) + '. ' + cut(b.t, 80) + (b.a ? ' / ' + cut(b.a, 40) : '') + ' / 별점 ' + b.r + (b.n ? ' / 감상: ' + cut(b.n, 120) : '')); });
+    if (f.life.t) L.push('[인생 책] ' + cut(f.life.t, 80) + (f.life.a ? ' / ' + cut(f.life.a, 40) : '') + (f.life.why ? ' / 이유: ' + cut(f.life.why, 300) : ''));
+    if (f.meh.t) L.push('[아쉬웠던 책] ' + cut(f.meh.t, 80) + (f.meh.a ? ' / ' + cut(f.meh.a, 40) : '') + (f.meh.why ? ' / 이유: ' + cut(f.meh.why, 300) : ''));
+    L.push('[한 달 독서량] ' + (f.perMonth.join(', ') || '응답 없음'));
+    L.push('[읽는 때와 곳] ' + (f.when.join(', ') || '응답 없음'));
+    L.push('[형태] ' + (f.format.join(', ') || '응답 없음'));
+    L.push('[고르는 기준] ' + (f.pick.join(', ') || '응답 없음'));
+    L.push('[좋아하는 분야] ' + (f.fields.join(', ') || '응답 없음'));
+    L.push('[책에서 바라는 것] ' + (f.want.join(', ') || '응답 없음'));
+    L.push('[취향 척도] (1이 왼쪽, 5가 오른쪽, 0은 미응답) ' + SCALES.map(function (s) { return s[1] + '↔' + s[2] + ': ' + f.scales[s[0]]; }).join(' / '));
+    if (f.now) L.push('[요즘 마음에 있는 것] ' + cut(f.now, 400));
+    if (f.goal) L.push('[올해 독서 목표] ' + cut(f.goal, 200));
+    L.push('');
+    L.push('규칙:');
+    L.push('- 존댓말로, 이 사람이 쓴 표현을 근거로 인용하며 구체적으로 써. 뻔한 칭찬이나 일반론은 피해.');
+    L.push('- 네 축은 각각 왼쪽 성향의 비율(0~100)로 판단해: s=이야기(↔지식), d=몰입(↔탐험: 한 분야를 깊게 vs 여러 분야를 넓게), e=감성(↔논리), c=고전(↔신간: 오래된 책 vs 요즘 책).');
+    L.push('- 책 식별: 오타나 번역 제목 차이가 있어도 가장 가까운 실제 책으로. field는 다음 중 하나: ' + FIELDS.join(', ') + '. 모르면 known:false.');
+    L.push('- 추천 도서는 한국에서 출간된(번역서 포함) 실제 책 중 존재를 확신하는 책만. 이미 적은 책은 제외. fit 3권(딱 맞는 책), stretch 2권(한 걸음 넓히는 책).');
+    L.push('- 요즘 마음에 있는 것은 존중하며 책과 연결하되, 의학적·심리적 진단이나 처방은 하지 마.');
+    L.push('- 아쉬웠던 책이 없으면 disliked는 빈 문자열.');
+    L.push('');
+    L.push('JSON 객체 하나로만 답해. 형식:');
+    L.push('{"summary":"이 사람의 독서를 그린 한 문장 초상","axes":{"s":{"pct":0,"why":"근거 한두 문장"},"d":{"pct":0,"why":""},"e":{"pct":0,"why":""},"c":{"pct":0,"why":""}},' +
+      '"keywords":[{"word":"2~6글자","why":"한두 문장"}],"books":[{"n":1,"known":true,"title":"","author":"","year":1919,"field":"문학","note":"이 사람의 취향과 연결한 한두 문장"}],' +
+      '"loved":"좋아한 책들의 공통점 2~3문장","disliked":"아쉬웠던 책에서 보이는 것 1~2문장","habits":{"diagnosis":"독서 생활 진단 2문장","tips":["구체적 제안","",""]},' +
+      '"recommend":[{"title":"","author":"","why":"이 사람의 답과 연결한 이유 한두 문장","kind":"fit"}],"plan":["다음 한 달 독서 계획 1단계","2단계","3단계"],"letter":"사서가 이 사람에게 쓰는 짧은 편지 4~5문장"}');
+    L.push('keywords는 3~5개, books는 입력한 책마다 하나씩 입력 번호 순서로, recommend는 5권(fit 3, stretch 2).');
+    return L.join('\n');
+  }
+
+  // ---------- run ----------
+  var samplePromise = (window.claude && typeof window.claude.use === 'function') ? window.claude.use('sample').catch(function () { return null; }) : Promise.resolve(null);
+  samplePromise.then(function (s) { if (!s) { $('notice').hidden = false; } });
+  var ctl = null, stepTimer = null;
+  function setStep(i) {
+    Array.prototype.forEach.call($('steps').children, function (li, k) { li.classList.toggle('on', k === i); li.classList.toggle('done', k < i); });
+  }
+  function startProgress() {
+    $('progress').hidden = false; $('stream').textContent = ''; var i = 0; setStep(0);
+    stepTimer = setInterval(function () { i = Math.min(i + 1, 3); setStep(i); }, 9000);
+    $('progress').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function stopProgress() { clearInterval(stepTimer); $('progress').hidden = true; }
+  $('stop').addEventListener('click', function () { if (ctl) ctl.abort(); });
+
+  function showErr(m) { $('err').textContent = m; $('err').hidden = false; }
+  $('f').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    $('err').hidden = true;
+    var f = readForm();
+    if (!f.books.length && !f.life.t) { showErr('읽은 책이나 인생 책을 한 권 이상 적어 주세요.'); return; }
+    var sample = await samplePromise;
+    if (!sample) { showErr('이 상담실은 claude.ai에서 열어야 사서와 이야기할 수 있어요.'); $('notice').hidden = false; return; }
+    $('go').disabled = true; ctl = new AbortController(); startProgress();
+    try {
+      var d = await sample.json(buildPrompt(f), {
+        signal: ctl.signal, cache: false,
+        onText: function (u) { $('stream').textContent = '사서가 ' + u.text.length.toLocaleString('ko-KR') + '자째 쓰는 중…'; setStep(4); }
+      });
+      stopProgress();
+      renderReport(d, f);
+    } catch (err) {
+      stopProgress();
+      var c = err && err.code;
+      if (c === 'cancelled') return;
+      if (c === 'not_granted' || c === 'sampling_disabled') showErr('Claude 사용을 허락해야 상담을 받을 수 있어요. 다시 누르면 허락 창이 떠요.');
+      else if (c === 'rate_limited') showErr('지금은 Claude 사용량이 많아요. 잠시 뒤 다시 시도해 주세요.');
+      else if (c === 'invalid_json') showErr('사서의 답을 읽지 못했어요. 한 번 더 눌러 주세요.');
+      else showErr('상담 중 문제가 생겼어요. 잠시 뒤 다시 시도해 주세요.');
+    } finally { $('go').disabled = false; }
+  });
+
+  // ---------- report ----------
+  function num(v, d) { v = Number(v); return isFinite(v) ? v : d; }
+  function str(v) { return v == null ? '' : String(v); }
+  function stars(n) { n = Math.max(0, Math.min(5, num(n, 0))); return n ? '★★★★★'.slice(0, n) + '☆☆☆☆☆'.slice(0, 5 - n) : ''; }
+  function nl(t) { return 'https://www.nl.go.kr/NL/contents/search.do?srchTarget=total&kwd=' + encodeURIComponent(t); }
+  var lastText = '';
+  function renderReport(d, f) {
+    d = d || {};
+    var ax = d.axes || {}, pct = {};
+    AXES.forEach(function (a) { pct[a.k] = Math.max(0, Math.min(100, Math.round(num(ax[a.k] && ax[a.k].pct, 50)))); });
+    var code = AXES.map(function (a) { return pct[a.k] >= 50 ? a.a : a.b; }).join('');
+    var name = TYPES[code];
+    var books = Array.isArray(d.books) ? d.books : [];
+    var kws = (Array.isArray(d.keywords) ? d.keywords : []).filter(function (k) { return k && k.word; }).slice(0, 5);
+    var recs = (Array.isArray(d.recommend) ? d.recommend : []).filter(function (r) { return r && r.title; }).slice(0, 6);
+    var tips = (d.habits && Array.isArray(d.habits.tips) ? d.habits.tips : []).filter(Boolean).slice(0, 4);
+    var plan = (Array.isArray(d.plan) ? d.plan : []).filter(Boolean).slice(0, 4);
+    var h = '';
+    h += '<article class="paper pin portrait"><div class="frame"><img src="' + IMGDATA[code] + '" alt="' + esc(name) + '"></div><div>' +
+      '<p class="code">' + code + '</p><h2>' + esc(name) + '</h2><p class="summary">' + esc(d.summary) + '</p></div></article>';
+    h += '<div><h3 class="r-title">네 가지 축으로 본 나 <small>왜 그렇게 읽었는지 근거와 함께</small></h3><div class="paper axes">' + AXES.map(function (a) {
+      var p = pct[a.k], left = p >= 50;
+      return '<div><div class="ax-top"><span class="l' + (left ? ' win' : '') + '">' + a.an + ' ' + p + '%</span><div class="bar"><i style="width:' + p + '%"></i></div><span class="' + (left ? '' : 'win') + '">' + (100 - p) + '% ' + a.bn + '</span></div>' +
+        '<p class="ax-why">' + esc(ax[a.k] && ax[a.k].why) + '</p></div>';
+    }).join('') + '</div></div>';
+    if (kws.length) h += '<div><h3 class="r-title">내 독서의 열쇠말</h3><div class="kw">' + kws.map(function (k) { return '<div class="paper"><h4>' + esc(k.word) + '</h4><p>' + esc(k.why) + '</p></div>'; }).join('') + '</div></div>';
+    if (f.books.length) {
+      h += '<div><h3 class="r-title">내 책 한 권 한 권 <small>사서의 메모</small></h3><div class="paper books-r">' + f.books.map(function (b, i) {
+        var m = books.filter(function (x) { return x && Number(x.n) === i + 1; })[0] || books[i] || {};
+        var meta = m.known === false ? '찾지 못한 책' : [m.author || b.a, m.year, m.field].filter(Boolean).map(esc).join(' · ');
+        return '<div class="br"><h4>『' + esc(m.known === false ? b.t : (m.title || b.t)) + '』</h4><span class="rate">' + stars(b.r) + '</span><p class="meta">' + meta + '</p><p class="bn">' + esc(m.note) + '</p></div>';
+      }).join('') + '</div></div>';
+    }
+    h += '<div class="two"><div class="paper note"><h4>좋아한 책들의 공통점</h4><p>' + esc(d.loved) + '</p></div>' +
+      (str(d.disliked) ? '<div class="paper note minus"><h4>아쉬웠던 책이 알려 준 것</h4><p>' + esc(d.disliked) + '</p></div>' : '') + '</div>';
+    if (d.habits) h += '<div><h3 class="r-title">독서 생활 진단</h3><div class="paper habits"><p>' + esc(d.habits.diagnosis) + '</p>' + (tips.length ? '<ul>' + tips.map(function (t) { return '<li>' + esc(t) + '</li>'; }).join('') + '</ul>' : '') + '</div></div>';
+    if (recs.length) h += '<div><h3 class="r-title">지금의 나에게 권하는 책 <small>초록은 딱 맞는 책, 빨강은 한 걸음 넓히는 책</small></h3><ul class="picks">' + recs.map(function (r) {
+      var st = r.kind === 'stretch';
+      return '<li class="paper' + (st ? ' stretch' : '') + '"><span class="tag">' + (st ? '한 걸음 넓히기' : '딱 맞는 책') + '</span><h4>『' + esc(r.title) + '』</h4><span class="au">' + esc(r.author) + '</span><p>' + esc(r.why) + '</p>' +
+        '<a href="' + nl(r.title) + '" target="_blank" rel="noopener">국립중앙도서관에서 찾기 ↗</a></li>';
+    }).join('') + '</ul></div>';
+    if (plan.length) h += '<div><h3 class="r-title">다음 한 달 독서 계획</h3><ol class="plan">' + plan.map(function (p) { return '<li class="paper">' + esc(p) + '</li>'; }).join('') + '</ol></div>';
+    if (d.letter) h += '<div><h3 class="r-title">사서의 편지</h3><div class="paper pin letter"><p>' + esc(d.letter) + '</p><p class="sign">다락방 서재에서, 사서 드림</p></div></div>';
+    h += '<div class="actions"><button type="button" class="ghost" id="copy">상담 기록 복사하기</button><button type="button" class="ghost" id="again">다시 상담 받기</button><span id="copyMsg"></span></div>';
+    $('report').innerHTML = h; $('report').hidden = false;
+    $('report').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    var T = ['[다락방 독서 상담 기록]', '', code + ' ' + name, str(d.summary), ''];
+    AXES.forEach(function (a) { T.push(a.an + ' ' + pct[a.k] + '% / ' + a.bn + ' ' + (100 - pct[a.k]) + '%  ' + str(ax[a.k] && ax[a.k].why)); });
+    if (kws.length) { T.push('', '열쇠말: ' + kws.map(function (k) { return k.word; }).join(', ')); }
+    T.push('', '좋아한 책들의 공통점: ' + str(d.loved));
+    if (str(d.disliked)) T.push('아쉬웠던 책이 알려 준 것: ' + str(d.disliked));
+    if (recs.length) { T.push('', '권하는 책'); recs.forEach(function (r) { T.push('- 『' + r.title + '』 ' + str(r.author) + ': ' + str(r.why)); }); }
+    if (plan.length) { T.push('', '다음 한 달 계획'); plan.forEach(function (p, i) { T.push((i + 1) + '. ' + p); }); }
+    if (d.letter) T.push('', '사서의 편지', str(d.letter));
+    lastText = T.join('\n');
+  }
+  document.addEventListener('click', function (e) {
+    if (e.target.id === 'again') { $('report').hidden = true; window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+    if (e.target.id !== 'copy') return;
+    var msg = $('copyMsg');
+    var fallback = function () {
+      var ta = $('copyFallback');
+      if (!ta) { ta = document.createElement('textarea'); ta.id = 'copyFallback'; ta.readOnly = true; e.target.parentNode.appendChild(ta); }
+      ta.value = lastText; ta.select(); msg.textContent = '선택된 글을 직접 복사해 주세요.';
+    };
+    try { navigator.clipboard.writeText(lastText).then(function () { msg.textContent = '복사했어요.'; }, fallback); } catch (err) { fallback(); }
+  });
+
+  fillExample();
+})();
+</script>
