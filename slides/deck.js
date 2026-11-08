@@ -39,6 +39,43 @@
     motes.appendChild(d);
   }
 
+  // ---------- live neighbors' shelf (real data from the Google Sheet) ----------
+  var SHELF_URL = 'https://script.google.com/macros/s/AKfycbzLpXGOcfBpaXwhViI9_y3U59CfElvhccQbQa8CuvkFa3bhlubiuEY7GSo5jcVDklsf/exec';
+  var NAMES = {}; TYPES.forEach(function (t) { NAMES[t[0]] = t[1]; });
+  var SPC = ['#C98A7E', '#8FA37A', '#D9B074', '#8AA1B4', '#B49A80', '#CFA0A6'];
+  var deckShelf = null, deckShelfFailed = false;
+  function escH(x) { return String(x).replace(/[&<>"']/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]; }); }
+  function drawDeckShelf(s, animate) {
+    if (!s) s = document.querySelector('[data-anim="shelf"]');
+    var box = document.getElementById('shShelves'), fb = document.getElementById('shFallback'), stamp = document.getElementById('shelfStamp');
+    if (!deckShelf) { if (deckShelfFailed) { fb.hidden = false; stamp.textContent = '연결이 안 되어 서비스 화면으로 대신 보여 드려요'; } return; }
+    var d = deckShelf, codes = Object.keys(d.shelves).sort(function (a, b) {
+      var n = function (c) { return d.shelves[c].reduce(function (x, y) { return x + y.n; }, 0); }; return n(b) - n(a);
+    }).slice(0, 3);
+    var t = new Date(); stamp.textContent = (t.getMonth() + 1) + '월 ' + t.getDate() + '일 ' + t.getHours() + ':' + String(t.getMinutes()).padStart(2, '0') + ' 기준';
+    document.getElementById('shPeople').textContent = d.people;
+    document.getElementById('shBooks').textContent = d.books;
+    box.innerHTML = codes.length ? codes.map(function (c) {
+      var list = d.shelves[c].slice(0, 9), max = list[0].n;
+      return '<div class="mini-shelf"><div class="who"><img src="assets/img/' + c + '.jpg" alt="">' + escH(NAMES[c] || c).split(' ').slice(-1)[0] + '</div><div class="row">' +
+        list.map(function (b, i) { return '<div class="dspine" style="height:' + (96 + Math.round(44 * b.n / max)) + 'px;background:' + SPC[i % 6] + '" title="' + escH(b.t) + '"><i>' + b.n + '</i><span>' + escH(b.t) + '</span></div>'; }).join('') + '</div></div>';
+    }).join('') : '<p class="sh-count">아직 비어 있어요. 오늘 첫 책을 꽂아 주세요.</p>';
+    if (animate && A) {
+      run(A({ targets: box.querySelectorAll('.dspine'), scaleY: [0, 1], opacity: [0, 1], duration: 700, delay: A.stagger(60, { start: 900 }), easing: 'easeOutBack' }));
+      ['shPeople', 'shBooks'].forEach(function (id) {
+        var el = document.getElementById(id), end = Number(el.textContent) || 0, o = { v: 0 };
+        run(A({ targets: o, v: end, duration: 1200, delay: 800, easing: 'easeOutExpo', update: function () { el.textContent = Math.round(o.v); } }));
+      });
+    }
+  }
+  var shelfReq = (window.fetch ? fetch(SHELF_URL) : Promise.reject()).then(function (r) { return r.json(); }).then(function (d) {
+    if (!d || !d.ok) throw 0; deckShelf = d;
+  }).catch(function () { deckShelfFailed = true; }).then(function () {
+    var s = document.querySelector('[data-anim="shelf"]');
+    if (s && s.classList.contains('on')) drawDeckShelf(s, !STATIC); else drawDeckShelf(s, false);
+  });
+  setTimeout(function () { if (!deckShelf && !deckShelfFailed) { deckShelfFailed = true; drawDeckShelf(null, false); } }, 8000);
+
   // ---------- scaling ----------
   function fit() {
     var s = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
@@ -127,6 +164,20 @@
       run(A({ targets: s.querySelectorAll('.pr-arrow path'), strokeDashoffset: [A.setDashOffset, 0], duration: 700, delay: t0 + 1900, easing: 'easeInOutSine' }));
       run(A({ targets: s.querySelector('.pr-final'), opacity: [0, 1], translateY: [-160, 0], rotate: [-14, 2], duration: 1400, delay: t0 + 2400, easing: 'easeOutElastic(1, .6)' }));
       run(A({ targets: s.querySelector('.pr-foot'), opacity: [0, 1], duration: 700, delay: t0 + 3000, easing: 'linear' }));
+    },
+    shelf: function (s) {
+      run(head(s));
+      run(A({ targets: s.querySelectorAll('.sh-step, .sh-note'), opacity: [0, 1], translateX: [-50, 0], duration: 700, delay: A.stagger(260, { start: 300 }), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelector('.sh-live'), opacity: [0, 1], translateY: [40, 0], duration: 800, delay: 700, easing: 'easeOutCubic' }));
+      drawDeckShelf(s, true);
+      if (!STATIC) run(A({ targets: s.querySelector('.live-dot'), boxShadow: ['0 0 0 0 rgba(217, 83, 79, .5)', '0 0 0 14px rgba(217, 83, 79, 0)'], duration: 1400, loop: true, easing: 'easeOutQuad' }));
+    },
+    doors: function (s) {
+      run(head(s));
+      run(A({ targets: s.querySelectorAll('.door'), opacity: [0, 1], translateY: [70, 0], rotate: function (_, i) { return [i ? 3 : -3, 0]; }, duration: 900, delay: A.stagger(500, { start: 300 }), easing: 'easeOutBack' }));
+      run(A({ targets: s.querySelectorAll('.door-mid path'), strokeDashoffset: [A.setDashOffset, 0], duration: 700, delay: 900, easing: 'easeInOutSine' }));
+      run(A({ targets: s.querySelector('.door-mid p'), opacity: [0, 1], duration: 500, delay: 1300, easing: 'linear' }));
+      run(A({ targets: s.querySelector('.why'), opacity: [0, 1], translateY: [30, 0], duration: 700, delay: 1700, easing: 'easeOutCubic' }));
     },
     lis: function (s) {
       run(head(s));
@@ -314,6 +365,6 @@
   go(start ? start - 1 : 0);
   if (CHECK) {
     var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-    ready.then(function () { setTimeout(check, 1500); });
+    Promise.all([ready, shelfReq]).then(function () { setTimeout(check, 1500); });
   }
 })();

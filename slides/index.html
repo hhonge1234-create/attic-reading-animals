@@ -122,19 +122,20 @@
 <!-- 7 이용 흐름 -->
 <section class="slide" data-anim="flow">
   <p class="eyebrow">이용 흐름</p>
-  <h2>세 가지를 적으면, 여섯 가지를 돌려받습니다</h2>
+  <h2>세 가지를 적으면, 일곱 가지를 돌려받습니다</h2>
   <svg class="flow" viewBox="0 0 1664 640" aria-label="입력 3가지가 사서 분석과 점수 계산을 거쳐 결과 6가지가 되는 흐름도">
     <g class="links">
       <path d="M330 110 C420 110 420 320 520 320"/>
       <path d="M330 320 L520 320"/>
       <path d="M330 530 C420 530 420 320 520 320"/>
       <path d="M820 320 L900 320"/>
-      <path d="M1200 320 C1260 320 1260 60 1320 60"/>
-      <path d="M1200 320 C1260 320 1260 164 1320 164"/>
-      <path d="M1200 320 C1260 320 1260 268 1320 268"/>
-      <path d="M1200 320 C1260 320 1260 372 1320 372"/>
-      <path d="M1200 320 C1260 320 1260 476 1320 476"/>
-      <path d="M1200 320 C1260 320 1260 580 1320 580"/>
+      <path d="M1200 320 C1260 320 1260 56 1320 56"/>
+      <path d="M1200 320 C1260 320 1260 144 1320 144"/>
+      <path d="M1200 320 C1260 320 1260 232 1320 232"/>
+      <path d="M1200 320 C1260 320 1260 320 1320 320"/>
+      <path d="M1200 320 C1260 320 1260 408 1320 408"/>
+      <path d="M1200 320 C1260 320 1260 496 1320 496"/>
+      <path d="M1200 320 C1260 320 1260 584 1320 584"/>
     </g>
   </svg>
   <div class="flow-boxes">
@@ -143,12 +144,13 @@
     <div class="fb in" style="left:0;top:530px">읽는 습관<small>질문 7개</small></div>
     <div class="fb core" style="left:520px;top:320px">Claude 사서<small>책 찾기 · 분야 · 성향</small></div>
     <div class="fb core" style="left:900px;top:320px">4축 점수 계산<small>16유형 중 하나</small></div>
-    <div class="fb out" style="left:1320px;top:60px">동물 카드</div>
-    <div class="fb out" style="left:1320px;top:164px">성향 분포</div>
-    <div class="fb out" style="left:1320px;top:268px">내 책 목록카드</div>
-    <div class="fb out" style="left:1320px;top:372px">맞춤 추천 4권</div>
-    <div class="fb out" style="left:1320px;top:476px">이웃 친구 2마리</div>
-    <div class="fb out" style="left:1320px;top:580px">행운의 독서템</div>
+    <div class="fb out" style="left:1320px;top:56px">동물 카드</div>
+    <div class="fb out" style="left:1320px;top:144px">성향 분포</div>
+    <div class="fb out" style="left:1320px;top:232px">내 책 목록카드</div>
+    <div class="fb out" style="left:1320px;top:320px">맞춤 추천</div>
+    <div class="fb out" style="left:1320px;top:408px">이웃 친구 2마리</div>
+    <div class="fb out new" style="left:1320px;top:496px">이웃들의 책장</div>
+    <div class="fb out" style="left:1320px;top:584px">행운의 독서템</div>
   </div>
 </section>
 
@@ -204,23 +206,47 @@
   <div class="shots">
     <div class="shot-main paper">
       <img class="shot on" src="assets/shots/shot-hero.jpg" alt="첫 화면: 수채화 다락방과 제목">
-      <img class="shot" src="assets/shots/shot-form.jpg" alt="입력 화면: 분야 선택과 도서명·저자 입력">
-      <img class="shot" src="assets/shots/shot-result.jpg" alt="결과 화면: 고래 카드와 성향 분포">
-      <img class="shot" src="assets/shots/shot-friends.jpg" alt="결과 화면: 이웃 친구와 행운의 독서템">
+      <img class="shot" src="assets/shots/shot-form.jpg" alt="입력 화면: 도서명과 저자를 나눠 적는 칸">
+      <img class="shot" src="assets/shots/shot-result.jpg" alt="결과 화면: 정밀 분석 안내와 고래 카드">
+      <img class="shot" src="assets/shots/shot-friends.jpg" alt="결과 화면: 취향이 맞는 친구와 정반대 친구">
+      <img class="shot" src="assets/shots/shot-shelf.jpg" alt="결과 화면: 다락방 이웃들의 책장">
+      <img class="shot" src="assets/shots/shot-consult.jpg" alt="다락방 독서 상담실: 별점과 감상을 적는 화면">
     </div>
     <ol class="shot-list">
       <li class="on"><b>첫 화면</b>수채화 다락방, 빨랫줄의 동물들</li>
-      <li><b>입력</b>분야, 도서명·저자, 습관 질문</li>
-      <li><b>결과</b>동물 카드와 네 축의 성향 분포</li>
-      <li><b>더 보기</b>이웃 친구, 맞춤 추천, 행운의 독서템</li>
+      <li><b>입력</b>분야, 도서명·저자, 습관 질문, 책장 동의</li>
+      <li><b>결과</b>동물 카드, 정밀 분석 안내</li>
+      <li><b>이웃 친구</b>잘 맞는 친구와 정반대 친구의 책</li>
+      <li><b>이웃들의 책장</b>같은 동물, 다른 동물이 꽂은 책</li>
+      <li><b>독서 상담실</b>내 Claude로 받는 깊은 상담</li>
     </ol>
+  </div>
+</section>
+
+<!-- 다락방 이웃들의 책장 -->
+<section class="slide" data-anim="shelf">
+  <p class="eyebrow">새 기능 · 이용자 데이터베이스</p>
+  <h2>다락방 이웃들의 책장</h2>
+  <div class="sh-grid">
+    <div class="sh-steps">
+      <div class="sh-step paper"><b>1</b><div><h3>책장에 꽂기</h3><p>테스트를 마칠 때 동의하면 내가 적은 책을 보탭니다.</p></div></div>
+      <div class="sh-step paper"><b>2</b><div><h3>구글 시트에 익명 저장</h3><p>도서명, 저자, 동물 유형만 한 줄씩. 이름과 이메일은 받지 않습니다.</p></div></div>
+      <div class="sh-step paper"><b>3</b><div><h3>동물별 책장으로</h3><p>같은 동물, 다른 동물이 많이 꽂은 책 순서로 책등을 세웁니다.</p></div></div>
+      <p class="sh-note">부적절한 제목은 시트에서 그 줄을 지우면 1분 안에 사라집니다.</p>
+    </div>
+    <div class="sh-live paper pin">
+      <p class="sh-live-h"><span class="live-dot"></span>지금 이 순간의 책장 <small id="shelfStamp">구글 시트에서 불러오는 중</small></p>
+      <p class="sh-count"><b class="sh-num" id="shPeople">–</b>명이 <b class="sh-num" id="shBooks">–</b>권을 꽂았어요</p>
+      <div class="sh-shelves" id="shShelves"></div>
+      <img class="sh-fallback" id="shFallback" src="assets/shots/shot-shelf.jpg" alt="서비스의 이웃 책장 화면" hidden>
+    </div>
   </div>
 </section>
 
 <!-- 13 만든 과정 -->
 <section class="slide" data-anim="timeline">
   <p class="eyebrow">바이브 코딩으로 만든 과정</p>
-  <h2>대화로 만들고, 10번 고쳐 배포했습니다</h2>
+  <h2>처음 76분 동안, 10번 고쳐 배포했습니다</h2>
   <div class="chart-frame line"><img src="assets/charts/timeline.svg" alt="13시 48분 시작부터 15시 3분 v10까지 배포 10번의 타임라인"><i class="wipe"></i></div>
   <div class="row4 kpis">
     <div class="kpi"><b class="count" data-count="76">76</b><span>분, 시작부터 마지막 배포까지</span></div>
@@ -228,7 +254,8 @@
     <div class="kpi"><b class="count" data-count="35">35</b><span>장, Flow로 그린 그림</span></div>
     <div class="kpi"><b class="count" data-count="18">18</b><span>장, 최종 사용한 그림</span></div>
   </div>
-  <p class="tools">도구 · <b>Claude Code</b> 대화로 코딩 · <b>Google Flow</b> 일러스트 · <b>Claude</b> 페이지 속 사서</p>
+  <p class="tools">도구 · <b>Claude Code</b> 대화로 코딩 · <b>Google Flow</b> 일러스트 · <b>Claude</b> 페이지 속 사서 · <b>구글 시트</b> 책장 저장</p>
+  <p class="tools after">그 뒤에 더한 것 · 발표 슬라이드 · 다락방 이웃들의 책장 · 다락방 독서 상담실</p>
 </section>
 
 <!-- 14 외부 데이터 -->
@@ -265,18 +292,40 @@
 <!-- 16 기술 구조 -->
 <section class="slide" data-anim="arch">
   <p class="eyebrow">기술 구조</p>
-  <h2>서버 없는 한 장짜리 웹</h2>
+  <h2>서버 없이, 무료로 굴러가는 구조</h2>
   <svg class="arch-lines" viewBox="0 0 1664 600" aria-hidden="true">
-    <path d="M560 300 L760 300"/><path d="M1100 250 L1300 130"/><path d="M1100 350 L1300 470"/><path d="M330 120 L330 210"/>
+    <path d="M320 265 C370 265 370 110 420 110"/><path d="M320 265 C370 265 370 420 420 420"/>
+    <path d="M860 110 L1000 110"/><path d="M860 420 L1000 420"/><path class="v" d="M640 172 L640 358"/>
   </svg>
+  <p class="arch-lab" style="left:664px;top:588px">상담실 열기</p>
   <div class="arch">
-    <div class="ab user" style="left:120px;top:300px">이용자 브라우저<small>한 장짜리 HTML · 그림 18장 내장</small></div>
-    <div class="ab flowimg" style="left:170px;top:60px">Google Flow<small>동물·다락방 그림</small></div>
-    <div class="ab claude" style="left:760px;top:300px">Claude 사서<small>페이지가 직접 질문 · 책 식별 · 분야 · 성향 · 추천</small></div>
-    <div class="ab local" style="left:1300px;top:130px">내장 도서 71권<small>Claude를 못 쓸 때</small></div>
-    <div class="ab nl" style="left:1300px;top:470px">국립중앙도서관 검색<small>추천 도서 링크</small></div>
+    <div class="ab user" style="left:0;top:265px">이용자<small>휴대폰·컴퓨터 브라우저</small></div>
+    <div class="ab pages" style="left:420px;top:110px">무료 체험 페이지<small>GitHub Pages · 한 장짜리 HTML</small></div>
+    <div class="ab claudepg" style="left:420px;top:420px">다락방 독서 상담실<small>claude.ai · 별점·습관·취향까지 받는 페이지</small></div>
+    <div class="ab sheet" style="left:1000px;top:110px">구글 시트 책장 DB<small>Apps Script 웹 앱 · 익명 저장과 동물별 집계</small></div>
+    <div class="ab claude" style="left:1000px;top:420px">Claude 사서<small>방문자 본인 계정 · 상담 기록과 추천 작성</small></div>
   </div>
-  <div class="chips-row"><span>서버 없음</span><span>데이터베이스 없음</span><span>입력 내용 저장 안 함</span><span>링크 하나로 공유</span></div>
+  <div class="chips-row"><span>별도 서버 없음</span><span>운영비 0원</span><span>이름·이메일 저장 안 함</span><span>추천 도서는 국립중앙도서관 검색으로</span></div>
+</section>
+
+<!-- 두 개의 문 -->
+<section class="slide" data-anim="doors">
+  <p class="eyebrow">서비스 구성</p>
+  <h2>가볍게 들어오는 문, 깊이 들어가는 문</h2>
+  <div class="doors">
+    <div class="door paper pin">
+      <p class="door-tag">문 1 · 누구나</p>
+      <h3>무료 체험 페이지</h3>
+      <ul><li>누구나 로그인 없이 바로</li><li>내장 도서 71권과 분야·습관으로 분석</li><li><b>다락방 이웃들의 책장</b>에 함께 꽂기</li><li>QR 코드로 공유</li></ul>
+    </div>
+    <div class="door-mid"><svg viewBox="0 0 160 80" aria-hidden="true"><path d="M8 40 H140 M122 22 L144 40 L122 58"/></svg><p>더 깊이<br>알고 싶다면</p></div>
+    <div class="door paper pin">
+      <p class="door-tag">문 2 · 내 Claude 계정</p>
+      <h3>다락방 독서 상담실</h3>
+      <ul><li>별점과 감상, 인생 책, 아쉬웠던 책까지</li><li>독서 습관과 문체·분위기 취향을 자세히</li><li>독서 초상, 4축의 근거, 열쇠말, 사서의 편지</li><li>맞춤 추천 5권과 한 달 독서 계획</li></ul>
+    </div>
+  </div>
+  <div class="why paper"><p><b>왜 나눴나요?</b> 일반 웹페이지는 방문자의 Claude 로그인을 쓸 수 없고, Claude 안의 페이지는 외부 저장소에 접속할 수 없습니다. 그래서 모두와 함께 쓰는 체험 페이지와, 나 혼자 깊이 상담받는 페이지로 역할을 나눴습니다. 상담실에 적은 내용은 저장하지 않습니다.</p><p class="next"><b>다음 단계</b> 제작자의 API 키로 상담실과 이웃 책장을 한 페이지에서 잇기 (1회 약 4~140원)</p></div>
 </section>
 
 <!-- 17 서비스 운영 -->
@@ -284,11 +333,11 @@
   <p class="eyebrow">서비스 운영 방안</p>
   <h2>링크 하나에서 도서관 프로그램까지</h2>
   <div class="road">
-    <div class="paper pin stage-c"><p class="hand mid">1단계 · 지금</p><ul><li>링크와 QR 코드로 공유</li><li>학과·도서관 SNS에 결과 문구 공유</li><li>신입생 오리엔테이션 체험 부스</li></ul></div>
+    <div class="paper pin stage-c"><p class="hand mid">1단계 · 지금</p><ul><li>링크와 QR 코드로 공유</li><li>함께 채우는 이웃 책장으로 다시 오게 하기</li><li>신입생 오리엔테이션 체험 부스</li></ul></div>
     <div class="paper pin stage-c"><p class="hand mid">2단계 · 도서관과 함께</p><ul><li>‘내 독서 동물 찾기’ 도서관 행사</li><li>동물별 추천 서가 전시</li><li>같은 동물·반대 동물 독서 모임 짝짓기</li></ul></div>
-    <div class="paper pin stage-c"><p class="hand mid">3단계 · 데이터 연결</p><ul><li>학교 도서관 소장·대출 가능 여부 표시</li><li>도서관 정보나루 대출 데이터로 추천 보강</li><li>익명 유형 통계를 큐레이션에 활용</li></ul></div>
+    <div class="paper pin stage-c"><p class="hand mid">3단계 · 데이터 연결</p><ul><li>학교 도서관 소장·대출 가능 여부 표시</li><li>이웃 책장 통계를 수서·큐레이션에 활용</li><li>상담실과 이웃 책장을 한 페이지로 잇기</li></ul></div>
   </div>
-  <div class="limits"><b>지금의 한계</b> 추천 도서는 Claude의 기억으로 고르므로 실제 소장 확인이 필요합니다 · Claude 분석은 보는 사람의 Claude 계정이 있어야 합니다 · 유형 분포의 치우침 조정</div>
+  <div class="limits"><b>지금의 한계</b> 추천 도서는 Claude의 기억으로 고르므로 실제 소장 확인이 필요합니다 · 독서 상담실은 claude.ai 로그인이 필요합니다 · 체험 페이지는 내장 71권만 알아봅니다 · 유형 분포의 치우침 조정</div>
 </section>
 
 <!-- 18 가치 -->
@@ -296,8 +345,8 @@
   <p class="eyebrow">가치</p>
   <h2>누구에게 어떤 의미가 있을까요</h2>
   <div class="row3">
-    <div class="paper pin card-v"><p class="who-t">이용자</p><h3>나를 알고, 밖을 봅니다</h3><p>내 독서 취향을 한눈에 보고, ‘정반대 친구’의 책으로 늘 보던 목록 밖의 책을 만납니다.</p></div>
-    <div class="paper pin card-v"><p class="who-t">도서관</p><h3>독자 상담을 더 많은 사람에게</h3><p>참여형 독서 프로그램과 동물별 북큐레이션으로 이용자를 서가로 이끕니다.</p></div>
+    <div class="paper pin card-v"><p class="who-t">이용자</p><h3>나를 알고, 밖을 봅니다</h3><p>내 취향을 한눈에 보고, 이웃들의 진짜 책장과 ‘정반대 친구’의 책으로 늘 보던 목록 밖의 책을 만납니다.</p></div>
+    <div class="paper pin card-v"><p class="who-t">도서관</p><h3>독자 상담을 더 많은 사람에게</h3><p>이용자가 직접 채우는 책장이 쌓이며, 동물별 북큐레이션의 근거 데이터가 됩니다.</p></div>
     <div class="paper pin card-v"><p class="who-t">문헌정보학</p><h3>전공을 체험하는 서비스</h3><p>분류, 참고면담, 독자 상담을 누구나 해 볼 수 있는 웹으로 옮겼습니다.</p></div>
   </div>
   <div class="lucky-band"><p class="hand mid">덤으로, 행운의 독서템</p><p><b class="count" data-count="20">20</b> 가지 물건 × <b class="count" data-count="20">20</b> 가지 색·무늬 × <b class="count" data-count="8">8</b> 가지 시간 = <b class="count big" data-count="3200">3,200</b> 가지 조합</p></div>
@@ -310,6 +359,7 @@
     <p class="hand huge">당신의 다락방에는<br>어떤 동물이 놀러 왔나요?</p>
     <p class="lead">지금 바로 해 보세요</p>
     <p class="url" id="siteUrl"></p>
+    <p class="url sub">독서 상담실 · claude.ai/artifact/DmqLE6gvBbLZoa9okZhq62</p>
   </div>
   <figure class="qr paper"><img src="assets/qr.svg" alt="서비스로 가는 QR 코드"><figcaption>QR로 바로 해 보기</figcaption></figure>
   <div class="end-row" id="endRow"></div>
