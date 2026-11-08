@@ -223,6 +223,28 @@ button.ghost { font: inherit; font-size: 14px; padding: 7px 16px; border-radius:
 .lucky-name { font-family: var(--hand); font-size: 34px; line-height: 1.15; color: var(--rose); }
 .lucky-msg { font-size: 15px; margin-top: 4px !important; }
 .lucky-when { font-family: var(--type); font-size: 12px; color: var(--ink-muted); margin-top: 6px !important; }
+.consent { display: flex; gap: 12px; align-items: flex-start; font-size: 15px; color: var(--ink); cursor: pointer; }
+.consent input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--wood); flex: none; }
+.consent small { display: block; color: var(--ink-muted); font-size: 13px; }
+.shelf-box { padding: 40px 26px 26px; display: grid; gap: 26px; }
+.shelf-unit { display: grid; gap: 12px; min-width: 0; }
+.shelf-head { display: flex; gap: 14px; align-items: center; }
+.shelf-head h4 { margin: 0; font-family: var(--display); font-size: 22px; }
+.shelf-kind { margin: 0; font-family: var(--hand); font-size: 24px; line-height: 1; color: var(--rose); }
+.shelf-row { display: flex; align-items: flex-end; gap: 6px; min-height: 250px; overflow-x: auto; padding: 0 6px; }
+.shelf-row.empty { align-items: center; justify-content: center; color: var(--ink-muted); text-align: center; font-size: 15px; background: repeating-linear-gradient(90deg, transparent 0 46px, rgba(203, 179, 137, .25) 46px 48px); border-radius: 4px; }
+.plank { height: 14px; border-radius: 2px; background: linear-gradient(#C49A6C, #8B5E3C); box-shadow: 0 6px 10px -4px rgba(120, 80, 40, .4); margin-top: -12px; }
+.spine { flex: none; width: 58px; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 8px 4px 10px; border-radius: 3px 3px 1px 1px; color: #FFF8EC;
+  background: var(--sp); box-shadow: inset -5px 0 0 rgba(0, 0, 0, .12), inset 3px 0 0 rgba(255, 255, 255, .18); overflow: hidden; }
+.sp-n { font: 700 12px var(--type); background: rgba(255, 248, 236, .9); color: var(--ink); border-radius: 999px; padding: 1px 7px; }
+.sp-t { writing-mode: vertical-rl; text-orientation: mixed; font-family: var(--display); font-weight: 700; font-size: 16px; line-height: 1.1; flex: 1; min-height: 0; overflow: hidden; }
+.sp-a { writing-mode: vertical-rl; font-size: 11px; opacity: .85; max-height: 70px; overflow: hidden; }
+.shelf-pick { display: grid; gap: 10px; border-top: 1px dashed var(--paper-line); border-bottom: 1px dashed var(--paper-line); padding: 14px 0; }
+.pick-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.pick-ani { position: relative; border: 0; background: none; padding: 3px; border-radius: 50%; cursor: pointer; }
+.pick-ani .pt.sm { width: 52px; height: 52px; border-radius: 50%; }
+.pick-ani.on { box-shadow: 0 0 0 3px var(--gold); }
+.pick-ani i { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); white-space: nowrap; font: 700 9px var(--body); font-style: normal; background: var(--wood); color: var(--cream); padding: 1px 5px; border-radius: 999px; }
 @media (max-width: 520px) { .lucky { grid-template-columns: auto 1fr; } .lucky #reroll { grid-column: 1 / -1; } .lucky .swatch { width: 64px; height: 64px; } }
 
 /* ---------- Field guide: polaroids on a clothesline ---------- */
@@ -299,6 +321,7 @@ footer strong { color: var(--text); }
       <legend><span class="n">No.3</span><h2>읽는 습관</h2></legend>
       <div class="qs" id="qs"></div>
     </fieldset>
+    <label class="consent" id="consentRow" hidden><input type="checkbox" id="share" checked><span>내가 적은 책을 <b>다락방 이웃들의 책장</b>에 익명으로 꽂기<small>이름 없이 도서명, 저자, 동물 유형만 저장돼요.</small></span></label>
     <div class="submit-row">
       <button type="submit" class="primary" id="go">내 독서 동물 찾기</button>
       <div id="status" hidden><span class="dot"></span><span id="statusText"></span><button type="button" class="link" id="stop">그만두기</button></div>
@@ -652,6 +675,7 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
       mate(good, 'good', '취향이 잘 맞는 친구', '좋아하는 책의 결은 같고 읽는 방식이 달라요. 서로 모르던 책을 건네줄 수 있는 짝이에요.', 'mateGood') +
       mate(opp, 'opp', '정반대 성향의 친구', '네 축이 모두 반대예요. 내 서가에 없는 책을 가장 많이 가진 친구예요.', 'mateOpp') + '</div></div>';
 
+    h += '<div id="shelfSec" hidden></div>';
     h += '<div><h3 class="sec-title">행운의 독서템 <small>' + t.n + '의 다음 책을 도와줄 물건</small></h3><div class="paper pinned lucky" id="lucky"></div></div>';
     lastShare = '나의 독서 동물은 ' + t.e + ' ' + t.n + '(' + code + ')! 잘 맞는 친구: ' + good.n + ', 정반대 친구: ' + opp.n + '. 행운의 독서템: -. 추천 도서: ' + t.b.map(function (b) { return '『' + b.t + '』'; }).join(', ');
     h += '<div class="share"><button type="button" class="ghost" id="copyBtn">결과 문구 복사</button><span id="copyMsg"></span></div>';
@@ -825,8 +849,75 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     if (ctl) ctl.abort();
     $('go').disabled = true;
     try { await run(form); } finally { $('go').disabled = false; }
-    var r = $('result'); if (r.firstChild) { try { history.replaceState(null, '', '#' + (document.querySelector('.code') || {}).textContent); } catch (e) {} }
+    var codeEl = document.querySelector('.card .code');
+    var r = $('result'); if (r.firstChild && codeEl) { try { history.replaceState(null, '', '#' + codeEl.textContent); } catch (e) {} }
+    if (codeEl && SHELF_API && $('share').checked && form.books.length) await addToShelf(codeEl.textContent, form.books);
   });
+
+  // ---------- 다락방 이웃들의 책장 (Google 스프레드시트에 모인 이용자 책 목록) ----------
+  var SHELF_DEFAULT = '';  // Apps Script 웹 앱 주소 (https://script.google.com/macros/s/…/exec)
+  var SHELF_API = (function () { try { return new URLSearchParams(location.search).get('shelf') || SHELF_DEFAULT; } catch (e) { return SHELF_DEFAULT; } })();
+  var shelfData = null, shelfOther = null, shelfCode = null;
+  function loadShelf() {
+    if (!SHELF_API) return Promise.resolve(null);
+    return fetch(SHELF_API, { method: 'GET' }).then(function (r) { return r.json(); }).then(function (d) {
+      if (!d || !d.ok) throw new Error('bad');
+      shelfData = d; $('consentRow').hidden = false; return d;
+    }).catch(function () { shelfData = null; return null; });
+  }
+  function sentKey(code, books) { return code + '|' + books.map(function (b) { return norm(b.t); }).sort().join(','); }
+  function addToShelf(code, books) {
+    var key = sentKey(code, books), last = null;
+    try { last = localStorage.getItem('attic-shelf-sent'); } catch (e) {}
+    var send = last === key ? Promise.resolve() : fetch(SHELF_API, {
+      method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ code: code, books: books.map(function (b) { return { t: b.t, a: b.a }; }) })
+    }).then(function (r) { return r.json(); }).then(function (d) {
+      if (d && d.ok) { try { localStorage.setItem('attic-shelf-sent', key); } catch (e) {} }
+    }).catch(function () {});
+    return send.then(loadShelf).then(function () { drawShelf(code, true); });
+  }
+  function spines(list) {
+    if (!list || !list.length) return '';
+    var max = list[0].n;
+    return list.slice(0, 10).map(function (b, i) {
+      var h = 150 + Math.round(90 * b.n / max);
+      return '<div class="spine" style="height:' + h + 'px;--sp:var(--sp' + ((i % 6) + 1) + ')" title="' + esc(b.t + (b.a ? ' · ' + b.a : '') + ' · ' + b.n + '명') + '">' +
+        '<span class="sp-n">' + b.n + '</span><span class="sp-t">' + esc(b.t) + '</span>' + (b.a ? '<span class="sp-a">' + esc(b.a) + '</span>' : '') + '</div>';
+    }).join('');
+  }
+  function shelfBlock(code, label, cls) {
+    var t = TYPES[code], list = shelfData.shelves[code] || [];
+    return '<div class="shelf-unit ' + cls + '"><div class="shelf-head">' + portrait(t, 'mid') + '<div><p class="shelf-kind">' + label + '</p><h4>' + t.n + '들의 책장</h4></div></div>' +
+      (list.length ? '<div class="shelf-row">' + spines(list) + '</div>' : '<div class="shelf-row empty"><p>아직 비어 있어요.<br>' + t.n + '의 첫 책을 기다리는 중이에요.</p></div>') +
+      '<div class="plank" aria-hidden="true"></div></div>';
+  }
+  function drawShelf(code, mine) {
+    var sec = $('shelfSec');
+    if (!sec || !shelfData) { if (sec) sec.hidden = true; return; }
+    shelfCode = code;
+    if (!shelfOther || shelfOther === code) shelfOther = flip(code, [0, 1, 2, 3]);
+    var good = flip(code, [1, 3]), opp = flip(code, [0, 1, 2, 3]);
+    var picker = ORDER.filter(function (c) { return c !== code; }).map(function (c) {
+      var tag = c === good ? '잘 맞는 친구' : c === opp ? '정반대 친구' : '';
+      return '<button type="button" class="pick-ani' + (c === shelfOther ? ' on' : '') + '" data-shelf="' + c + '" title="' + TYPES[c].n + '">' + portrait(TYPES[c], 'sm') + (tag ? '<i>' + tag + '</i>' : '') + '</button>';
+    }).join('');
+    sec.innerHTML = '<h3 class="sec-title">다락방 이웃들의 책장 <small>지금까지 ' + shelfData.people + '명이 ' + shelfData.books + '권을 꽂았어요' + (mine ? ' · 방금 내 책도 꽂혔어요' : '') + '</small></h3>' +
+      '<div class="paper pinned shelf-box">' +
+      shelfBlock(code, mine ? '나와 같은 동물' : '이 동물', 'same') +
+      '<div class="shelf-pick"><p class="shelf-kind">다른 동물의 책장 엿보기</p><div class="pick-row">' + picker + '</div></div>' +
+      shelfBlock(shelfOther, shelfOther === opp ? '나와 정반대 동물' : shelfOther === good ? '나와 잘 맞는 동물' : '다른 동물', 'other') +
+      '</div>';
+    sec.hidden = false;
+  }
+  document.addEventListener('click', function (ev) {
+    var b = ev.target.closest('[data-shelf]');
+    if (!b || !shelfCode) return;
+    shelfOther = b.getAttribute('data-shelf');
+    drawShelf(shelfCode, false);
+  });
+  var _render = render;
+  render = function (code, ctx) { _render(code, ctx); if (shelfData) { shelfOther = null; drawShelf(code, false); } };
 
   fillExample();
   var start = (location.hash || '').replace('#', '').toUpperCase();
@@ -835,5 +926,6 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     var f0 = readForm(), rows0 = localRows(f0.books), r0 = score(f0, rows0);
     render(r0.code, { mode: 'example', pct: r0.pct, rows: rows0, field: r0.field, nClass: r0.nClass });
   }
+  loadShelf().then(function () { var c = document.querySelector('.card .code'); if (c && shelfData) drawShelf(c.textContent, false); });
 })();
 </script>
