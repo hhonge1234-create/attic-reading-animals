@@ -133,6 +133,17 @@ form.paper { display: grid; gap: 30px; padding: 40px 28px 28px; }
 .q { display: grid; gap: 8px; border: 0; padding: 0; margin: 0; min-width: 0; }
 .q legend { padding: 0; font-size: 16px; }
 .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.opts.three { grid-template-columns: repeat(3, 1fr); }
+.qn { display: inline-block; min-width: 2.2em; font-family: var(--type); font-size: 12px; color: var(--rose); }
+.answered { font-family: var(--type); font-size: 13px; color: var(--ink-muted); }
+.answered.done { color: var(--leaf); font-weight: 700; }
+.taste-card { padding: 34px 24px 22px; display: grid; gap: 14px; }
+.taste-line { margin: 0; font-family: var(--hand); font-size: 26px; line-height: 1.35; color: var(--wood); }
+.taste-line b { font-weight: 400; }
+.taste-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 8px; }
+.taste-grid li { padding: 10px 12px; border-radius: 8px; background: var(--paper-2); border: 1px solid var(--paper-line); font-size: 15px; }
+.taste-grid li span { display: block; font-family: var(--type); font-size: 11px; letter-spacing: .08em; color: var(--rose); }
+@media (max-width: 520px) { .opts.three { grid-template-columns: 1fr; } }
 .opt span { display: block; height: 100%; padding: 10px 14px; border: 1px solid var(--paper-line); border-radius: 6px; cursor: pointer; font-size: 15px; background: var(--paper-2); }
 .opt input:checked + span { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); background: var(--paper); font-weight: 700; }
 .submit-row { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
@@ -327,12 +338,20 @@ footer strong { color: var(--text); }
       <div class="chips" id="chips"></div>
     </fieldset>
     <fieldset class="step">
-      <legend><span class="n">No.2</span><h2>독서 습관과 읽는 이유</h2></legend>
-      <p class="hint">네 가지 축마다 세 개씩, 모두 12개예요. 더 가까운 쪽을 골라 주세요.</p>
-      <div class="qs" id="qs"></div>
+      <legend><span class="n">No.2</span><h2>나의 독서 습관</h2></legend>
+      <p class="hint">더 가까운 쪽을 골라 주세요. 정답은 없어요.</p>
+      <div class="qs" id="qsA"></div>
     </fieldset>
     <fieldset class="step">
-      <legend><span class="n">No.3</span><h2>내 책장 보여 주기</h2><small class="opt-tag">선택</small></legend>
+      <legend><span class="n">No.3</span><h2>끌리는 이야기와 주제</h2></legend>
+      <div class="qs" id="qsB"></div>
+    </fieldset>
+    <fieldset class="step">
+      <legend><span class="n">No.4</span><h2>나의 책 취향</h2><small class="opt-tag">결과의 취향 카드에 담겨요</small></legend>
+      <div class="qs" id="qsT"></div>
+    </fieldset>
+    <fieldset class="step">
+      <legend><span class="n">No.5</span><h2>내 책장 보여 주기</h2><small class="opt-tag">선택</small></legend>
       <p class="hint">최근에 읽었거나 좋아하는 책을 적어 주세요. 분석에는 쓰지 않고, 동의하면 <b>다락방 이웃들의 책장</b>에 꽂혀 나와 같은 동물에게 추천돼요.</p>
       <div class="book-head" aria-hidden="true"><span>도서명</span><span>저자</span></div>
       <div class="book-rows" id="bookRows"></div>
@@ -341,6 +360,7 @@ footer strong { color: var(--text); }
     <label class="consent" id="consentRow" hidden><input type="checkbox" id="share" checked><span>내가 적은 책을 <b>다락방 이웃들의 책장</b>에 익명으로 꽂기<small>이름 없이 도서명, 저자, 동물 유형만 저장되고, 나와 같은 동물에게 추천돼요.</small></span></label>
     <div class="submit-row">
       <button type="submit" class="primary" id="go">내 독서 동물 찾기</button>
+      <span class="answered" id="answered"></span>
       <div id="status" hidden><span class="dot"></span><span id="statusText"></span><button type="button" class="link" id="stop">그만두기</button></div>
       <p class="err" id="err" hidden></p>
     </div>
@@ -361,7 +381,7 @@ footer strong { color: var(--text); }
   </section>
 
   <footer>
-    <p><strong>분석 방법.</strong> 네 축(이야기/지식, 몰입/탐험, 감성/논리, 고전/신간)마다 질문 3개씩, 모두 12개의 답으로 유형을 정해요. 축마다 질문 수와 점수가 같아서 16마리가 고르게 나뉘어요.</p>
+    <p><strong>분석 방법.</strong> 네 축(이야기/지식, 몰입/탐험, 감성/논리, 고전/신간)마다 질문 5개씩, 모두 20개의 답으로 유형을 정해요. 축마다 질문 수와 점수가 같아서 16마리가 고르게 나뉘어요. 책 취향 질문 5개는 결과의 취향 카드에 담겨요.</p>
     <p><strong>추천.</strong> 적은 책은 분석에 쓰지 않아요. 동의하면 구글 시트의 다락방 이웃들의 책장에 익명으로 꽂히고, 같은 동물 이웃들이 많이 꽂은 책 순서로 추천돼요. 책장이 아직 비어 있으면 사서가 고른 기본 추천을 보여 드려요.</p>
     <p><strong>궁합.</strong> 잘 맞는 동물은 좋아하는 내용(이야기/지식, 감성/논리)은 같고 읽는 방식(몰입/탐험, 고전/신간)이 다른 유형이에요. 반대 동물은 네 축이 모두 다른 유형입니다.</p>
   </footer>
@@ -449,24 +469,41 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     { id: 'ksf', c: '8□3', l: 'SF·판타지', w: { s: 2, e: -1, c: -1 } },
     { id: 'kmy', c: '8□3', l: '추리·스릴러', w: { s: 2, e: -2 } }
   ];
+  // 동물을 정하는 질문: 축마다 5개, 점수는 모두 ±1 (A: 독서 습관, B: 끌리는 이야기와 주제)
   var QS = [
-    { id: 's1', q: '서점에 들어가면 먼저 가는 곳은?', o: [['소설·문학 매대', { s: 1 }], ['인문·과학 매대', { s: -1 }]] },
-    { id: 'd1', q: '마음에 드는 작가가 생기면?', o: [['그 작가 책을 모두 찾아 읽는다', { d: 1 }], ['다음엔 전혀 다른 책을 고른다', { d: -1 }]] },
-    { id: 'e1', q: '책을 덮고 오래 남는 것은?', o: [['장면과 감정', { e: 1 }], ['새로 알게 된 사실과 논리', { e: -1 }]] },
-    { id: 'c1', q: '책을 고를 때 더 믿는 것은?', o: [['오래 살아남은 명작', { c: 1 }], ['요즘 화제의 신간', { c: -1 }]] },
-    { id: 's2', q: '책을 펼치는 가장 큰 이유는?', o: [['다른 사람의 삶을 살아 보려고', { s: 1 }], ['몰랐던 것을 알게 되려고', { s: -1 }]] },
-    { id: 'd2', q: '나의 읽는 방식은?', o: [['한 권을 끝까지 천천히', { d: 1 }], ['여러 권을 번갈아 가며', { d: -1 }]] },
-    { id: 'e2', q: '이야기 속 인물을 만나면?', o: [['깊이 감정이입한다', { e: 1 }], ['왜 그렇게 행동했는지 분석한다', { e: -1 }]] },
-    { id: 'c2', q: '읽을 책은 주로 어디서 발견하나요?', o: [['도서관 서가를 거닐다가', { c: 1 }], ['SNS나 베스트셀러 목록에서', { c: -1 }]] },
-    { id: 's3', q: '요즘 가장 끌리는 주제는?', o: [['사람과 관계에 대한 이야기', { s: 1 }], ['세상이 돌아가는 원리', { s: -1 }]] },
-    { id: 'd3', q: '관심 있는 분야는?', o: [['한두 분야를 깊게 판다', { d: 1 }], ['이것저것 넓게 둘러본다', { d: -1 }]] },
-    { id: 'e3', q: '책에서 가장 바라는 것은?', o: [['위로와 공감', { e: 1 }], ['정리된 생각과 해답', { e: -1 }]] },
-    { id: 'c3', q: '같은 주제라면 어떤 책을 고를까요?', o: [['오래 읽혀 온 책', { c: 1 }], ['최근에 나온 책', { c: -1 }]] }
+    { id: 'd1', g: 'A', q: '마음에 드는 작가가 생기면?', o: [['그 작가 책을 모두 찾아 읽는다', { d: 1 }], ['다음엔 전혀 다른 책을 고른다', { d: -1 }]] },
+    { id: 'c1', g: 'A', q: '책을 고를 때 더 믿는 것은?', o: [['오래 살아남은 명작', { c: 1 }], ['요즘 화제의 신간', { c: -1 }]] },
+    { id: 'd2', g: 'A', q: '나의 읽는 방식은?', o: [['한 권을 끝까지 천천히', { d: 1 }], ['여러 권을 번갈아 가며', { d: -1 }]] },
+    { id: 'c2', g: 'A', q: '읽을 책은 주로 어디서 발견하나요?', o: [['도서관 서가를 거닐다가', { c: 1 }], ['SNS나 베스트셀러 목록에서', { c: -1 }]] },
+    { id: 'd3', g: 'A', q: '관심 있는 분야는?', o: [['한두 분야를 깊게 판다', { d: 1 }], ['이것저것 넓게 둘러본다', { d: -1 }]] },
+    { id: 'c3', g: 'A', q: '같은 주제라면 어떤 책을 고를까요?', o: [['오래 읽혀 온 책', { c: 1 }], ['최근에 나온 책', { c: -1 }]] },
+    { id: 'd4', g: 'A', q: '시리즈물이 있다면?', o: [['끝까지 정주행한다', { d: 1 }], ['첫 권만 읽고 다른 책으로', { d: -1 }]] },
+    { id: 'c4', g: 'A', q: '책장에 오래 남기는 책은?', o: [['몇 번이고 다시 읽는 책', { c: 1 }], ['이번 달에 읽을 새 책', { c: -1 }]] },
+    { id: 'd5', g: 'A', q: '서점에 가면 나는 보통?', o: [['늘 가는 코너로 곧장 간다', { d: 1 }], ['처음 보는 코너를 기웃거린다', { d: -1 }]] },
+    { id: 'c5', g: 'A', q: '낡은 옛 책과 갓 나온 신간이 나란히 있다면?', o: [['낡은 책에 손이 간다', { c: 1 }], ['신간에 손이 간다', { c: -1 }]] },
+    { id: 's1', g: 'B', q: '서점에 들어가면 먼저 가는 곳은?', o: [['소설·문학 매대', { s: 1 }], ['인문·과학 매대', { s: -1 }]] },
+    { id: 'e1', g: 'B', q: '책을 덮고 오래 남는 것은?', o: [['장면과 감정', { e: 1 }], ['새로 알게 된 사실과 논리', { e: -1 }]] },
+    { id: 's2', g: 'B', q: '책을 펼치는 가장 큰 이유는?', o: [['다른 사람의 삶을 살아 보려고', { s: 1 }], ['몰랐던 것을 알게 되려고', { s: -1 }]] },
+    { id: 'e2', g: 'B', q: '이야기 속 인물을 만나면?', o: [['깊이 감정이입한다', { e: 1 }], ['왜 그렇게 행동했는지 분석한다', { e: -1 }]] },
+    { id: 's3', g: 'B', q: '요즘 가장 끌리는 주제는?', o: [['사람과 관계에 대한 이야기', { s: 1 }], ['세상이 돌아가는 원리', { s: -1 }]] },
+    { id: 'e3', g: 'B', q: '책에서 가장 바라는 것은?', o: [['위로와 공감', { e: 1 }], ['정리된 생각과 해답', { e: -1 }]] },
+    { id: 's4', g: 'B', q: '여행 가방에 한 권만 넣는다면?', o: [['마음을 흔드는 소설', { s: 1 }], ['궁금증을 풀어 줄 교양서', { s: -1 }]] },
+    { id: 'e4', g: 'B', q: '마음에 드는 문장을 만나면?', o: [['필사하거나 사진으로 남긴다', { e: 1 }], ['핵심을 요약해 둔다', { e: -1 }]] },
+    { id: 's5', g: 'B', q: '영화의 원작 책이 있다면?', o: [['원작 소설을 찾아 읽는다', { s: 1 }], ['배경이 된 역사나 과학을 찾아본다', { s: -1 }]] },
+    { id: 'e5', g: 'B', q: '친구에게 책을 추천할 때 하는 말은?', o: [['“읽다가 울었어”', { e: 1 }], ['“이 책 덕분에 새로 알게 됐어”', { e: -1 }]] }
+  ];
+  // 책 취향 질문: 동물을 정하지 않고 결과의 취향 카드에만 쓰여요
+  var TASTE = [
+    { id: 't1', label: '분위기', q: '끌리는 분위기는?', o: ['밝고 따뜻한', '잔잔하고 담담한', '어둡고 묵직한'] },
+    { id: 't2', label: '두께', q: '편하게 손이 가는 두께는?', o: ['하루에 읽는 얇은 책', '일주일쯤 걸리는 책', '오래 붙잡는 벽돌책'] },
+    { id: 't3', label: '결말', q: '좋아하는 결말은?', o: ['분명하게 닫히는 결말', '여운이 남는 열린 결말'] },
+    { id: 't4', label: '문체', q: '좋아하는 문장은?', o: ['짧고 간결한 문장', '풍성하게 그려 내는 문장'] },
+    { id: 't5', label: '전개', q: '좋아하는 이야기 속도는?', o: ['숨 가쁘게 빠른 전개', '천천히 스며드는 호흡'] }
   ];
   var FIELDS = { '0': '교양·정보', '1': '철학·심리', '2': '종교', '3': '사회·경제', '4': '과학', '5': '기술·건강·생활', '6': '예술', '7': '언어', '8': '문학', '9': '역사·지리' };
   var FIELD_KEY = {}; Object.keys(FIELDS).forEach(function (k) { FIELD_KEY[FIELDS[k]] = k; });
   var FIELD_LIST = Object.keys(FIELDS).map(function (k) { return FIELDS[k]; }).join(', ');
-  var EXAMPLE = { chips: ['k100', 'k400', 'k813'], books: [['데미안', '헤르만 헤세'], ['소년이 온다', '한강'], ['코스모스', '칼 세이건']], ans: { s1: 0, d1: 0, e1: 0, c1: 0, s2: 0, d2: 1, e2: 0, c2: 0, s3: 0, d3: 0, e3: 0, c3: 0 } };
+  var EXAMPLE = { chips: ['k100', 'k400', 'k813'], books: [['데미안', '헤르만 헤세'], ['소년이 온다', '한강'], ['코스모스', '칼 세이건']], ans: { s1: 0, d1: 0, e1: 0, c1: 0, s2: 0, d2: 1, e2: 0, c2: 0, s3: 0, d3: 0, e3: 0, c3: 0, s4: 0, d4: 0, e4: 1, c4: 0, s5: 0, d5: 0, e5: 0, c5: 1 }, taste: { t1: 1, t2: 1, t3: 1, t4: 1, t5: 1 } };
 
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (m) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]; }); }
   function $(id) { return document.getElementById(id); }
@@ -515,11 +552,22 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     if (c.group) return '<div class="group-label">' + c.group + '</div>';
     return '<label class="chip"><input type="checkbox" id="' + c.id + '" value="' + c.id + '"><span>' + c.l + '</span></label>';
   }).join('');
-  $('qs').innerHTML = QS.map(function (q) {
-    return '<fieldset class="q"><legend>' + q.q + '</legend><div class="opts">' + q.o.map(function (o, i) {
-      return '<label class="opt"><input type="radio" name="' + q.id + '" id="' + q.id + '_' + i + '" value="' + i + '"><span>' + o[0] + '</span></label>';
+  function qHtml(id, text, opts, n) {
+    return '<fieldset class="q"><legend><span class="qn">' + n + '</span>' + text + '</legend><div class="opts' + (opts.length === 3 ? ' three' : '') + '">' + opts.map(function (o, i) {
+      return '<label class="opt"><input type="radio" name="' + id + '" id="' + id + '_' + i + '" value="' + i + '"><span>' + o + '</span></label>';
     }).join('') + '</div></fieldset>';
-  }).join('');
+  }
+  var qn = 0;
+  ['A', 'B'].forEach(function (g) {
+    $('qs' + g).innerHTML = QS.filter(function (q) { return q.g === g; }).map(function (q) { return qHtml(q.id, q.q, q.o.map(function (o) { return o[0]; }), ++qn); }).join('');
+  });
+  $('qsT').innerHTML = TASTE.map(function (t, i) { return qHtml(t.id, t.q, t.o, 'T' + (i + 1)); }).join('');
+  function updateAnswered() {
+    var n = QS.filter(function (q) { return document.querySelector('input[name="' + q.id + '"]:checked'); }).length;
+    $('answered').textContent = n + ' / ' + QS.length + ' 답함';
+    $('answered').classList.toggle('done', n === QS.length);
+  }
+  $('f').addEventListener('change', updateAnswered);
   // Book rows: 도서명 + 저자
   var MAX_BOOKS = 15, rowSeq = 0;
   function renumber() {
@@ -565,6 +613,8 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     EXAMPLE.books.forEach(function (b) { addBookRow(b[0], b[1]); });
     addBookRow();
     Object.keys(EXAMPLE.ans).forEach(function (q) { $(q + '_' + EXAMPLE.ans[q]).checked = true; });
+    Object.keys(EXAMPLE.taste).forEach(function (q) { $(q + '_' + EXAMPLE.taste[q]).checked = true; });
+    updateAnswered();
   }
 
   // Scoring
@@ -592,7 +642,9 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     var lines = books.map(function (b) { return b.t + (b.a ? ' / ' + b.a : ''); });
     var answers = [];
     QS.forEach(function (q) { var r = document.querySelector('input[name="' + q.id + '"]:checked'); if (r) answers.push(q.o[+r.value][1]); });
-    return { picked: picked, books: books, lines: lines, answers: answers };
+    var taste = [];
+    TASTE.forEach(function (t) { var r = document.querySelector('input[name="' + t.id + '"]:checked'); if (r) taste.push({ label: t.label, v: t.o[+r.value] }); });
+    return { picked: picked, books: books, lines: lines, answers: answers, taste: taste };
   }
   // rows: [{input, known, title, author, year, kdc, genre, story, emotion, code?}]
   function score(form) {
@@ -600,9 +652,9 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     form.answers.forEach(function (w) { addW(sc, w); });
     var code = AX.map(function (ax) { var v = sc[ax.k]; return (v > 0 || (v === 0 && ax.tie)) ? ax.a : ax.b; }).join('');
     var pct = {};
-    AX.forEach(function (ax) { pct[ax.k] = Math.max(5, Math.min(95, 50 + 15 * sc[ax.k])); });
+    AX.forEach(function (ax) { pct[ax.k] = Math.max(5, Math.min(95, 50 + 9 * sc[ax.k])); });
     var top = form.picked[0];
-    return { code: code, pct: pct, field: top ? FIELDS[top.c[0]] : '' };
+    return { code: code, pct: pct, field: top ? FIELDS[top.c[0]] : '', taste: form.taste };
   }
   function localRows(books) {
     return books.map(function (b) {
@@ -655,6 +707,10 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     h += '<div class="card-main"><div class="frame">' + portrait(t, 'big') + '</div><div><p class="code">' + code + '</p><h2>' + t.n + '</h2><p class="desc">' + t.d + '</p><p class="ai-note" id="aiNote" hidden></p><ul class="traits">' +
       t.tr.map(function (x) { return '<li>' + x + '</li>'; }).join('') + '</ul></div></div><div class="hole" aria-hidden="true"></div></article>';
 
+    if (ctx.taste && ctx.taste.length) {
+      h += '<div><h3 class="sec-title">나의 책 취향 카드</h3><div class="paper pinned taste-card"><p class="taste-line">' + ctx.taste.map(function (x) { return '<b>' + esc(x.v) + '</b>'; }).join(' · ') + '</p><ul class="taste-grid">' +
+        ctx.taste.map(function (x) { return '<li><span>' + esc(x.label) + '</span>' + esc(x.v) + '</li>'; }).join('') + '</ul></div></div>';
+    }
     if (ctx.pct) {
       h += '<div><h3 class="sec-title">성향 분포</h3><div class="paper axes">' + AX.map(function (ax) {
         var p = ctx.pct[ax.k], aWin = code.indexOf(ax.a) !== -1;
@@ -775,7 +831,7 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
   async function run(form) {
     var r = score(form);
     lastExclude = form.books.map(function (b) { return norm(b.t); });
-    render(r.code, { mode: 'local', pct: r.pct, field: r.field });
+    render(r.code, { mode: 'local', pct: r.pct, field: r.field, taste: r.taste });
     $('result').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
@@ -824,7 +880,7 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     ev.preventDefault();
     $('err').hidden = true;
     var form = readForm();
-    if (form.answers.length < QS.length) { showErr('독서 습관과 읽는 이유 질문 12개에 모두 답해 주세요. (' + form.answers.length + '/12)'); return; }
+    if (form.answers.length < QS.length) { showErr('No.2와 No.3의 질문 ' + QS.length + '개에 모두 답해 주세요. (지금 ' + form.answers.length + '개)'); return; }
     if (ctl) ctl.abort();
     $('go').disabled = true;
     try { await run(form); } finally { $('go').disabled = false; }
@@ -945,7 +1001,7 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
   else {
     var f0 = readForm(), r0 = score(f0);
     lastExclude = f0.books.map(function (b) { return norm(b.t); });
-    render(r0.code, { mode: 'example', pct: r0.pct, field: r0.field });
+    render(r0.code, { mode: 'example', pct: r0.pct, field: r0.field, taste: r0.taste });
   }
   loadShelf().then(function () { var c = document.querySelector('.card .code'); if (c && shelfData) { drawShelf(c.textContent, false); fillRecs(c.textContent); } });
 })();
