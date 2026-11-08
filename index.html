@@ -41,7 +41,7 @@ body {
   background-image:
     radial-gradient(900px 600px at 10% 20%, rgba(232, 205, 160, .18), transparent 70%),
     radial-gradient(700px 500px at 90% 70%, rgba(214, 160, 140, .12), transparent 70%);
-  color: var(--text); font-family: var(--body); font-size: 16.5px; line-height: 1.7;
+  color: var(--text); font-family: var(--body); font-size: 16.5px; line-height: 1.7; word-break: keep-all; overflow-wrap: break-word;
   padding-block: 0 80px;
 }
 .wrap {
@@ -245,6 +245,16 @@ button.ghost { font: inherit; font-size: 14px; padding: 7px 16px; border-radius:
 .pick-ani .pt.sm { width: 52px; height: 52px; border-radius: 50%; }
 .pick-ani.on { box-shadow: 0 0 0 3px var(--gold); }
 .pick-ani i { position: absolute; left: 50%; bottom: -8px; transform: translateX(-50%); white-space: nowrap; font: 700 9px var(--body); font-style: normal; background: var(--wood); color: var(--cream); padding: 1px 5px; border-radius: 999px; }
+.claude-hint { margin: 0; font-size: 14px; color: var(--ink-muted); }
+.claude-hint a { color: var(--wood); font-weight: 700; text-underline-offset: 3px; }
+.claude-cta { display: grid; grid-template-columns: 1fr auto; gap: 22px; align-items: center; padding: 34px 26px 24px; border-left: 6px solid var(--gold); }
+.claude-cta > div { min-width: 0; }
+.cta-kind { margin: 0; font-family: var(--hand); font-size: 26px; line-height: 1.1; color: var(--rose); }
+.cta-body { margin: 6px 0 0; font-size: 15px; }
+.cta-note { margin: 6px 0 0; font-size: 13px; color: var(--ink-muted); }
+.cta-btn { display: inline-block; white-space: nowrap; font-family: var(--display); font-weight: 700; font-size: 16px; padding: 12px 20px; border-radius: 999px; background: var(--wood); color: var(--cream); text-decoration: none; }
+.cta-btn:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; }
+@media (max-width: 620px) { .claude-cta { grid-template-columns: 1fr; } .cta-btn { justify-self: start; white-space: normal; } }
 @media (max-width: 520px) { .lucky { grid-template-columns: auto 1fr; } .lucky #reroll { grid-column: 1 / -1; } .lucky .swatch { width: 64px; height: 64px; } }
 
 /* ---------- Field guide: polaroids on a clothesline ---------- */
@@ -327,6 +337,7 @@ footer strong { color: var(--text); }
       <div id="status" hidden><span class="dot"></span><span id="statusText"></span><button type="button" class="link" id="stop">그만두기</button></div>
       <p class="err" id="err" hidden></p>
     </div>
+    <p class="claude-hint" id="claudeHint" hidden>목록에 없는 책까지 정확하게 분석하려면 <a href="https://claude.ai/artifact/DmqLE6gvBbLZoa9okZhq62" target="_blank" rel="noopener">내 Claude 계정으로 열기 ↗</a></p>
   </form>
 
   <section id="result" aria-live="polite"></section>
@@ -660,7 +671,7 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
       var unknown = ctx.rows.filter(function (r) { return !r.known; }).length;
       h += '<div><h3 class="sec-title">내 책 목록카드 <small>' + ctx.rows.length + '권 중 ' + (ctx.rows.length - unknown) + '권 찾음 · ' + ctx.nClass + '개 분야에 걸쳐 읽어요</small></h3><div class="paper tbl-wrap"><table class="cat"><thead><tr><th>입력</th><th>식별한 책</th><th>출간</th><th>분야</th><th>성향</th></tr></thead><tbody>' +
         ctx.rows.map(function (r) {
-          if (!r.known) return '<tr class="miss"><td>' + esc(r.input) + '</td><td colspan="4">' + (ctx.mode === 'claude' ? '찾지 못했어요. 저자를 함께 적어 보세요.' : '내장 목록에 없어 반영하지 않았어요.') + '</td></tr>';
+          if (!r.known) return '<tr class="miss"><td>' + esc(r.input) + '</td><td colspan="4">' + (ctx.mode === 'claude' ? '찾지 못했어요. 저자를 함께 적어 보세요.' : '내장 목록에 없어 반영하지 않았어요. 내 Claude 계정으로 분석하면 찾을 수 있어요.') + '</td></tr>';
           return '<tr><td>' + esc(r.input) + '</td><td>' + esc(r.title) + (r.author ? ' <span class="bk-a">' + esc(r.author) + '</span>' : '') + (r.genre ? '<br><span class="bk-a">' + esc(r.genre) + (r.guess ? ' · 추정' : '') + '</span>' : '') + '</td><td class="mono">' + esc(r.year || '-') + '</td><td class="k">' + esc(r.field || '-') + '</td><td><span class="lean-tag">' + leanOf(r) + '</span></td></tr>';
         }).join('') + '</tbody></table></div></div>';
     }
@@ -917,7 +928,23 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
     drawShelf(shelfCode, false);
   });
   var _render = render;
-  render = function (code, ctx) { _render(code, ctx); if (shelfData) { shelfOther = null; drawShelf(code, false); } };
+  var CLAUDE_URL = 'https://claude.ai/artifact/DmqLE6gvBbLZoa9okZhq62';
+  var IN_CLAUDE = !!(window.claude && typeof window.claude.use === 'function');
+  function claudeCta() {
+    return '<div class="paper pinned claude-cta"><div><p class="cta-kind">더 정확하게 분석하고 싶다면</p>' +
+      '<p class="cta-body">이 결과는 내장 도서 71권과 고른 분야, 습관 질문으로만 분석했어요. <b>내 Claude 계정</b>으로 열면 Claude 사서가 어떤 책이든 찾아 분야와 출간연도를 확인하고, 나에게 맞춘 책을 새로 골라 드려요.</p>' +
+      '<p class="cta-note">claude.ai 로그인이 필요해요 · 책 목록은 열린 화면에서 다시 적어 주세요</p></div>' +
+      '<a class="cta-btn" href="' + CLAUDE_URL + '" target="_blank" rel="noopener">내 Claude 계정으로 정밀 분석하기 ↗</a></div>';
+  }
+  if (!IN_CLAUDE) $('claudeHint').hidden = false;
+  render = function (code, ctx) {
+    _render(code, ctx);
+    if (!IN_CLAUDE && ctx && ctx.mode !== 'browse') {
+      var badge = $('result').firstElementChild;
+      if (badge) badge.insertAdjacentHTML('afterend', claudeCta());
+    }
+    if (shelfData) { shelfOther = null; drawShelf(code, false); }
+  };
 
   fillExample();
   var start = (location.hash || '').replace('#', '').toUpperCase();
