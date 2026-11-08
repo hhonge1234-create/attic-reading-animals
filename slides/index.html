@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>다락방 서재에 놀러 온 동물들 · 발표</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Gowun+Dodum&family=Nanum+Pen+Script&family=Courier+Prime:wght@400;700&display=swap">
+<link rel="stylesheet" href="deck.css">
+</head>
+<body>
+<div class="stage" id="stage">
+<div class="deck" id="deck">
+
+<!-- 1 표지 -->
+<section class="slide cover" data-anim="cover">
+  <img class="bleed" src="assets/img/attic-wide.jpg" alt="수채화로 그린 다락방 서재">
+  <div class="line-wrap" aria-hidden="true">
+    <svg class="string" viewBox="0 0 820 160" preserveAspectRatio="none"><path d="M0 20 Q410 120 820 20"/></svg>
+    <figure class="pol hang" style="left:60px;top:28px"><img src="assets/img/SDEC.jpg" alt=""></figure>
+    <figure class="pol hang" style="left:215px;top:58px"><img src="assets/img/SDEN.jpg" alt=""></figure>
+    <figure class="pol hang" style="left:370px;top:68px"><img src="assets/img/KDEC.jpg" alt=""></figure>
+    <figure class="pol hang" style="left:525px;top:58px"><img src="assets/img/SWEN.jpg" alt=""></figure>
+    <figure class="pol hang" style="left:680px;top:28px"><img src="assets/img/KWLN.jpg" alt=""></figure>
+  </div>
+  <div class="cover-text">
+    <p class="eyebrow">문헌정보학과 바이브 코딩 공모전</p>
+    <h1>다락방 서재에<br>놀러 온 동물들</h1>
+    <p class="hand big">나는 어떤 책 읽는 동물일까?</p>
+    <p class="lead">읽은 책으로 독서 성향을 읽어 주는<br>다락방 사서 서비스</p>
+    <p class="who">[발표자 이름 · 학번]</p>
+  </div>
+  <div class="motes" aria-hidden="true"></div>
+</section>
+
+<!-- 2 문제 -->
+<section class="slide" data-anim="problem">
+  <p class="eyebrow">왜 만들었나</p>
+  <h2>책은 많은데,<br>다음 책을 고르기는 어렵습니다</h2>
+  <div class="row3">
+    <div class="paper pin card-p"><p class="num">01</p><h3>추천은 늘 베스트셀러</h3><p>서점과 SNS는 모두에게 같은 목록을 보여 줍니다.</p></div>
+    <div class="paper pin card-p"><p class="num">02</p><h3>내 취향을 말하기 어려움</h3><p>무엇을 좋아하는지 알아야 다음 책을 고를 수 있습니다.</p></div>
+    <div class="paper pin card-p"><p class="num">03</p><h3>독서 상담은 한 번에 한 명</h3><p>사서의 상담을 더 많은 사람에게 닿게 할 방법이 필요합니다.</p></div>
+  </div>
+  <p class="hand answer">그래서, 사서가 읽어 주는 <u>독서 성향 테스트</u>를 만들었습니다.</p>
+</section>
+
+<!-- 3 아이디어 -->
+<section class="slide split" data-anim="idea">
+  <div class="col-text">
+    <p class="eyebrow">아이디어</p>
+    <h2>MBTI처럼,<br>4개의 축으로<br>16마리 독서 동물</h2>
+    <p class="body">좋아하는 분야, 읽은 책, 읽는 습관을 네 가지 축으로 나눕니다. 네 번 갈라지면 열여섯 가지 독자가 됩니다.</p>
+    <p class="hand mid">2 × 2 × 2 × 2 = 16</p>
+  </div>
+  <div class="video-frame paper"><video src="assets/video/AxisTree.mp4" poster="assets/video/AxisTree.png" muted playsinline preload="auto" data-play></video></div>
+</section>
+
+<!-- 4 네 개의 축 -->
+<section class="slide" data-anim="axes">
+  <p class="eyebrow">네 개의 축</p>
+  <h2>각 축은 이렇게 정합니다</h2>
+  <div class="axes">
+    <div class="axis-row"><div class="ax-name"><b class="a">이야기</b><span>S · K</span><b class="b">지식</b></div><div class="track"><i class="knob" data-to="-0.6"></i></div><p>고른 분야와 읽은 책의 내용, 서점에서 먼저 가는 매대</p></div>
+    <div class="axis-row"><div class="ax-name"><b class="a">몰입</b><span>D · W</span><b class="b">탐험</b></div><div class="track"><i class="knob" data-to="0.55"></i></div><p>읽은 책이 몇 개 분야에 걸쳐 있는지, 작가 정주행 여부</p></div>
+    <div class="axis-row"><div class="ax-name"><b class="a">감성</b><span>E · L</span><b class="b">논리</b></div><div class="track"><i class="knob" data-to="-0.4"></i></div><p>책이 정서 중심인지 분석 중심인지, 책을 덮고 남는 것</p></div>
+    <div class="axis-row"><div class="ax-name"><b class="a">고전</b><span>C · N</span><b class="b">신간</b></div><div class="track"><i class="knob" data-to="0.7"></i></div><p>책의 최초 출간연도, 명작과 화제작 중 무엇을 믿는지</p></div>
+  </div>
+</section>
+
+<!-- 5 도감 -->
+<section class="slide" data-anim="guide">
+  <p class="eyebrow">다락방 동물 도감</p>
+  <h2>16마리 독서 동물 <span class="sub">Google Flow로 직접 그렸습니다</span></h2>
+  <div class="guide" id="guideGrid"></div>
+</section>
+
+<!-- 6 문헌정보학 -->
+<section class="slide" data-anim="lis">
+  <p class="eyebrow">문헌정보학과의 연결</p>
+  <h2>사서가 하는 일을 서비스로 옮겼습니다</h2>
+  <div class="row4">
+    <div class="paper pin card-l"><svg viewBox="0 0 48 48" class="ico"><rect x="6" y="8" width="10" height="32" rx="2"/><rect x="19" y="12" width="10" height="28" rx="2"/><rect x="32" y="6" width="10" height="34" rx="2"/></svg><h3>분류</h3><p>책을 10개 분야로 나누고, 분야가 몇 갈래인지로 몰입과 탐험을 판단합니다.</p></div>
+    <div class="paper pin card-l"><svg viewBox="0 0 48 48" class="ico"><path d="M8 10h32v20H22l-8 8v-8H8z"/></svg><h3>참고면담</h3><p>사서가 이용자에게 묻듯, 읽는 습관 질문 7개로 이용자를 이해합니다.</p></div>
+    <div class="paper pin card-l"><svg viewBox="0 0 48 48" class="ico"><path d="M24 40s-14-8-14-19a8 8 0 0 1 14-5 8 8 0 0 1 14 5c0 11-14 19-14 19z"/></svg><h3>독자 상담</h3><p>취향이 맞는 책, 반대 성향의 책까지 사서처럼 골라 추천합니다.</p></div>
+    <div class="paper pin card-l"><svg viewBox="0 0 48 48" class="ico"><circle cx="21" cy="21" r="11"/><path d="M29 29l11 11"/></svg><h3>정보 접근</h3><p>추천한 책마다 국립중앙도서관 검색으로 바로 이어 줍니다.</p></div>
+  </div>
+</section>
+
+<!-- 7 이용 흐름 -->
+<section class="slide" data-anim="flow">
+  <p class="eyebrow">이용 흐름</p>
+  <h2>세 가지를 적으면, 여섯 가지를 돌려받습니다</h2>
+  <svg class="flow" viewBox="0 0 1664 640" aria-label="입력 3가지가 사서 분석과 점수 계산을 거쳐 결과 6가지가 되는 흐름도">
+    <g class="links">
+      <path d="M330 110 C420 110 420 320 520 320"/>
+      <path d="M330 320 L520 320"/>
+      <path d="M330 530 C420 530 420 320 520 320"/>
+      <path d="M820 320 L900 320"/>
+      <path d="M1200 320 C1260 320 1260 60 1320 60"/>
+      <path d="M1200 320 C1260 320 1260 164 1320 164"/>
+      <path d="M1200 320 C1260 320 1260 268 1320 268"/>
+      <path d="M1200 320 C1260 320 1260 372 1320 372"/>
+      <path d="M1200 320 C1260 320 1260 476 1320 476"/>
+      <path d="M1200 320 C1260 320 1260 580 1320 580"/>
+    </g>
+  </svg>
+  <div class="flow-boxes">
+    <div class="fb in" style="left:0;top:110px">좋아하는 분야<small>10개 분야</small></div>
+    <div class="fb in" style="left:0;top:320px">읽은 책<small>도서명 · 저자</small></div>
+    <div class="fb in" style="left:0;top:530px">읽는 습관<small>질문 7개</small></div>
+    <div class="fb core" style="left:520px;top:320px">Claude 사서<small>책 찾기 · 분야 · 성향</small></div>
+    <div class="fb core" style="left:900px;top:320px">4축 점수 계산<small>16유형 중 하나</small></div>
+    <div class="fb out" style="left:1320px;top:60px">동물 카드</div>
+    <div class="fb out" style="left:1320px;top:164px">성향 분포</div>
+    <div class="fb out" style="left:1320px;top:268px">내 책 목록카드</div>
+    <div class="fb out" style="left:1320px;top:372px">맞춤 추천 4권</div>
+    <div class="fb out" style="left:1320px;top:476px">이웃 친구 2마리</div>
+    <div class="fb out" style="left:1320px;top:580px">행운의 독서템</div>
+  </div>
+</section>
+
+<!-- 8 점수 ① -->
+<section class="slide split" data-anim="heat">
+  <div class="col-text">
+    <p class="eyebrow">점수 계산 ①</p>
+    <h2>분야를 고를 때마다<br>네 축에 점수가<br>쌓입니다</h2>
+    <p class="body">분야 하나는 각 축에 −2점부터 +2점까지 줍니다. 빨간 칸은 왼쪽 성향(이야기·몰입·감성·고전), 파란 칸은 오른쪽 성향(지식·탐험·논리·신간) 쪽입니다.</p>
+    <div class="paper note"><p class="hand mid">예) 자연과학을 고르면</p><p>지식 쪽 2점, 논리 쪽 2점</p></div>
+  </div>
+  <div class="chart-frame tall"><img src="assets/charts/heatmap.svg" alt="분야 16개가 네 축에 주는 가중치 히트맵"><i class="wipe"></i></div>
+</section>
+
+<!-- 9 점수 ② -->
+<section class="slide" data-anim="curves">
+  <p class="eyebrow">점수 계산 ②</p>
+  <h2>점수는 퍼센트로, 출간연도는 고전과 신간으로</h2>
+  <div class="row2">
+    <div class="paper chart-card"><h3>점수 → 결과 막대의 퍼센트</h3><img src="assets/charts/tanh.svg" alt="축 점수를 퍼센트로 바꾸는 완만한 S자 곡선. 예시 독자의 네 축이 표시됨"><p class="cap">점수가 커져도 95%를 넘지 않게 완만하게 바꿉니다. 빨간 점은 예시 독자입니다.</p></div>
+    <div class="paper chart-card"><h3>최초 출간연도 → 고전/신간 점수</h3><img src="assets/charts/yearscore.svg" alt="1990년 이전 +2, 2010년 이전 +1, 2018년 이전 −1, 이후 −2인 계단 그래프"><p class="cap">사서가 찾아 준 책의 최초 출간연도로 점수를 매깁니다.</p></div>
+  </div>
+</section>
+
+<!-- 10 예시 -->
+<section class="slide split" data-anim="example">
+  <div class="video-frame paper wide"><video src="assets/video/ScorePipeline.mp4" poster="assets/video/ScorePipeline.png" muted playsinline preload="auto" data-play></video></div>
+  <div class="col-text narrow">
+    <p class="eyebrow">한 사람의 분석 예시</p>
+    <h2>예시 독자는<br>고래가 되었습니다</h2>
+    <div class="whale paper pin"><img src="assets/img/SDEC.jpg" alt="책 위에 엎드린 고래"><div><p class="code">SDEC</p><h3>깊은 바다의 고래</h3></div></div>
+    <ul class="stats" id="exStats"></ul>
+  </div>
+</section>
+
+<!-- 11 시뮬레이션 -->
+<section class="slide" data-anim="sim">
+  <p class="eyebrow">알고리즘 시뮬레이션 · 실제 이용자 데이터가 아닙니다</p>
+  <h2>무작위 응답 <span class="count" data-count="10000">10,000</span>개를 넣어 보았습니다</h2>
+  <div class="sim">
+    <div class="chart-frame"><img src="assets/charts/simulation.svg" alt="16유형별 인원 막대 그래프. 가장 많은 수달 929명, 가장 적은 너구리 286명"><i class="wipe"></i></div>
+    <div class="sim-side">
+      <div class="paper note"><p class="hand mid">발견 ①</p><p>질문 7개만 답하면 128가지 응답 중 27가지씩 수달·강아지로 몰립니다.</p><img src="assets/charts/questions-only.svg" alt="질문만으로 본 128가지 응답의 유형 분포"></div>
+      <div class="paper note"><p class="hand mid">발견 ②</p><p>분야와 책이 더해지면 퍼지지만, 아직 최대 3.2배 차이가 납니다. 가중치 조정이 다음 과제입니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 화면 -->
+<section class="slide" data-anim="screens">
+  <p class="eyebrow">서비스 화면</p>
+  <h2>실제 화면</h2>
+  <div class="shots">
+    <div class="shot-main paper">
+      <img class="shot on" src="assets/shots/shot-hero.jpg" alt="첫 화면: 수채화 다락방과 제목">
+      <img class="shot" src="assets/shots/shot-form.jpg" alt="입력 화면: 분야 선택과 도서명·저자 입력">
+      <img class="shot" src="assets/shots/shot-result.jpg" alt="결과 화면: 고래 카드와 성향 분포">
+      <img class="shot" src="assets/shots/shot-friends.jpg" alt="결과 화면: 이웃 친구와 행운의 독서템">
+    </div>
+    <ol class="shot-list">
+      <li class="on"><b>첫 화면</b>수채화 다락방, 빨랫줄의 동물들</li>
+      <li><b>입력</b>분야, 도서명·저자, 습관 질문</li>
+      <li><b>결과</b>동물 카드와 네 축의 성향 분포</li>
+      <li><b>더 보기</b>이웃 친구, 맞춤 추천, 행운의 독서템</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 13 만든 과정 -->
+<section class="slide" data-anim="timeline">
+  <p class="eyebrow">바이브 코딩으로 만든 과정</p>
+  <h2>대화로 만들고, 10번 고쳐 배포했습니다</h2>
+  <div class="chart-frame line"><img src="assets/charts/timeline.svg" alt="13시 48분 시작부터 15시 3분 v10까지 배포 10번의 타임라인"><i class="wipe"></i></div>
+  <div class="row4 kpis">
+    <div class="kpi"><b class="count" data-count="76">76</b><span>분, 시작부터 마지막 배포까지</span></div>
+    <div class="kpi"><b class="count" data-count="10">10</b><span>번의 배포</span></div>
+    <div class="kpi"><b class="count" data-count="35">35</b><span>장, Flow로 그린 그림</span></div>
+    <div class="kpi"><b class="count" data-count="18">18</b><span>장, 최종 사용한 그림</span></div>
+  </div>
+  <p class="tools">도구 · <b>Claude Code</b> 대화로 코딩 · <b>Google Flow</b> 일러스트 · <b>Claude</b> 페이지 속 사서</p>
+</section>
+
+<!-- 14 외부 데이터 -->
+<section class="slide" data-anim="data">
+  <p class="eyebrow">외부 데이터의 벽</p>
+  <h2>도서 API를 직접 시험해 보았습니다</h2>
+  <div class="data-grid">
+    <table class="paper probe">
+      <tr><th>출처</th><th>확인한 것</th><th>결과</th></tr>
+      <tr><td>Google Books</td><td>키 없이 ‘데미안’ 검색</td><td class="bad">429 · 하루 한도 0</td></tr>
+      <tr><td>Open Library</td><td>‘소년이 온다’ 검색</td><td class="mid">1건</td></tr>
+      <tr><td>Open Library</td><td>‘불편한 편의점’ 검색</td><td class="bad">0건</td></tr>
+      <tr><td>배포 환경</td><td>페이지에서 외부 주소 호출</td><td class="bad">보안 정책상 막힘</td></tr>
+    </table>
+    <div class="solve">
+      <div class="paper pin sol"><p class="hand mid">해결 ①</p><h3>페이지가 Claude 사서에게 직접 묻기</h3><p>어떤 책이든 찾아 분야와 성향을 매기고 맞춤 추천까지.</p></div>
+      <div class="paper pin sol"><p class="hand mid">해결 ②</p><h3>못 쓸 때는 내장 도서 71권</h3><img src="assets/charts/catalog.svg" alt="내장 도서 71권의 유형별 분포"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 15 시행착오 -->
+<section class="slide" data-anim="fixes">
+  <p class="eyebrow">시행착오</p>
+  <h2>써 보고, 문제를 찾고, 바로 고쳤습니다</h2>
+  <div class="flips">
+    <div class="flip"><div class="face front paper"><p class="tag bad">문제</p><h3>입력한 책을 잘 못 찾음</h3></div><div class="face back paper"><p class="tag good">해결</p><h3>도서명·저자 칸 분리</h3><p>오타·번역 제목도 가장 가까운 책으로 찾고, 더 정확한 모델로 분석</p></div></div>
+    <div class="flip"><div class="face front paper"><p class="tag bad">문제</p><h3>분류번호가 거의 틀림</h3></div><div class="face back paper"><p class="tag good">해결</p><h3>쉬운 10개 분야로</h3><p>세 자리 번호 대신 ‘문학’, ‘과학’처럼 고르게 하고 화면에도 이름만</p></div></div>
+    <div class="flip"><div class="face front paper"><p class="tag bad">문제</p><h3>그림이 화면에 안 보임</h3></div><div class="face back paper"><p class="tag good">해결</p><h3>그림을 페이지에 내장</h3><p>파일 경로에 기대지 않고 18장을 페이지 안에 직접 넣음</p></div></div>
+    <div class="flip"><div class="face front paper"><p class="tag bad">문제</p><h3>배경과 그림체가 따로 놂</h3></div><div class="face back paper"><p class="tag good">해결</p><h3>수채 다락방으로 통일</h3><p>Flow로 그린 다락방에 맞춰 사이트 전체 색을 바꿈</p></div></div>
+  </div>
+</section>
+
+<!-- 16 기술 구조 -->
+<section class="slide" data-anim="arch">
+  <p class="eyebrow">기술 구조</p>
+  <h2>서버 없는 한 장짜리 웹</h2>
+  <svg class="arch-lines" viewBox="0 0 1664 600" aria-hidden="true">
+    <path d="M560 300 L760 300"/><path d="M1100 250 L1300 130"/><path d="M1100 350 L1300 470"/><path d="M330 120 L330 210"/>
+  </svg>
+  <div class="arch">
+    <div class="ab user" style="left:120px;top:300px">이용자 브라우저<small>한 장짜리 HTML · 그림 18장 내장</small></div>
+    <div class="ab flowimg" style="left:170px;top:60px">Google Flow<small>동물·다락방 그림</small></div>
+    <div class="ab claude" style="left:760px;top:300px">Claude 사서<small>페이지가 직접 질문 · 책 식별 · 분야 · 성향 · 추천</small></div>
+    <div class="ab local" style="left:1300px;top:130px">내장 도서 71권<small>Claude를 못 쓸 때</small></div>
+    <div class="ab nl" style="left:1300px;top:470px">국립중앙도서관 검색<small>추천 도서 링크</small></div>
+  </div>
+  <div class="chips-row"><span>서버 없음</span><span>데이터베이스 없음</span><span>입력 내용 저장 안 함</span><span>링크 하나로 공유</span></div>
+</section>
+
+<!-- 17 서비스 운영 -->
+<section class="slide" data-anim="service">
+  <p class="eyebrow">서비스 운영 방안</p>
+  <h2>링크 하나에서 도서관 프로그램까지</h2>
+  <div class="road">
+    <div class="paper pin stage-c"><p class="hand mid">1단계 · 지금</p><ul><li>링크와 QR 코드로 공유</li><li>학과·도서관 SNS에 결과 문구 공유</li><li>신입생 오리엔테이션 체험 부스</li></ul></div>
+    <div class="paper pin stage-c"><p class="hand mid">2단계 · 도서관과 함께</p><ul><li>‘내 독서 동물 찾기’ 도서관 행사</li><li>동물별 추천 서가 전시</li><li>같은 동물·반대 동물 독서 모임 짝짓기</li></ul></div>
+    <div class="paper pin stage-c"><p class="hand mid">3단계 · 데이터 연결</p><ul><li>학교 도서관 소장·대출 가능 여부 표시</li><li>도서관 정보나루 대출 데이터로 추천 보강</li><li>익명 유형 통계를 큐레이션에 활용</li></ul></div>
+  </div>
+  <div class="limits"><b>지금의 한계</b> 추천 도서는 Claude의 기억으로 고르므로 실제 소장 확인이 필요합니다 · Claude 분석은 보는 사람의 Claude 계정이 있어야 합니다 · 유형 분포의 치우침 조정</div>
+</section>
+
+<!-- 18 가치 -->
+<section class="slide" data-anim="value">
+  <p class="eyebrow">가치</p>
+  <h2>누구에게 어떤 의미가 있을까요</h2>
+  <div class="row3">
+    <div class="paper pin card-v"><p class="who-t">이용자</p><h3>나를 알고, 밖을 봅니다</h3><p>내 독서 취향을 한눈에 보고, ‘정반대 친구’의 책으로 늘 보던 목록 밖의 책을 만납니다.</p></div>
+    <div class="paper pin card-v"><p class="who-t">도서관</p><h3>독자 상담을 더 많은 사람에게</h3><p>참여형 독서 프로그램과 동물별 북큐레이션으로 이용자를 서가로 이끕니다.</p></div>
+    <div class="paper pin card-v"><p class="who-t">문헌정보학</p><h3>전공을 체험하는 서비스</h3><p>분류, 참고면담, 독자 상담을 누구나 해 볼 수 있는 웹으로 옮겼습니다.</p></div>
+  </div>
+  <div class="lucky-band"><p class="hand mid">덤으로, 행운의 독서템</p><p><b class="count" data-count="20">20</b> 가지 물건 × <b class="count" data-count="20">20</b> 가지 색·무늬 × <b class="count" data-count="8">8</b> 가지 시간 = <b class="count big" data-count="3200">3,200</b> 가지 조합</p></div>
+</section>
+
+<!-- 19 마무리 -->
+<section class="slide ending" data-anim="ending">
+  <img class="bleed dim" src="assets/img/attic-wide.jpg" alt="">
+  <div class="end-text">
+    <p class="hand huge">당신의 다락방에는<br>어떤 동물이 놀러 왔나요?</p>
+    <p class="lead">지금 바로 해 보세요</p>
+    <p class="url" id="siteUrl"></p>
+  </div>
+  <figure class="qr paper"><img src="assets/qr.svg" alt="서비스로 가는 QR 코드"><figcaption>QR로 바로 해 보기</figcaption></figure>
+  <div class="end-row" id="endRow"></div>
+</section>
+
+</div>
+</div>
+<div class="hud"><div class="bar" id="bar"></div><span id="pageNo"></span></div>
+<pre id="report" hidden></pre>
+<script src="vendor/anime.min.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
