@@ -17,7 +17,7 @@
     ['KWEC', '기억하는 코끼리'], ['KWEN', '산책하는 강아지'], ['KWLC', '영리한 돌고래'], ['KWLN', '모아 두는 다람쥐']
   ];
   var DESC = {"SDEC": "한 번 잠수하면 오래 머무는 독자", "SDEN": "지금 이 시대의 이야기에 마음이 움직이는 독자", "SDLC": "이야기 속 구조와 수수께끼를 즐기는 독자", "SDLN": "치밀하게 짜인 장르 소설에 빠지는 독자", "SWEC": "여러 나라, 여러 시대의 명작을 산책하듯 읽는 독자", "SWEN": "요즘 이야기라면 장르를 가리지 않는 독자", "SWLC": "고전 장르 문학을 두루 섭렵하는 독자", "SWLN": "요즘 장르 소설의 흐름을 빠르게 따라가는 독자", "KDEC": "오래된 생각의 책을 천천히 곱씹는 독자", "KDEN": "인문·심리 에세이로 나를 들여다보는 독자", "KDLC": "한 분야의 원전을 끝까지 읽어 내는 독자", "KDLN": "최신 연구와 데이터로 생각의 집을 짓는 독자", "KWEC": "예술, 역사, 자연을 넘나드는 교양 고전 독자", "KWEN": "다정한 교양서를 여기저기 즐겁게 읽는 독자", "KWLC": "분야를 가로지르는 큰 그림을 좋아하는 독자", "KWLN": "화제의 실용서와 트렌드서를 빠르게 모으는 독자"};
-  var EXAMPLE = [['이야기', 64], ['몰입', 87], ['감성', 81], ['고전', 81]]; // from data/model.json
+  var EXAMPLE = [['이야기', 95], ['몰입', 77], ['감성', 77], ['고전', 77]]; // the service's example answers: +5, +3, +3, +3
   var SITE_URL = 'https://hhonge1234-create.github.io/attic-reading-animals/';
 
   // ---------- static content built from data ----------
@@ -179,6 +179,18 @@
       run(A({ targets: s.querySelector('.door-mid p'), opacity: [0, 1], duration: 500, delay: 1300, easing: 'linear' }));
       run(A({ targets: s.querySelector('.why'), opacity: [0, 1], translateY: [30, 0], duration: 700, delay: 1700, easing: 'easeOutCubic' }));
     },
+    qgrid: function (s) {
+      run(head(s));
+      run(A({ targets: s.querySelectorAll('.qcol'), opacity: [0, 1], translateY: [60, 0], duration: 800, delay: A.stagger(160, { start: 300 }), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelectorAll('.qcol li'), opacity: [0, 1], translateX: [-16, 0], duration: 400, delay: A.stagger(45, { start: 800 }), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelectorAll('.qrule p'), opacity: [0, 1], duration: 600, delay: A.stagger(300, { start: 1900 }), easing: 'linear' }));
+    },
+    balance: function (s) {
+      run(head(s));
+      run(wipe(s, 2200));
+      counts(s);
+      run(A({ targets: s.querySelectorAll('.bal-notes .note'), opacity: [0, 1], translateY: [40, 0], duration: 700, delay: A.stagger(400, { start: 1500 }), easing: 'easeOutCubic' }));
+    },
     lis: function (s) {
       run(head(s));
       run(A({ targets: s.querySelectorAll('.card-l'), opacity: [0, 1], translateY: [70, 0], duration: 800, delay: A.stagger(170, { start: 300 }), easing: 'easeOutCubic' }));
@@ -189,11 +201,9 @@
       var tl = run(A.timeline({ easing: 'easeOutCubic' }));
       tl.add({ targets: s.querySelectorAll('.fb.in'), opacity: [0, 1], translateX: [-50, 0], duration: 600, delay: A.stagger(130) }, 300)
         .add({ targets: s.querySelectorAll('.links path:nth-child(-n+3)'), strokeDashoffset: [A.setDashOffset, 0], duration: 700, easing: 'easeInOutSine' })
-        .add({ targets: s.querySelectorAll('.fb.core')[0], opacity: [0, 1], scale: [.8, 1], duration: 500, easing: 'easeOutBack' })
-        .add({ targets: s.querySelectorAll('.links path:nth-child(4)'), strokeDashoffset: [A.setDashOffset, 0], duration: 400 })
-        .add({ targets: s.querySelectorAll('.fb.core')[1], opacity: [0, 1], scale: [.8, 1], duration: 500, easing: 'easeOutBack' })
-        .add({ targets: s.querySelectorAll('.links path:nth-child(n+5)'), strokeDashoffset: [A.setDashOffset, 0], duration: 700, delay: A.stagger(60), easing: 'easeInOutSine' })
-        .add({ targets: s.querySelectorAll('.fb.out'), opacity: [0, 1], translateX: [40, 0], duration: 500, delay: A.stagger(90) }, '-=500');
+        .add({ targets: s.querySelectorAll('.fb.core'), opacity: [0, 1], scale: [.8, 1], duration: 500, delay: A.stagger(150), easing: 'easeOutBack' })
+        .add({ targets: s.querySelectorAll('.links path:nth-child(n+4)'), strokeDashoffset: [A.setDashOffset, 0], duration: 800, delay: A.stagger(60), easing: 'easeInOutSine' })
+        .add({ targets: s.querySelectorAll('.fb.out'), opacity: [0, 1], translateX: [40, 0], duration: 500, delay: A.stagger(90) }, '-=600');
     },
     heat: function (s) {
       run(A({ targets: s.querySelectorAll('.col-text > *'), opacity: [0, 1], translateY: [24, 0], duration: 700, delay: A.stagger(140), easing: 'easeOutCubic' }));

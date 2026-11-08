@@ -68,11 +68,12 @@ class ScorePipeline(Scene):
     """Example reader: inputs flow into four axis bars, the bars settle, letters form SDEC."""
 
     def construct(self):
-        ex = MODEL["example"]
+        # The service's example answers (20 questions, 5 per axis, ±1 each): S +5, D +3, E +3, C +3
+        ex = {"code": "SDEC", "pct": {"s": 95, "d": 77, "e": 77, "c": 77}}
         inputs = [
-            ("좋아하는 분야", " · ".join(ex["input"]["chips"])),
-            ("읽은 책", " · ".join(b[0] for b in ex["input"]["books"])),
-            ("읽는 습관", "질문 7개"),
+            ("나의 독서 습관", "질문 10개 · 몰입/탐험, 고전/신간"),
+            ("끌리는 이야기와 주제", "질문 10개 · 이야기/지식, 감성/논리"),
+            ("나의 책 취향", "5개 · 결과의 취향 카드로"),
         ]
         cards = VGroup()
         for i, (h, body) in enumerate(inputs):

@@ -338,3 +338,19 @@ p { margin: 0; }
 .arch-lines path.v { stroke: var(--rose); }
 .arch-lab { position: absolute; z-index: 2; font-family: var(--hand); font-size: 30px; color: var(--rose); background: var(--bg); padding: 0 6px; }
 .url.sub { font-size: 24px; color: var(--muted); }
+
+/* revision 2: question design, percent chart, balance */
+.qgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
+.qcol { padding: 30px 30px 26px; }
+.qcol h3 { font-size: 36px; margin-bottom: 14px; }
+.qcol h3 .a { color: var(--rose); } .qcol h3 .b { color: var(--blue); }
+.qcol ol { margin: 0; padding-left: 34px; display: grid; gap: 10px; font-size: 26px; line-height: 1.35; color: var(--ink); }
+.qcol li::marker { font-family: var(--type); color: var(--gold); font-weight: 700; }
+.qrule { margin-top: 30px; display: grid; gap: 10px; font-size: 27px; color: var(--muted); }
+.qrule b { color: var(--wood); margin-right: 12px; }
+.chart-frame.mid img { width: 100%; max-height: 760px; }
+.chart-frame.bal { margin-top: -10px; }
+.chart-frame.bal img { width: 100%; max-height: 470px; }
+.bal-notes { margin-top: 24px; }
+.bal-notes .note b { color: var(--rose); }
+.sheet-core { background: #3E6E52 !important; }
