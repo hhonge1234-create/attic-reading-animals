@@ -855,7 +855,7 @@ var IMGDATA = {"KDEC": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDA
   });
 
   // ---------- 다락방 이웃들의 책장 (Google 스프레드시트에 모인 이용자 책 목록) ----------
-  var SHELF_DEFAULT = '';  // Apps Script 웹 앱 주소 (https://script.google.com/macros/s/…/exec)
+  var SHELF_DEFAULT = 'https://script.google.com/macros/s/AKfycbzLpXGOcfBpaXwhViI9_y3U59CfElvhccQbQa8CuvkFa3bhlubiuEY7GSo5jcVDklsf/exec';  // Apps Script 웹 앱 (shelf-backend/Code.gs)
   var SHELF_API = (function () { try { return new URLSearchParams(location.search).get('shelf') || SHELF_DEFAULT; } catch (e) { return SHELF_DEFAULT; } })();
   var shelfData = null, shelfOther = null, shelfCode = null;
   function loadShelf() {
