@@ -127,6 +127,11 @@
   function run(a) { running.push(a); return a; }
   function every(fn, ms) { timers.push(setInterval(fn, ms)); }
 
+  function divider(s) {
+    run(A({ targets: s.querySelector('.dv-num'), opacity: [0, 1], scale: [1.6, 1], duration: 900, easing: 'easeOutBack' }));
+    run(A({ targets: s.querySelectorAll('.dv-title, .dv-sub'), opacity: [0, 1], translateY: [30, 0], duration: 800, delay: A.stagger(200, { start: 300 }), easing: 'easeOutCubic' }));
+    run(A({ targets: s.querySelectorAll('.dv-col li'), opacity: [0, 1], translateX: [-30, 0], duration: 500, delay: A.stagger(90, { start: 900 }), easing: 'easeOutCubic' }));
+  }
   // ---------- animations per slide ----------
   var ANIM = {
     cover: function (s) {
@@ -215,8 +220,10 @@
       counts(s);
       run(A({ targets: s.querySelectorAll('.bal-notes .note'), opacity: [0, 1], translateY: [40, 0], duration: 700, delay: A.stagger(400, { start: 1500 }), easing: 'easeOutCubic' }));
     },
+    div1: function (s) { divider(s); },
+    div2: function (s) { divider(s); },
     oneline: function (s) {
-      run(A({ targets: s.querySelector('.ol-text .eyebrow'), opacity: [0, 1], duration: 600, easing: 'linear' }));
+      run(A({ targets: s.querySelectorAll('.ol-text .eyebrow, .ol-lead'), opacity: [0, 1], duration: 600, delay: A.stagger(200), easing: 'linear' }));
       run(A({ targets: s.querySelectorAll('.ol-big span'), opacity: [0, 1], translateY: [30, 0], duration: 800, delay: A.stagger(450, { start: 300 }), easing: 'easeOutCubic' }));
       run(A({ targets: s.querySelectorAll('.ol-key'), opacity: [0, 1], translateX: [80, 0], duration: 800, delay: A.stagger(300, { start: 2000 }), easing: 'easeOutBack' }));
     },
@@ -398,7 +405,7 @@
         if (!r.width || !r.height) return;
         var o = { l: (r.left - box.left) / scale, t: (r.top - box.top) / scale, r: (r.right - box.left) / scale, b: (r.bottom - box.top) / scale };
         if (o.l < -2 || o.t < -2 || o.r > 1922 || o.b > 1082) issues.push({ kind: 'outside-slide', el: desc(el), box: round(o) });
-        else if (!el.closest('.cover, .ending, .guide-one') && (o.l < 60 || o.r > 1860 || o.b > 1040)) issues.push({ kind: 'outside-margin', el: desc(el), box: round(o) });
+        else if (!el.closest('.cover, .ending, .guide-one, .divider') && (o.l < 60 || o.r > 1860 || o.b > 1040)) issues.push({ kind: 'outside-margin', el: desc(el), box: round(o) });
         if (/^(H1|H2|H3|P|LI|TD|TH|FIGCAPTION)$/.test(el.tagName) || el.matches('.fb, .ab')) {
           if (el.scrollWidth > el.clientWidth + 2) issues.push({ kind: 'text-overflow-x', el: desc(el), sw: el.scrollWidth, cw: el.clientWidth });
           if (el.scrollHeight > el.clientHeight + 2 && st.overflow !== 'visible') issues.push({ kind: 'text-overflow-y', el: desc(el) });

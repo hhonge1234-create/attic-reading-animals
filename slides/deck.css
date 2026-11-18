@@ -415,3 +415,18 @@ p { margin: 0; }
 .fn-labels .lg { color: var(--muted); font-size: 22px; display: flex; align-items: center; gap: 8px; }
 .fn-labels .lg i { display: inline-block; width: 22px; height: 14px; border-radius: 3px; margin-left: 10px; }
 .fn-labels .sw-p { background: var(--wood-lt); opacity: .65; } .fn-labels .sw-d { background: var(--rose); opacity: .5; }
+
+/* part dividers */
+.slide.divider { padding: 0; }
+.divider::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(250, 246, 238, .97) 0, rgba(250, 246, 238, .93) 48%, rgba(250, 246, 238, .55) 100%); pointer-events: none; }
+.divider > *:not(.bleed) { z-index: 1; }
+.dv-wrap { position: absolute; left: 160px; top: 0; bottom: 0; width: 1400px; display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+.dv-num { font-family: var(--hand); font-size: 96px; line-height: 1; color: var(--rose); }
+.dv-title { font-size: 104px; line-height: 1.1; color: #5A3A26; margin: 0; }
+.dv-sub { font-size: 34px; color: var(--muted); }
+.dv-cols { display: flex; gap: 70px; margin-top: 30px; }
+.dv-col { min-width: 420px; }
+.dv-h { font: 700 24px var(--type); letter-spacing: .1em; color: var(--rose); margin-bottom: 12px; }
+.dv-col ol { margin: 0; padding-left: 40px; display: grid; gap: 10px; font-size: 32px; color: var(--ink); }
+.dv-col li::marker { font-family: var(--type); color: var(--gold); font-weight: 700; }
+.ol-lead { font-family: var(--hand); font-size: 44px; color: var(--rose); margin-bottom: -6px; }
