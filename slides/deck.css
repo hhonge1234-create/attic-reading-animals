@@ -433,3 +433,4 @@ p { margin: 0; }
 .ws-quote { font-family: var(--body); font-size: 30px; line-height: 1.5; min-height: 0; }
 .ws-quote b { color: var(--ink); }
 .ws-sub { font-family: var(--hand); font-size: 30px; line-height: 1.25; color: var(--muted); margin: 2px 0 4px; }
+.flips { grid-template-columns: repeat(3, 1fr); gap: 40px; }

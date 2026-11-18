@@ -140,7 +140,7 @@
     <p class="dv-num">2부</p>
     <h2 class="dv-title">동작 원리와 만든 과정</h2>
     <p class="dv-sub">어떻게 동작하는지, 그리고 어떻게 만들었는지</p>
-    <div class="dv-cols"><div class="dv-col"><p class="dv-h">동작 원리</p><ol><li>이용 흐름</li><li>네 개의 축과 16마리</li><li>질문 설계와 점수</li><li>기술 구조</li></ol></div><div class="dv-col"><p class="dv-h">만든 과정</p><ol><li>외부 데이터의 벽</li><li>시행착오</li><li>일러스트</li><li>앞으로의 운영</li></ol></div></div>
+    <div class="dv-cols"><div class="dv-col"><p class="dv-h">동작 원리</p><ol><li>이용 흐름</li><li>네 개의 축과 16마리</li><li>동물 일러스트</li><li>질문 설계</li><li>기술 구조</li></ol></div><div class="dv-col"><p class="dv-h">만든 과정</p><ol><li>외부 데이터의 벽</li><li>시행착오</li><li>앞으로의 운영</li></ol></div></div>
   </div>
 </section>
 
@@ -187,6 +187,32 @@
       <h2>16마리 독서 동물</h2>
       <p class="hand mid">Google Flow로 직접 그렸습니다</p>
       <p class="g-key"><b>S</b> 이야기 <b>K</b> 지식 · <b>D</b> 몰입 <b>W</b> 탐험<br><b>E</b> 감성 <b>L</b> 논리 · <b>C</b> 고전 <b>N</b> 신간</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 Flow 프롬프트 -->
+<section class="slide" data-anim="prompt">
+  <p class="eyebrow">2부 · 동작 원리 · 동물 일러스트</p>
+  <h2>프롬프트 한 줄이 고래가 되기까지</h2>
+  <div class="pr-grid">
+    <div class="paper pin pr-card">
+      <p class="pr-label">프롬프트 예시 · 깊은 바다의 고래</p>
+      <p class="pr-text"><span class="pr-animal" data-type="a small round baby whale, pale blue-gray, lying on its belly with a thick old book open in front of it, eyes softly closed as if moved by the story,">a small round baby whale, pale blue-gray, lying on its belly with a thick old book open in front of it, eyes softly closed as if moved by the story,</span> <span class="pr-style" data-type="delicate hand-drawn illustration, thin sketchy warm brown colored-pencil outline, soft pale watercolor wash, fluffy fur drawn with fine short strokes, tiny dot eyes, very simple minimal face, plain off-white watercolor paper background, no text">delicate hand-drawn illustration, thin sketchy warm brown colored-pencil outline, soft pale watercolor wash, fluffy fur drawn with fine short strokes, tiny dot eyes, very simple minimal face, plain off-white watercolor paper background, no text</span><i class="caret"></i></p>
+      <div class="pr-legend">
+        <p><b class="sw a"></b><span><b>동물마다 다른 부분</b> 책을 펼친 채 엎드려, 이야기에 감동해 눈을 감은 아기 고래</span></p>
+        <p><b class="sw s"></b><span><b>16장 모두 같은 부분</b> 갈색 색연필 선, 연한 수채, 점 눈, 흰 종이 배경</span></p>
+      </div>
+    </div>
+    <div class="pr-flow">
+      <p class="pr-step">Flow가 만든 후보 2장</p>
+      <div class="pr-cands">
+        <figure class="cand pick"><img src="assets/img/flow/whale-a.jpg" alt="후보 1: 책 위에 엎드린 고래"><figcaption>골랐어요</figcaption></figure>
+        <figure class="cand"><img src="assets/img/flow/whale-b.jpg" alt="후보 2: 조금 작게 그려진 고래"><figcaption>후보 2</figcaption></figure>
+      </div>
+      <svg class="pr-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 30 H104 M88 14 L106 30 L88 46"/></svg>
+      <figure class="g-item pr-final"><img src="assets/img/SDEC.jpg" alt="완성된 깊은 바다의 고래 카드"><figcaption>깊은 바다의 고래<small>동물만 정사각형으로</small></figcaption></figure>
+      <p class="pr-foot">동물 16마리 × 후보 2장 = <b>32장</b>, 다락방 배경 <b>3장</b>을 만들어 그중 <b>18장</b>을 썼습니다.</p>
     </div>
   </div>
 </section>
@@ -238,17 +264,6 @@
   <div class="qrule"><p><b>모든 답은 +1점 또는 −1점</b> 축마다 다섯 개라 합이 늘 홀수, 동점이 생기지 않습니다.</p><p><b>취향 질문 5개는 따로</b> 분위기·두께·결말·문체·전개는 동물을 바꾸지 않고 취향 카드에 담깁니다.</p></div>
 </section>
 
-<!-- 9 점수 → 퍼센트 -->
-<section class="slide split" data-anim="heat">
-  <div class="col-text">
-    <p class="eyebrow">2부 · 동작 원리 · 점수 계산</p>
-    <h2>다섯 개의 답이<br>막대가 됩니다</h2>
-    <p class="body">한 축의 다섯 답을 더하면 −5점부터 +5점까지 홀수가 나옵니다. 결과 막대는 <b>50% + 9% × 점수</b>로 그립니다. 그래프는 답이 반반으로 갈릴 때 각 점수가 나올 확률입니다.</p>
-    <div class="paper note"><p class="hand mid">예) 다섯 개 모두 이야기 쪽</p><p>+5점 → 이야기 95% · 지식 5%</p></div>
-  </div>
-  <div class="chart-frame mid"><img src="assets/charts/axis_dist.svg" alt="한 축의 점수 분포. ±1점이 각각 31.2%, ±3점이 15.6%, ±5점이 3.1%이고 막대는 59%, 77%, 95%"><i class="wipe"></i></div>
-</section>
-
 <!-- 16 기술 구조 -->
 <section class="slide" data-anim="arch">
   <p class="eyebrow">2부 · 동작 원리 · 기술 구조</p>
@@ -293,35 +308,8 @@
   <h2>써 보고, 문제를 찾고, 바로 고쳤습니다</h2>
   <div class="flips">
     <div class="flip"><div class="face front paper"><p class="tag bad">문제</p><h3>적은 책이 목록에 거의 없음</h3></div><div class="face back paper"><p class="tag good">해결</p><h3>동물은 질문으로, 책은 책장으로</h3><p>책 제목에 기대지 않고 질문 20개로 동물을 정하고, 적은 책은 이웃 책장에 꽂아 추천에 씀</p></div></div>
-    <div class="flip"><div class="face front paper"><p class="tag bad">문제</p><h3>유형이 3배 넘게 치우침</h3></div><div class="face back paper"><p class="tag good">해결</p><h3>축마다 같은 질문 수</h3><p>모두 ±1점, 축마다 5개. 가능한 답 전부에서 16마리가 정확히 같아짐</p></div></div>
     <div class="flip"><div class="face front paper"><p class="tag bad">문제</p><h3>25개 질문이 길고 번거로움</h3></div><div class="face back paper"><p class="tag good">해결</p><h3>한 화면에 질문 하나</h3><p>카드를 누르면 다음으로, 진행 막대와 이전 버튼, 숫자 키로도 답함</p></div></div>
     <div class="flip"><div class="face front paper"><p class="tag bad">문제</p><h3>그림이 화면에 안 보임</h3></div><div class="face back paper"><p class="tag good">해결</p><h3>그림을 페이지에 내장</h3><p>파일 경로에 기대지 않고 18장을 페이지 안에 직접 넣음</p></div></div>
-  </div>
-</section>
-
-<!-- 7 Flow 프롬프트 -->
-<section class="slide" data-anim="prompt">
-  <p class="eyebrow">2부 · 만든 과정 · 일러스트</p>
-  <h2>프롬프트 한 줄이 고래가 되기까지</h2>
-  <div class="pr-grid">
-    <div class="paper pin pr-card">
-      <p class="pr-label">프롬프트 예시 · 깊은 바다의 고래</p>
-      <p class="pr-text"><span class="pr-animal" data-type="a small round baby whale, pale blue-gray, lying on its belly with a thick old book open in front of it, eyes softly closed as if moved by the story,">a small round baby whale, pale blue-gray, lying on its belly with a thick old book open in front of it, eyes softly closed as if moved by the story,</span> <span class="pr-style" data-type="delicate hand-drawn illustration, thin sketchy warm brown colored-pencil outline, soft pale watercolor wash, fluffy fur drawn with fine short strokes, tiny dot eyes, very simple minimal face, plain off-white watercolor paper background, no text">delicate hand-drawn illustration, thin sketchy warm brown colored-pencil outline, soft pale watercolor wash, fluffy fur drawn with fine short strokes, tiny dot eyes, very simple minimal face, plain off-white watercolor paper background, no text</span><i class="caret"></i></p>
-      <div class="pr-legend">
-        <p><b class="sw a"></b><span><b>동물마다 다른 부분</b> 책을 펼친 채 엎드려, 이야기에 감동해 눈을 감은 아기 고래</span></p>
-        <p><b class="sw s"></b><span><b>16장 모두 같은 부분</b> 갈색 색연필 선, 연한 수채, 점 눈, 흰 종이 배경</span></p>
-      </div>
-    </div>
-    <div class="pr-flow">
-      <p class="pr-step">Flow가 만든 후보 2장</p>
-      <div class="pr-cands">
-        <figure class="cand pick"><img src="assets/img/flow/whale-a.jpg" alt="후보 1: 책 위에 엎드린 고래"><figcaption>골랐어요</figcaption></figure>
-        <figure class="cand"><img src="assets/img/flow/whale-b.jpg" alt="후보 2: 조금 작게 그려진 고래"><figcaption>후보 2</figcaption></figure>
-      </div>
-      <svg class="pr-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 30 H104 M88 14 L106 30 L88 46"/></svg>
-      <figure class="g-item pr-final"><img src="assets/img/SDEC.jpg" alt="완성된 깊은 바다의 고래 카드"><figcaption>깊은 바다의 고래<small>동물만 정사각형으로</small></figcaption></figure>
-      <p class="pr-foot">동물 16마리 × 후보 2장 = <b>32장</b>, 다락방 배경 <b>3장</b>을 만들어 그중 <b>18장</b>을 썼습니다.</p>
-    </div>
   </div>
 </section>
 
