@@ -68,11 +68,35 @@
       });
     }
   }
+  var FLIPL = { S: 'K', K: 'S', D: 'W', W: 'D', E: 'L', L: 'E', C: 'N', N: 'C' };
+  function miniShelf(code, list) {
+    var who = '<div class="who"><img src="assets/img/' + code + '.jpg" alt="">' + escH((NAMES[code] || code).split(' ').slice(-1)[0]) + '</div>';
+    if (!list || !list.length) return '<div class="mini-shelf">' + who + '<div class="ws-empty">아직 비어 있는 책장이에요.<br>오늘 시연에서 첫 책을 꽂아 볼게요.</div></div>';
+    var max = list[0].n;
+    return '<div class="mini-shelf">' + who + '<div class="row">' + list.slice(0, 8).map(function (b, i) {
+      return '<div class="dspine" style="height:' + (92 + Math.round(40 * b.n / max)) + 'px;background:' + SPC[i % 6] + '" title="' + escH(b.t) + '"><i>' + b.n + '</i><span>' + escH(b.t) + '</span></div>';
+    }).join('') + '</div></div>';
+  }
+  function drawWhy(animate) {
+    var a = document.getElementById('wsSame'), b = document.getElementById('wsOpp'), st = document.getElementById('wsStamp');
+    if (!a) return;
+    if (!deckShelf) { if (deckShelfFailed) { a.innerHTML = miniShelf('SDEC', null); b.innerHTML = miniShelf('KWLN', null); st.textContent = '(책장을 불러오지 못했어요)'; } return; }
+    var d = deckShelf, codes = Object.keys(d.shelves).sort(function (x, y) {
+      var n = function (c) { return d.shelves[c].reduce(function (p, q) { return p + q.n; }, 0); }; return n(y) - n(x);
+    });
+    var c = codes[0] || 'SDEC', o = c.split('').map(function (ch) { return FLIPL[ch]; }).join('');
+    a.innerHTML = miniShelf(c, d.shelves[c]);
+    b.innerHTML = miniShelf(o, d.shelves[o]);
+    var t = new Date(); st.textContent = '(' + (t.getMonth() + 1) + '월 ' + t.getDate() + '일 실제 책장)';
+    if (animate && A) run(A({ targets: [a, b].map(function (x) { return x.querySelectorAll('.dspine'); }).reduce(function (p, q) { return p.concat(Array.prototype.slice.call(q)); }, []), scaleY: [0, 1], opacity: [0, 1], duration: 700, delay: A.stagger(70, { start: 1200 }), easing: 'easeOutBack' }));
+  }
   var shelfReq = (window.fetch ? fetch(SHELF_URL) : Promise.reject()).then(function (r) { return r.json(); }).then(function (d) {
     if (!d || !d.ok) throw 0; deckShelf = d;
   }).catch(function () { deckShelfFailed = true; }).then(function () {
     var s = document.querySelector('[data-anim="shelf"]');
     if (s && s.classList.contains('on')) drawDeckShelf(s, !STATIC); else drawDeckShelf(s, false);
+    var w = document.querySelector('[data-anim="whyshelf"]');
+    drawWhy(!!(w && w.classList.contains('on') && !STATIC));
   });
   setTimeout(function () { if (!deckShelf && !deckShelfFailed) { deckShelfFailed = true; drawDeckShelf(null, false); } }, 8000);
 
@@ -190,6 +214,31 @@
       run(wipe(s, 2200));
       counts(s);
       run(A({ targets: s.querySelectorAll('.bal-notes .note'), opacity: [0, 1], translateY: [40, 0], duration: 700, delay: A.stagger(400, { start: 1500 }), easing: 'easeOutCubic' }));
+    },
+    oneline: function (s) {
+      run(A({ targets: s.querySelector('.ol-text .eyebrow'), opacity: [0, 1], duration: 600, easing: 'linear' }));
+      run(A({ targets: s.querySelectorAll('.ol-big span'), opacity: [0, 1], translateY: [30, 0], duration: 800, delay: A.stagger(450, { start: 300 }), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelectorAll('.ol-key'), opacity: [0, 1], translateX: [80, 0], duration: 800, delay: A.stagger(300, { start: 2000 }), easing: 'easeOutBack' }));
+    },
+    funnel: function (s) {
+      run(head(s));
+      run(A({ targets: s.querySelectorAll('.fn-card'), opacity: [0, 1], translateY: [60, 0], duration: 800, delay: A.stagger(700, { start: 300 }), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelectorAll('.fn-mid path'), strokeDashoffset: [A.setDashOffset, 0], duration: 700, delay: 900, easing: 'easeInOutSine' }));
+      run(A({ targets: s.querySelector('.fn-mid p'), opacity: [0, 1], duration: 500, delay: 1300, easing: 'linear' }));
+      run(A({ targets: s.querySelectorAll('.fn-wedge polygon'), scaleX: [0, 1], duration: 1400, delay: A.stagger(200, { start: 1900 }), easing: 'easeInOutQuad' }));
+      run(A({ targets: s.querySelectorAll('.fn-labels span'), opacity: [0, 1], duration: 600, delay: A.stagger(300, { start: 2600 }), easing: 'linear' }));
+    },
+    whyshelf: function (s) {
+      run(head(s));
+      run(A({ targets: s.querySelectorAll('.ws-col'), opacity: [0, 1], translateY: [60, 0], duration: 800, delay: A.stagger(900, { start: 300 }), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelectorAll('.ws-word'), scale: [.6, 1], opacity: [0, 1], duration: 700, delay: A.stagger(900, { start: 600 }), easing: 'easeOutBack' }));
+      run(A({ targets: s.querySelector('.ws-foot'), opacity: [0, 1], duration: 700, delay: 2600, easing: 'linear' }));
+      drawWhy(true);
+    },
+    demo: function (s) {
+      run(head(s));
+      run(A({ targets: s.querySelectorAll('.dm-steps li'), opacity: [0, 1], translateX: [-50, 0], duration: 600, delay: A.stagger(180, { start: 300 }), easing: 'easeOutCubic' }));
+      run(A({ targets: s.querySelector('.dm-qr'), opacity: [0, 1], scale: [.7, 1], rotate: [-6, 0], duration: 900, delay: 900, easing: 'easeOutBack' }));
     },
     lis: function (s) {
       run(head(s));

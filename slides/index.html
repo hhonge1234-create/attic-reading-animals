@@ -12,7 +12,6 @@
 <body>
 <div class="stage" id="stage">
 <div class="deck" id="deck">
-
 <!-- 1 표지 -->
 <section class="slide cover" data-anim="cover">
   <img class="bleed" src="assets/img/attic-wide.jpg" alt="수채화로 그린 다락방 서재">
@@ -36,14 +35,100 @@
 
 <!-- 2 문제 -->
 <section class="slide" data-anim="problem">
-  <p class="eyebrow">왜 만들었나</p>
-  <h2>책은 많은데,<br>다음 책을 고르기는 어렵습니다</h2>
+  <p class="eyebrow">1부 · 왜 만들었나</p>
+  <h2>책 추천은<br>왜 이렇게 어려울까요</h2>
   <div class="row3">
-    <div class="paper pin card-p"><p class="num">01</p><h3>추천은 늘 베스트셀러</h3><p>서점과 SNS는 모두에게 같은 목록을 보여 줍니다.</p></div>
-    <div class="paper pin card-p"><p class="num">02</p><h3>내 취향을 말하기 어려움</h3><p>무엇을 좋아하는지 알아야 다음 책을 고를 수 있습니다.</p></div>
-    <div class="paper pin card-p"><p class="num">03</p><h3>독서 상담은 한 번에 한 명</h3><p>사서의 상담을 더 많은 사람에게 닿게 할 방법이 필요합니다.</p></div>
+    <div class="paper pin card-p"><p class="num">01</p><h3>책은 개인적이다</h3><p>같은 책도 누군가에겐 인생 책, 누군가에겐 덮어 버린 책이 됩니다.</p></div>
+    <div class="paper pin card-p"><p class="num">02</p><h3>목록은 나를 모른다</h3><p>서점과 SNS의 베스트셀러는 모두에게 같은 목록을 보여 줍니다.</p></div>
+    <div class="paper pin card-p"><p class="num">03</p><h3>상담은 한 번에 한 명</h3><p>사서의 독서 상담은 따뜻하지만, 많은 사람에게 닿기 어렵습니다.</p></div>
   </div>
-  <p class="hand answer">그래서, 사서가 읽어 주는 <u>독서 성향 테스트</u>를 만들었습니다.</p>
+  <p class="hand answer">그래서 책 추천은 정보보다 <u>공감</u>이 먼저라고 생각했습니다.</p>
+</section>
+
+<!-- 3 한 문장 -->
+<section class="slide" data-anim="oneline">
+  <div class="ol-grid">
+    <div class="ol-text">
+      <p class="eyebrow">다락방 서재에 놀러 온 동물들은</p>
+      <h2 class="ol-big"><span>취향을 묻고,</span><span>비슷한 사람의 책장으로 <em class="c1">위로하고,</em></span><span>반대편 책장으로 <em class="c2">넓혀 주는</em></span><span>독서 서비스입니다.</span></h2>
+    </div>
+    <div class="ol-keys">
+      <div class="ol-key paper"><img src="assets/img/SDEC.jpg" alt=""><div><p class="k-tag">하나</p><h3>나를 알기</h3><p>짧은 질문으로 나를 닮은 책 읽는 동물을 찾아요.</p></div></div>
+      <div class="ol-key paper"><img src="assets/img/SWEN.jpg" alt=""><div><p class="k-tag">둘</p><h3>공감받기</h3><p>나와 닮은 사람들이 실제로 읽은 책장을 봐요.</p></div></div>
+      <div class="ol-key paper"><img src="assets/img/KWLN.jpg" alt=""><div><p class="k-tag">셋</p><h3>넓혀 보기</h3><p>나와 정반대인 사람의 책장에서 새 분야를 만나요.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 두 단계 -->
+<section class="slide" data-anim="funnel">
+  <p class="eyebrow">2부 · 어떻게 쓰이나</p>
+  <h2>가볍게 들어와, 깊이 머물게</h2>
+  <div class="fn-grid">
+    <div class="fn-card paper pin">
+      <p class="fn-tag">1단계 · 가벼운 문</p>
+      <h3>무료 체험 페이지</h3>
+      <img src="assets/shots/shot-quiz.jpg" alt="한 화면에 질문 하나가 나오는 체험 페이지">
+      <ul><li>짧고 쉬운 질문을 한 화면에 하나씩</li><li>로그인 없이 누구나 바로</li><li>나를 닮은 동물, 취향 카드, 이웃 책장 추천</li></ul>
+    </div>
+    <div class="fn-mid"><svg viewBox="0 0 160 80" aria-hidden="true"><path d="M8 40 H140 M122 22 L144 40 L122 58"/></svg><p>흥미가 생긴<br>만큼 더 깊이</p></div>
+    <div class="fn-card paper pin deep">
+      <p class="fn-tag">2단계 · 깊은 문</p>
+      <h3>다락방 독서 상담실</h3>
+      <img src="assets/shots/shot-consult.jpg" alt="별점과 감상을 적는 다락방 독서 상담실">
+      <ul><li>별점과 감상, 인생 책, 요즘 고민까지</li><li>내 Claude 계정으로</li><li>독서 초상, 맞춤 처방, 사서의 편지</li></ul>
+    </div>
+  </div>
+  <svg class="fn-wedge" viewBox="0 0 1664 120" aria-label="오른쪽으로 갈수록 참여하는 사람은 줄고 나누는 이야기의 깊이는 커지는 그림">
+    <polygon class="w-people" points="0,4 1664,48 1664,60 0,60"/>
+    <polygon class="w-depth" points="0,60 1664,60 1664,116 0,68"/>
+  </svg>
+  <div class="fn-labels"><span class="lp">처음엔 많은 사람이 가볍게</span><span class="lg"><i class="sw-p"></i>참여하는 사람 <i class="sw-d"></i>나누는 이야기의 깊이</span><span class="ld">관심이 생긴 사람은 깊게</span></div>
+</section>
+
+<!-- 5 왜 책장 -->
+<section class="slide" data-anim="whyshelf">
+  <p class="eyebrow">왜 사람들의 책장을 모았나</p>
+  <h2>책장 두 칸이 주는 것</h2>
+  <div class="ws-grid">
+    <div class="ws-col paper pin same">
+      <p class="ws-tag">나와 비슷한 사람의 책장</p>
+      <p class="ws-word">공감</p>
+      <p class="ws-quote">“내가 재밌게 읽고 위로받았던 책을 다른 사람도 많이 읽었다는 사실만으로, 이해받는 느낌이 들었습니다.”</p>
+      <div class="ws-shelf" id="wsSame"></div>
+    </div>
+    <div class="ws-col paper pin opp">
+      <p class="ws-tag">나와 정반대인 사람의 책장</p>
+      <p class="ws-word">확장</p>
+      <p class="ws-quote">“늘 읽던 분야를 벗어나고 싶을 때, 누군가 실제로 읽은 책이라서 믿고 집어 들 수 있는 진짜 추천.”</p>
+      <div class="ws-shelf" id="wsOpp"></div>
+    </div>
+  </div>
+  <p class="ws-foot">책은 개인적이라 추천받기 어렵습니다. 그래서 <b>나와 닮은 사람</b>과 <b>나와 다른 사람</b>의 실제 책장으로 풀었습니다. <small id="wsStamp"></small></p>
+</section>
+
+<!-- 12 화면 -->
+<section class="slide" data-anim="screens">
+  <p class="eyebrow">이용 흐름</p>
+  <h2>이렇게 이용합니다</h2>
+  <div class="shots">
+    <div class="shot-main paper">
+      <img class="shot on" src="assets/shots/shot-quiz.jpg" alt="한 화면에 질문 하나: 큼직한 선택 카드와 진행 막대">
+      <img class="shot" src="assets/shots/shot-result.jpg" alt="결과: 상담실 안내와 고래 카드">
+      <img class="shot" src="assets/shots/shot-taste.jpg" alt="결과: 나의 책 취향 카드와 성향 분포">
+      <img class="shot" src="assets/shots/shot-recs.jpg" alt="결과: 이웃 책장 꼬리표가 붙은 추천 책">
+      <img class="shot" src="assets/shots/shot-shelf.jpg" alt="결과: 다락방 이웃들의 책장">
+      <img class="shot" src="assets/shots/shot-consult.jpg" alt="다락방 독서 상담실: 별점과 감상을 적는 화면">
+    </div>
+    <ol class="shot-list">
+      <li class="on"><b>한 질문씩</b>카드를 누르면 다음 질문으로</li>
+      <li><b>결과 카드</b>나를 닮은 동물과 상담실 안내</li>
+      <li><b>취향 카드</b>분위기·두께·결말·문체·전개</li>
+      <li><b>이웃 책장 추천</b>같은 동물 이웃이 꽂은 책</li>
+      <li><b>이웃들의 책장</b>같은 동물, 다른 동물의 책</li>
+      <li><b>독서 상담실</b>내 Claude로 받는 깊은 상담</li>
+    </ol>
+  </div>
 </section>
 
 <!-- 3 아이디어 -->
@@ -55,18 +140,6 @@
     <p class="hand mid">2 × 2 × 2 × 2 = 16</p>
   </div>
   <div class="video-frame paper"><video src="assets/video/AxisTree.mp4" poster="assets/video/AxisTree.png" muted playsinline preload="auto" data-play></video></div>
-</section>
-
-<!-- 4 네 개의 축 -->
-<section class="slide" data-anim="axes">
-  <p class="eyebrow">네 개의 축</p>
-  <h2>각 축은 이런 질문으로 정합니다</h2>
-  <div class="axes">
-    <div class="axis-row"><div class="ax-name"><b class="a">이야기</b><span>S · K</span><b class="b">지식</b></div><div class="track"><i class="knob" data-to="-0.6"></i></div><p>서점에서 먼저 가는 매대, 책을 펼치는 이유, 여행 가방 속 한 권</p></div>
-    <div class="axis-row"><div class="ax-name"><b class="a">몰입</b><span>D · W</span><b class="b">탐험</b></div><div class="track"><i class="knob" data-to="0.55"></i></div><p>작가 정주행, 시리즈물을 대하는 법, 관심 분야의 폭</p></div>
-    <div class="axis-row"><div class="ax-name"><b class="a">감성</b><span>E · L</span><b class="b">논리</b></div><div class="track"><i class="knob" data-to="-0.4"></i></div><p>책을 덮고 남는 것, 인물을 만나는 법, 친구에게 추천할 때 하는 말</p></div>
-    <div class="axis-row"><div class="ax-name"><b class="a">고전</b><span>C · N</span><b class="b">신간</b></div><div class="track"><i class="knob" data-to="0.7"></i></div><p>명작과 화제작 중 무엇을 믿는지, 책을 발견하는 곳, 책장에 남기는 책</p></div>
-  </div>
 </section>
 
 <!-- 5 도감: 16마리 한 장 -->
@@ -81,35 +154,25 @@
   </div>
 </section>
 
-<!-- 7 Flow 프롬프트 -->
-<section class="slide" data-anim="prompt">
-  <p class="eyebrow">Google Flow로 직접 그렸습니다</p>
-  <h2>프롬프트 한 줄이 고래가 되기까지</h2>
-  <div class="pr-grid">
-    <div class="paper pin pr-card">
-      <p class="pr-label">프롬프트 예시 · 깊은 바다의 고래</p>
-      <p class="pr-text"><span class="pr-animal" data-type="a small round baby whale, pale blue-gray, lying on its belly with a thick old book open in front of it, eyes softly closed as if moved by the story,">a small round baby whale, pale blue-gray, lying on its belly with a thick old book open in front of it, eyes softly closed as if moved by the story,</span> <span class="pr-style" data-type="delicate hand-drawn illustration, thin sketchy warm brown colored-pencil outline, soft pale watercolor wash, fluffy fur drawn with fine short strokes, tiny dot eyes, very simple minimal face, plain off-white watercolor paper background, no text">delicate hand-drawn illustration, thin sketchy warm brown colored-pencil outline, soft pale watercolor wash, fluffy fur drawn with fine short strokes, tiny dot eyes, very simple minimal face, plain off-white watercolor paper background, no text</span><i class="caret"></i></p>
-      <div class="pr-legend">
-        <p><b class="sw a"></b><span><b>동물마다 다른 부분</b> 책을 펼친 채 엎드려, 이야기에 감동해 눈을 감은 아기 고래</span></p>
-        <p><b class="sw s"></b><span><b>16장 모두 같은 부분</b> 갈색 색연필 선, 연한 수채, 점 눈, 흰 종이 배경</span></p>
-      </div>
-    </div>
-    <div class="pr-flow">
-      <p class="pr-step">Flow가 만든 후보 2장</p>
-      <div class="pr-cands">
-        <figure class="cand pick"><img src="assets/img/flow/whale-a.jpg" alt="후보 1: 책 위에 엎드린 고래"><figcaption>골랐어요</figcaption></figure>
-        <figure class="cand"><img src="assets/img/flow/whale-b.jpg" alt="후보 2: 조금 작게 그려진 고래"><figcaption>후보 2</figcaption></figure>
-      </div>
-      <svg class="pr-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 30 H104 M88 14 L106 30 L88 46"/></svg>
-      <figure class="g-item pr-final"><img src="assets/img/SDEC.jpg" alt="완성된 깊은 바다의 고래 카드"><figcaption>깊은 바다의 고래<small>동물만 정사각형으로</small></figcaption></figure>
-      <p class="pr-foot">동물 16마리 × 후보 2장 = <b>32장</b>, 다락방 배경 <b>3장</b>을 만들어 그중 <b>18장</b>을 썼습니다.</p>
-    </div>
+<!-- 시연 -->
+<section class="slide" data-anim="demo">
+  <p class="eyebrow">시연</p>
+  <h2>지금 직접 해 보겠습니다</h2>
+  <div class="dm-grid">
+    <ol class="dm-steps">
+      <li class="paper"><b>시작하기</b>한 화면에 하나씩, 카드를 눌러 답하기</li>
+      <li class="paper"><b>나를 닮은 동물</b>성향 분포와 나의 책 취향 카드</li>
+      <li class="paper"><b>같은 동물 이웃의 책장</b>나만 좋아한 책이 아니었다는 공감</li>
+      <li class="paper"><b>정반대 친구의 책장</b>내 분야 밖의 진짜 추천</li>
+      <li class="paper"><b>다락방 독서 상담실</b>더 깊이 알고 싶은 사람을 위한 처방</li>
+    </ol>
+    <figure class="qr paper dm-qr"><img src="assets/qr.svg" alt="체험 페이지로 가는 QR 코드"><figcaption>함께 해 보세요</figcaption><p class="dm-url">hhonge1234-create.github.io/attic-reading-animals</p></figure>
   </div>
 </section>
 
 <!-- 6 문헌정보학 -->
 <section class="slide" data-anim="lis">
-  <p class="eyebrow">문헌정보학과의 연결</p>
+  <p class="eyebrow">3부 · 어떻게 만들었나 · 문헌정보학과의 연결</p>
   <h2>사서가 하는 일을 서비스로 옮겼습니다</h2>
   <div class="row4">
     <div class="paper pin card-l"><svg viewBox="0 0 48 48" class="ico"><rect x="6" y="8" width="10" height="32" rx="2"/><rect x="19" y="12" width="10" height="28" rx="2"/><rect x="32" y="6" width="10" height="34" rx="2"/></svg><h3>분류</h3><p>이웃들이 꽂은 책을 독자 유형(동물)별 서가로 모아 정리합니다.</p></div>
@@ -155,7 +218,7 @@
 
 <!-- 8 질문 설계 -->
 <section class="slide" data-anim="qgrid">
-  <p class="eyebrow">점수 계산 ①</p>
+  <p class="eyebrow">질문 설계</p>
   <h2>질문 20개, 축마다 다섯 개씩</h2>
   <div class="qgrid">
     <div class="paper qcol"><h3><span class="a">이야기</span> · <span class="b">지식</span></h3><ol><li>서점에서 먼저 가는 매대</li><li>책을 펼치는 이유</li><li>요즘 끌리는 주제</li><li>여행 가방 속 한 권</li><li>영화 원작이 있다면</li></ol></div>
@@ -164,28 +227,6 @@
     <div class="paper qcol"><h3><span class="a">고전</span> · <span class="b">신간</span></h3><ol><li>책을 고를 때 믿는 것</li><li>책을 발견하는 곳</li><li>같은 주제라면</li><li>책장에 오래 남기는 책</li><li>옛 책과 신간 사이</li></ol></div>
   </div>
   <div class="qrule"><p><b>모든 답은 +1점 또는 −1점</b> 축마다 다섯 개라 합이 늘 홀수, 동점이 생기지 않습니다.</p><p><b>취향 질문 5개는 따로</b> 분위기·두께·결말·문체·전개는 동물을 바꾸지 않고 취향 카드에 담깁니다.</p></div>
-</section>
-
-<!-- 9 점수 → 퍼센트 -->
-<section class="slide split" data-anim="heat">
-  <div class="col-text">
-    <p class="eyebrow">점수 계산 ②</p>
-    <h2>다섯 개의 답이<br>막대가 됩니다</h2>
-    <p class="body">한 축의 다섯 답을 더하면 −5점부터 +5점까지 홀수가 나옵니다. 결과 막대는 <b>50% + 9% × 점수</b>로 그립니다. 그래프는 답이 반반으로 갈릴 때 각 점수가 나올 확률입니다.</p>
-    <div class="paper note"><p class="hand mid">예) 다섯 개 모두 이야기 쪽</p><p>+5점 → 이야기 95% · 지식 5%</p></div>
-  </div>
-  <div class="chart-frame mid"><img src="assets/charts/axis_dist.svg" alt="한 축의 점수 분포. ±1점이 각각 31.2%, ±3점이 15.6%, ±5점이 3.1%이고 막대는 59%, 77%, 95%"><i class="wipe"></i></div>
-</section>
-
-<!-- 10 예시 -->
-<section class="slide split" data-anim="example">
-  <div class="video-frame paper wide"><video src="assets/video/ScorePipeline.mp4" poster="assets/video/ScorePipeline.png" muted playsinline preload="auto" data-play></video></div>
-  <div class="col-text narrow">
-    <p class="eyebrow">한 사람의 분석 예시</p>
-    <h2>예시 독자는<br>고래가 되었습니다</h2>
-    <div class="whale paper pin"><img src="assets/img/SDEC.jpg" alt="책 위에 엎드린 고래"><div><p class="code">SDEC</p><h3>깊은 바다의 고래</h3></div></div>
-    <ul class="stats" id="exStats"></ul>
-  </div>
 </section>
 
 <!-- 11 균형 -->
@@ -199,34 +240,10 @@
   </div>
 </section>
 
-<!-- 12 화면 -->
-<section class="slide" data-anim="screens">
-  <p class="eyebrow">서비스 화면</p>
-  <h2>실제 화면</h2>
-  <div class="shots">
-    <div class="shot-main paper">
-      <img class="shot on" src="assets/shots/shot-quiz.jpg" alt="한 화면에 질문 하나: 큼직한 선택 카드와 진행 막대">
-      <img class="shot" src="assets/shots/shot-result.jpg" alt="결과: 상담실 안내와 고래 카드">
-      <img class="shot" src="assets/shots/shot-taste.jpg" alt="결과: 나의 책 취향 카드와 성향 분포">
-      <img class="shot" src="assets/shots/shot-recs.jpg" alt="결과: 이웃 책장 꼬리표가 붙은 추천 책">
-      <img class="shot" src="assets/shots/shot-shelf.jpg" alt="결과: 다락방 이웃들의 책장">
-      <img class="shot" src="assets/shots/shot-consult.jpg" alt="다락방 독서 상담실: 별점과 감상을 적는 화면">
-    </div>
-    <ol class="shot-list">
-      <li class="on"><b>한 질문씩</b>카드를 누르면 다음 질문으로</li>
-      <li><b>결과 카드</b>나를 닮은 동물과 상담실 안내</li>
-      <li><b>취향 카드</b>분위기·두께·결말·문체·전개</li>
-      <li><b>이웃 책장 추천</b>같은 동물 이웃이 꽂은 책</li>
-      <li><b>이웃들의 책장</b>같은 동물, 다른 동물의 책</li>
-      <li><b>독서 상담실</b>내 Claude로 받는 깊은 상담</li>
-    </ol>
-  </div>
-</section>
-
 <!-- 다락방 이웃들의 책장 -->
 <section class="slide" data-anim="shelf">
-  <p class="eyebrow">새 기능 · 이용자 데이터베이스</p>
-  <h2>다락방 이웃들의 책장</h2>
+  <p class="eyebrow">이웃 책장의 구조 · 이용자 데이터베이스</p>
+  <h2>책장은 이렇게 쌓입니다</h2>
   <div class="sh-grid">
     <div class="sh-steps">
       <div class="sh-step paper"><b>1</b><div><h3>책장에 꽂기</h3><p>테스트 마지막에 내 책을 적고 동의하면 책장에 보탭니다.</p></div></div>
@@ -274,6 +291,32 @@
   </div>
 </section>
 
+<!-- 7 Flow 프롬프트 -->
+<section class="slide" data-anim="prompt">
+  <p class="eyebrow">Google Flow로 직접 그렸습니다</p>
+  <h2>프롬프트 한 줄이 고래가 되기까지</h2>
+  <div class="pr-grid">
+    <div class="paper pin pr-card">
+      <p class="pr-label">프롬프트 예시 · 깊은 바다의 고래</p>
+      <p class="pr-text"><span class="pr-animal" data-type="a small round baby whale, pale blue-gray, lying on its belly with a thick old book open in front of it, eyes softly closed as if moved by the story,">a small round baby whale, pale blue-gray, lying on its belly with a thick old book open in front of it, eyes softly closed as if moved by the story,</span> <span class="pr-style" data-type="delicate hand-drawn illustration, thin sketchy warm brown colored-pencil outline, soft pale watercolor wash, fluffy fur drawn with fine short strokes, tiny dot eyes, very simple minimal face, plain off-white watercolor paper background, no text">delicate hand-drawn illustration, thin sketchy warm brown colored-pencil outline, soft pale watercolor wash, fluffy fur drawn with fine short strokes, tiny dot eyes, very simple minimal face, plain off-white watercolor paper background, no text</span><i class="caret"></i></p>
+      <div class="pr-legend">
+        <p><b class="sw a"></b><span><b>동물마다 다른 부분</b> 책을 펼친 채 엎드려, 이야기에 감동해 눈을 감은 아기 고래</span></p>
+        <p><b class="sw s"></b><span><b>16장 모두 같은 부분</b> 갈색 색연필 선, 연한 수채, 점 눈, 흰 종이 배경</span></p>
+      </div>
+    </div>
+    <div class="pr-flow">
+      <p class="pr-step">Flow가 만든 후보 2장</p>
+      <div class="pr-cands">
+        <figure class="cand pick"><img src="assets/img/flow/whale-a.jpg" alt="후보 1: 책 위에 엎드린 고래"><figcaption>골랐어요</figcaption></figure>
+        <figure class="cand"><img src="assets/img/flow/whale-b.jpg" alt="후보 2: 조금 작게 그려진 고래"><figcaption>후보 2</figcaption></figure>
+      </div>
+      <svg class="pr-arrow" viewBox="0 0 120 60" aria-hidden="true"><path d="M6 30 H104 M88 14 L106 30 L88 46"/></svg>
+      <figure class="g-item pr-final"><img src="assets/img/SDEC.jpg" alt="완성된 깊은 바다의 고래 카드"><figcaption>깊은 바다의 고래<small>동물만 정사각형으로</small></figcaption></figure>
+      <p class="pr-foot">동물 16마리 × 후보 2장 = <b>32장</b>, 다락방 배경 <b>3장</b>을 만들어 그중 <b>18장</b>을 썼습니다.</p>
+    </div>
+  </div>
+</section>
+
 <!-- 16 기술 구조 -->
 <section class="slide" data-anim="arch">
   <p class="eyebrow">기술 구조</p>
@@ -293,29 +336,9 @@
   <div class="chips-row"><span>별도 서버 없음</span><span>운영비 0원</span><span>이름·이메일 저장 안 함</span><span>추천 도서는 국립중앙도서관 검색으로</span></div>
 </section>
 
-<!-- 두 개의 문 -->
-<section class="slide" data-anim="doors">
-  <p class="eyebrow">서비스 구성</p>
-  <h2>가볍게 들어오는 문, 깊이 들어가는 문</h2>
-  <div class="doors">
-    <div class="door paper pin">
-      <p class="door-tag">문 1 · 누구나</p>
-      <h3>무료 체험 페이지</h3>
-      <ul><li>누구나 로그인 없이 바로</li><li>한 질문씩 25개로 나를 닮은 동물 찾기</li><li><b>이웃들의 책장</b>에서 다음 책 추천</li><li>QR 코드로 공유</li></ul>
-    </div>
-    <div class="door-mid"><svg viewBox="0 0 160 80" aria-hidden="true"><path d="M8 40 H140 M122 22 L144 40 L122 58"/></svg><p>더 깊이<br>알고 싶다면</p></div>
-    <div class="door paper pin">
-      <p class="door-tag">문 2 · 내 Claude 계정</p>
-      <h3>다락방 독서 상담실</h3>
-      <ul><li>별점과 감상, 인생 책, 아쉬웠던 책까지</li><li>독서 습관과 문체·분위기 취향을 자세히</li><li>독서 초상, 4축의 근거, 열쇠말, 사서의 편지</li><li>맞춤 추천 5권과 한 달 독서 계획</li></ul>
-    </div>
-  </div>
-  <div class="why paper"><p><b>왜 나눴나요?</b> 일반 웹페이지는 방문자의 Claude 로그인을 쓸 수 없고, Claude 안의 페이지는 외부 저장소에 접속할 수 없습니다. 그래서 모두와 함께 쓰는 체험 페이지와, 나 혼자 깊이 상담받는 페이지로 역할을 나눴습니다. 상담실에 적은 내용은 저장하지 않습니다.</p><p class="next"><b>다음 단계</b> 제작자의 API 키로 상담실과 이웃 책장을 한 페이지에서 잇기 (1회 약 4~140원)</p></div>
-</section>
-
 <!-- 17 서비스 운영 -->
 <section class="slide" data-anim="service">
-  <p class="eyebrow">서비스 운영 방안</p>
+  <p class="eyebrow">4부 · 앞으로 · 서비스 운영 방안</p>
   <h2>링크 하나에서 도서관 프로그램까지</h2>
   <div class="road">
     <div class="paper pin stage-c"><p class="hand mid">1단계 · 지금</p><ul><li>링크와 QR 코드로 공유</li><li>함께 채우는 이웃 책장으로 다시 오게 하기</li><li>신입생 오리엔테이션 체험 부스</li></ul></div>
@@ -330,7 +353,7 @@
   <p class="eyebrow">가치</p>
   <h2>누구에게 어떤 의미가 있을까요</h2>
   <div class="row3">
-    <div class="paper pin card-v"><p class="who-t">이용자</p><h3>나를 알고, 밖을 봅니다</h3><p>내 취향을 한눈에 보고, 이웃들의 진짜 책장과 ‘정반대 친구’의 책으로 늘 보던 목록 밖의 책을 만납니다.</p></div>
+    <div class="paper pin card-v"><p class="who-t">이용자</p><h3>공감하고, 넓혀 봅니다</h3><p>나와 닮은 사람의 책장에서 위로를, 정반대인 사람의 책장에서 새로운 분야를 만납니다.</p></div>
     <div class="paper pin card-v"><p class="who-t">도서관</p><h3>독자 상담을 더 많은 사람에게</h3><p>이용자가 직접 채우는 책장이 쌓이며, 동물별 북큐레이션의 근거 데이터가 됩니다.</p></div>
     <div class="paper pin card-v"><p class="who-t">문헌정보학</p><h3>전공을 체험하는 서비스</h3><p>분류, 참고면담, 독자 상담을 누구나 해 볼 수 있는 웹으로 옮겼습니다.</p></div>
   </div>
@@ -348,6 +371,40 @@
   </div>
   <figure class="qr paper"><img src="assets/qr.svg" alt="서비스로 가는 QR 코드"><figcaption>QR로 바로 해 보기</figcaption></figure>
   <div class="end-row" id="endRow"></div>
+</section>
+
+<!-- 4 네 개의 축 -->
+<section class="slide" data-anim="axes">
+  <p class="eyebrow">부록 · 네 개의 축</p>
+  <h2>각 축은 이런 질문으로 정합니다</h2>
+  <div class="axes">
+    <div class="axis-row"><div class="ax-name"><b class="a">이야기</b><span>S · K</span><b class="b">지식</b></div><div class="track"><i class="knob" data-to="-0.6"></i></div><p>서점에서 먼저 가는 매대, 책을 펼치는 이유, 여행 가방 속 한 권</p></div>
+    <div class="axis-row"><div class="ax-name"><b class="a">몰입</b><span>D · W</span><b class="b">탐험</b></div><div class="track"><i class="knob" data-to="0.55"></i></div><p>작가 정주행, 시리즈물을 대하는 법, 관심 분야의 폭</p></div>
+    <div class="axis-row"><div class="ax-name"><b class="a">감성</b><span>E · L</span><b class="b">논리</b></div><div class="track"><i class="knob" data-to="-0.4"></i></div><p>책을 덮고 남는 것, 인물을 만나는 법, 친구에게 추천할 때 하는 말</p></div>
+    <div class="axis-row"><div class="ax-name"><b class="a">고전</b><span>C · N</span><b class="b">신간</b></div><div class="track"><i class="knob" data-to="0.7"></i></div><p>명작과 화제작 중 무엇을 믿는지, 책을 발견하는 곳, 책장에 남기는 책</p></div>
+  </div>
+</section>
+
+<!-- 9 점수 → 퍼센트 -->
+<section class="slide split" data-anim="heat">
+  <div class="col-text">
+    <p class="eyebrow">부록 · 점수 계산 ②</p>
+    <h2>다섯 개의 답이<br>막대가 됩니다</h2>
+    <p class="body">한 축의 다섯 답을 더하면 −5점부터 +5점까지 홀수가 나옵니다. 결과 막대는 <b>50% + 9% × 점수</b>로 그립니다. 그래프는 답이 반반으로 갈릴 때 각 점수가 나올 확률입니다.</p>
+    <div class="paper note"><p class="hand mid">예) 다섯 개 모두 이야기 쪽</p><p>+5점 → 이야기 95% · 지식 5%</p></div>
+  </div>
+  <div class="chart-frame mid"><img src="assets/charts/axis_dist.svg" alt="한 축의 점수 분포. ±1점이 각각 31.2%, ±3점이 15.6%, ±5점이 3.1%이고 막대는 59%, 77%, 95%"><i class="wipe"></i></div>
+</section>
+
+<!-- 10 예시 -->
+<section class="slide split" data-anim="example">
+  <div class="video-frame paper wide"><video src="assets/video/ScorePipeline.mp4" poster="assets/video/ScorePipeline.png" muted playsinline preload="auto" data-play></video></div>
+  <div class="col-text narrow">
+    <p class="eyebrow">부록 · 한 사람의 분석 예시</p>
+    <h2>예시 독자는<br>고래가 되었습니다</h2>
+    <div class="whale paper pin"><img src="assets/img/SDEC.jpg" alt="책 위에 엎드린 고래"><div><p class="code">SDEC</p><h3>깊은 바다의 고래</h3></div></div>
+    <ul class="stats" id="exStats"></ul>
+  </div>
 </section>
 
 </div>
