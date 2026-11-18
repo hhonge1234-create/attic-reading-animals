@@ -430,3 +430,6 @@ p { margin: 0; }
 .dv-col ol { margin: 0; padding-left: 40px; display: grid; gap: 10px; font-size: 32px; color: var(--ink); }
 .dv-col li::marker { font-family: var(--type); color: var(--gold); font-weight: 700; }
 .ol-lead { font-family: var(--hand); font-size: 44px; color: var(--rose); margin-bottom: -6px; }
+.ws-quote { font-family: var(--body); font-size: 30px; line-height: 1.5; min-height: 0; }
+.ws-quote b { color: var(--ink); }
+.ws-sub { font-family: var(--hand); font-size: 30px; line-height: 1.25; color: var(--muted); margin: 2px 0 4px; }
