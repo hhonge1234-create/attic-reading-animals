@@ -21,16 +21,16 @@
   var SITE_URL = 'https://hhonge1234-create.github.io/attic-reading-animals/';
 
   // ---------- static content built from data ----------
-  document.getElementById('guide16').insertAdjacentHTML('beforeend', TYPES.map(function (t) {
+  if (document.getElementById('guide16')) document.getElementById('guide16').insertAdjacentHTML('beforeend', TYPES.map(function (t) {
     return '<figure class="g16"><img src="assets/img/' + t[0] + '.jpg" alt="' + t[1] + '"><figcaption>' + t[1] + '<small>' + t[0] + '</small></figcaption></figure>';
   }).join(''));
-  document.getElementById('exStats').innerHTML = EXAMPLE.map(function (e) {
+  if (document.getElementById('exStats')) document.getElementById('exStats').innerHTML = EXAMPLE.map(function (e) {
     return '<li><span>' + e[0] + '</span><div class="tr"><i style="width:' + e[1] + '%" data-w="' + e[1] + '"></i></div><b data-count="' + e[1] + '">' + e[1] + '%</b></li>';
   }).join('');
-  document.getElementById('endRow').innerHTML = TYPES.filter(function (_, i) { return i % 2 === 0; }).map(function (t) {
+  if (document.getElementById('endRow')) document.getElementById('endRow').innerHTML = TYPES.filter(function (_, i) { return i % 2 === 0; }).map(function (t) {
     return '<img src="assets/img/' + t[0] + '.jpg" alt="' + t[1] + '">';
   }).join('');
-  document.getElementById('siteUrl').textContent = SITE_URL.replace('https://', '');
+  if (document.getElementById('siteUrl')) document.getElementById('siteUrl').textContent = SITE_URL.replace('https://', '');
   var motes = document.querySelector('.motes');
   for (var m = 0; m < 26; m++) {
     var d = document.createElement('i');
@@ -48,6 +48,7 @@
   function drawDeckShelf(s, animate) {
     if (!s) s = document.querySelector('[data-anim="shelf"]');
     var box = document.getElementById('shShelves'), fb = document.getElementById('shFallback'), stamp = document.getElementById('shelfStamp');
+    if (!box) return; // the shelf-structure slide may not be in the deck
     if (!deckShelf) { if (deckShelfFailed) { fb.hidden = false; stamp.textContent = '연결이 안 되어 서비스 화면으로 대신 보여 드려요'; } return; }
     var d = deckShelf, codes = Object.keys(d.shelves).sort(function (a, b) {
       var n = function (c) { return d.shelves[c].reduce(function (x, y) { return x + y.n; }, 0); }; return n(b) - n(a);
