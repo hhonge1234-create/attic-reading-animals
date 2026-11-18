@@ -140,7 +140,7 @@
     <p class="dv-num">2부</p>
     <h2 class="dv-title">동작 원리와 만든 과정</h2>
     <p class="dv-sub">어떻게 동작하는지, 그리고 어떻게 만들었는지</p>
-    <div class="dv-cols"><div class="dv-col"><p class="dv-h">동작 원리</p><ol><li>이용 흐름</li><li>네 개의 축과 16마리</li><li>질문 설계와 점수</li><li>16마리의 균형</li><li>이웃 책장과 기술 구조</li></ol></div><div class="dv-col"><p class="dv-h">만든 과정</p><ol><li>외부 데이터의 벽</li><li>시행착오</li><li>일러스트</li><li>앞으로의 운영</li></ol></div></div>
+    <div class="dv-cols"><div class="dv-col"><p class="dv-h">동작 원리</p><ol><li>이용 흐름</li><li>네 개의 축과 16마리</li><li>질문 설계와 점수</li><li>기술 구조</li></ol></div><div class="dv-col"><p class="dv-h">만든 과정</p><ol><li>외부 데이터의 벽</li><li>시행착오</li><li>일러스트</li><li>앞으로의 운영</li></ol></div></div>
   </div>
 </section>
 
@@ -247,48 +247,6 @@
     <div class="paper note"><p class="hand mid">예) 다섯 개 모두 이야기 쪽</p><p>+5점 → 이야기 95% · 지식 5%</p></div>
   </div>
   <div class="chart-frame mid"><img src="assets/charts/axis_dist.svg" alt="한 축의 점수 분포. ±1점이 각각 31.2%, ±3점이 15.6%, ±5점이 3.1%이고 막대는 59%, 77%, 95%"><i class="wipe"></i></div>
-</section>
-
-<!-- 10 예시 -->
-<section class="slide split" data-anim="example">
-  <div class="video-frame paper wide"><video src="assets/video/ScorePipeline.mp4" poster="assets/video/ScorePipeline.png" muted playsinline preload="auto" data-play></video></div>
-  <div class="col-text narrow">
-    <p class="eyebrow">2부 · 동작 원리 · 분석 예시</p>
-    <h2>예시 독자는<br>고래가 되었습니다</h2>
-    <div class="whale paper pin"><img src="assets/img/SDEC.jpg" alt="책 위에 엎드린 고래"><div><p class="code">SDEC</p><h3>깊은 바다의 고래</h3></div></div>
-    <ul class="stats" id="exStats"></ul>
-  </div>
-</section>
-
-<!-- 11 균형 -->
-<section class="slide" data-anim="balance">
-  <p class="eyebrow">2부 · 동작 원리 · 알고리즘 검증 (실제 이용자 데이터 아님)</p>
-  <h2>16마리가 고르게 나뉘도록 다시 설계했습니다</h2>
-  <div class="chart-frame bal"><img src="assets/charts/balance.svg" alt="예전에는 유형별 비율이 2.9%에서 9.3%까지 3배 넘게 차이 났고, 지금은 16유형 모두 정확히 6.25%"><i class="wipe"></i></div>
-  <div class="row2 bal-notes">
-    <div class="paper note"><p class="hand mid">예전</p><p>분야·책 가중치와 질문 수가 축마다 달라, 무작위 응답 1만 개에서 가장 많은 유형과 적은 유형이 3배 넘게 차이 났습니다.</p></div>
-    <div class="paper note"><p class="hand mid">지금</p><p>축마다 같은 수, 같은 점수의 질문. 가능한 답 <b class="count" data-count="1048576">1,048,576</b>가지를 모두 계산하면 16마리가 정확히 6.25%씩입니다.</p></div>
-  </div>
-</section>
-
-<!-- 다락방 이웃들의 책장 -->
-<section class="slide" data-anim="shelf">
-  <p class="eyebrow">2부 · 동작 원리 · 이웃 책장</p>
-  <h2>책장은 이렇게 쌓입니다</h2>
-  <div class="sh-grid">
-    <div class="sh-steps">
-      <div class="sh-step paper"><b>1</b><div><h3>책장에 꽂기</h3><p>테스트 마지막에 내 책을 적고 동의하면 책장에 보탭니다.</p></div></div>
-      <div class="sh-step paper"><b>2</b><div><h3>구글 시트에 익명 저장</h3><p>도서명, 저자, 동물 유형만 한 줄씩. 이름과 이메일은 받지 않습니다.</p></div></div>
-      <div class="sh-step paper"><b>3</b><div><h3>동물별 책장과 추천으로</h3><p>같은 동물 이웃이 많이 꽂은 책부터 추천합니다. 책장이 비면 사서 추천으로 채웁니다.</p></div></div>
-      <p class="sh-note">부적절한 제목은 시트에서 그 줄을 지우면 1분 안에 사라집니다.</p>
-    </div>
-    <div class="sh-live paper pin">
-      <p class="sh-live-h"><span class="live-dot"></span>지금 이 순간의 책장 <small id="shelfStamp">구글 시트에서 불러오는 중</small></p>
-      <p class="sh-count"><b class="sh-num" id="shPeople">–</b>명이 <b class="sh-num" id="shBooks">–</b>권을 꽂았어요</p>
-      <div class="sh-shelves" id="shShelves"></div>
-      <img class="sh-fallback" id="shFallback" src="assets/shots/shot-shelf.jpg" alt="서비스의 이웃 책장 화면" hidden>
-    </div>
-  </div>
 </section>
 
 <!-- 16 기술 구조 -->
